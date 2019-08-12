@@ -1,29 +1,36 @@
+	<title>Apps - Plugins - ThingSpeak IoT</title>
 <html>
   <head>
-
+  <!-- 
+  
+  NOTE: This plugin will not be visible on public views of a channel. 
+        If you intend to make your channel public, consider using the
+        MATLAB Visualization App to create your visualizations.
+  
+  -->  
+  
   <title>Google Gauge - ThingSpeak</title>
 
   <style type="text/css">
-  body 
+  body { background-color: #ddd; }
   #container { height: 100%; width: 100%; display: table; }
-  #inner { vertical-align: middle; horizontal-align: middle; display: table-cell;}
-  #gauge_div { width: 180px; heigh: 180px; margin: 0 auto; }
+  #inner { vertical-align: middle; display: table-cell; }
+  #gauge_div { width: 120px; margin: 0 auto; }
 </style>
+
+
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
 <script type='text/javascript'>
-  
+
   // set your channel id here
-  var channel_id = 109638;
+  var channel_id = 9;
   // set your channel's read api key here if necessary
-  var api_key = 7C6M9N84JEOZ3D2Z;
+  var api_key = '';
+  // maximum value for the gauge
+  var max_gauge_value = 1023;
   // name of the gauge
-  var gauge_name = '%';
-  // Color parameters
-  var RedFrom = 80;
-  var YellowFrom = 65;
-  var GreenFrom = 40;  
- 
+  var gauge_name = 'Light Level';
 
   // global variables
   var chart, charts, data;
@@ -48,6 +55,50 @@
     $.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/feed/last.json?api_key=' + api_key, function(data) {
 
       // get the data point
+      p = data.field1;
+
+      // if there is a data point display it
+      if (p) {
+        p = Math.round((p / max_gauge_value) * 100);
+        displayData(p);
+      }
+
+    });
+  }
+
+  // initialize the chart
+  function initChart() {
+
+    data = new google.visualization.DataTable();
+    data.addColumn('string', 'Label');
+    data.addColumn('number', 'Value');
+    data.addRows(1);
+
+    chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
+    options = {width: 120, height: 120, redFrom: 90, redTo: 100, yellowFrom:75, yellowTo: 90, minorTicks: 5};
+
+    loadData();
+
+    // load new data every 15 seconds
+    setInterval('loadData()', 15000);
+  }
+
+</script>
+
+
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="inner">
+        <div id="gauge_div"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
       p = data.field2;
 
       // if there is a data point display it
