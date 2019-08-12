@@ -10,9 +10,9 @@
 <script type='text/javascript'>
   
   // set your channel id here
-  var channel_id = 109638;
+  var channel_id = 125023;
   // set your channel's read api key here if necessary
-  var api_key = '7C6M9N84JEOZ3D2Z';
+  var api_key = 'CG3416WAHN3WD981';
   // name of the gauge
   var gauge_name = '%';
   // Color parameters
