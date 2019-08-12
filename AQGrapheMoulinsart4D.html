@@ -10,6 +10,9 @@ body { background-color: white; height: 100%; margin: 0; padding: 0; }
 </style>
 <script type="text/javascript">
 
+/** @define {boolean} */
+var debug = false;
+var indextest = 0;
 
 //================ variables common to all series =======================
 var series_channel_id = 809574;
@@ -17,9 +20,6 @@ var series_read_api_key = '2WTHUAZL6YMI175Y';
 var series_results = 4;	// Number of days for the Graph: 4, 30 or 120
 var median = 0;		// if = 0 all data else in minutes the average that must be calculated by Thingspeak
 
-/** @define {boolean} */
-var debug = false;
-var indextest = 0;
 
 // variables for the first series - médiane
 var series_1_field_number = 8;
@@ -62,7 +62,7 @@ else
 if ((median/60) > 1) {chart_title += 's';}
 
 // y axis title
-var y_axis_title = 'Qualité de l'air - CO2 ppm';
+var y_axis_title = 'Qualité de l\'air - CO2 ppm';
 
 // user's timezone offset
 var my_offset = new Date().getTimezoneOffset();
