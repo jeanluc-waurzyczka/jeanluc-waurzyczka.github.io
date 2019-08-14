@@ -35,23 +35,6 @@ var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
 
 
-//=============================== ?GrapheQsDJL ======================================//
-var channel_id = 91536;
-var api_key = 'FFY5YX284BZGMF6T';
-
-//=============================== ?GrapheAizenay ====================================//
-var channel_id = 102444;
-var api_key = '7AA31ENPR2WM5CER';
-
-//=============================== ?GrapheCampingCar =================================//
-var channel_id = 109638;
-var api_key = '7C6M9N84JEOZ3D2Z';
-
-//=============================== ?GrapheQsDSejour =================================//
-var channel_id = 125023;
-var api_key = 'CG3416WAHN3WD981';
-
-
 //***********************************************************************************//
 
 
@@ -59,19 +42,6 @@ var api_key = 'CG3416WAHN3WD981';
 
 var series_results = 4;	// Number of days for the Graph: 4, 30 or 180
 var median = 0;		// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
-
-
-
-//======================================= 1 Month  ===================================//
-
-var series_results = 30;	// Number of days for the Graph: 4, 30 or 180
-var median = 240;		// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
-
-//======================================= 6 Months  ==================================//
-
-var series_results = 180;	// Number of days for the Graph: 4, 30 or 180
-var median = 1440;			// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
-
 
 //***********************************************************************************//
 
@@ -115,7 +85,7 @@ $(document).on('ready', function() {
 
 // add the base chart
 function addChart() 
-	{
+{
 	// variable for the local date in milliseconds
 	var localDate;
 
@@ -169,7 +139,7 @@ function addSeries(field_number, color)
 	var field_name = 'field' + field_number;
 
 	// get the data with a webservice call
-$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + api_key, function(data) 
+	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + api_key, function(data) 
 	{
 		// blank array for holding chart data
 		var chart_data = [];
