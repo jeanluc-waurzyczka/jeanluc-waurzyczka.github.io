@@ -139,7 +139,7 @@ function addSeries(field_number, color)
 	var field_name = 'field' + field_number;
 
 	// get the data with a webservice call
-	$.getJSON('https://api.thingspeak.com/channels/' + series_channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + series_read_api_key, function(data) 
+	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + series_read_api_key, function(data) 
 	{
 		// blank array for holding chart data
 		var chart_data = [];
