@@ -156,13 +156,6 @@ $.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + fie
 			// if a numerical value exists add it
 			if (!isNaN(parseInt(value))) 
 			{ 
-				if (FirstDateMax == -99 && !isNaN (parseInt (Date.parse(this.created_at))))
-				{
-					FirstDateMax = getChartDate (this.created_at) + (median * 60000);
-					if (debug) {console.log(' FirstDateMax : ' + FirstDateMax);}
-					FirstDateMin = getChartDate (this.created_at) + (median * 60000);
-					if (debug) {console.log(' FirstDateMin : ' + FirstDateMin);}
-				}
 				chart_data.push(point); 	
 			}
 		});
