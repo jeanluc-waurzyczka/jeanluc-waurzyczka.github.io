@@ -47,7 +47,7 @@ function loadData()
 	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/feed/last.json?api_key=' + api_key, function(data) 
 	{
 		// get the data point
-		p = data.field2;
+		p = data.field5;
 
 		// if there is a data point display it
 		if (p) 
@@ -66,7 +66,7 @@ function initChart()
 	data.addColumn('number', 'Value');
 	data.addRows(1);
 	chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
-	options = {width: 180, height: 180, min: 5, max: 35, redColor: '#ff5b5b', redFrom: 0, redTo: 100, yellowColor: '#ffd468', yellowFrom: redTo, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: yellowTo, greenTo: 40,minorTicks: 5, majorTicks: [5, 10, 15, 20, 25, 30, 35]};
+	options = {width: 180, height: 180, min: 5, max: 35, redColor: '#ff5b5b', redFrom: 0, redTo: redTo, yellowColor: '#ffd468', yellowFrom: redTo, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: yellowTo, greenTo: 40,minorTicks: 5, majorTicks: [5, 10, 15, 20, 25, 30, 35]};
 
 	loadData();
 }
