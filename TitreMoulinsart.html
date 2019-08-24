@@ -51,7 +51,8 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/feeds/last.js
 	else {MinutesTemp = MinutesWorking;}
 	TexteTitre += MinutesTemp;
 	TexteTitre += " ";  
-	TexteTitre += date_last_update.toLocaleDateString();
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 	
