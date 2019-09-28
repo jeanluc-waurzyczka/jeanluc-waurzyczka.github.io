@@ -1,0 +1,353 @@
+<html style="height: 100%;">
+<head>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//thingspeak.com/highcharts-3.0.8.js"></script>
+
+<style type="text/css">
+body { background-color: white; height: 100%; margin: 0; padding: 0; }
+#chart-container { width: 880px; height: 460px; display: block; position:absolute; bottom:0; top:0; left:0; right:0; margin: 5px 15px 15px 0; overflow: hidden; }
+</style>
+<script type="text/javascript">
+
+
+
+//***********************************************************************************//
+
+//================================= TGraphe  =============================//
+
+// variables for the first series - médiane
+var series_1_field_number = 5;
+var series_1_color = '#d62020';
+
+// variables for the second series
+var series_2_field_number = 3;
+var series_2_color = '#00aaff';
+
+// variables for the third series
+var series_3_field_number = 4;
+var series_3_color = '#ffbf00';
+
+// y axis title
+var y_axis_title = 'Température - °C';
+
+
+//***********************************************************************************//
+
+//=============================== Aizenay ====================================//
+var channel_id = 102444;
+var api_key = '7AA31ENPR2WM5CER';
+
+
+//***********************************************************************************//
+
+
+//======================================= 4D  ===================================//
+
+var series_results = 4;	// Number of days for the Graph: 4, 30 or 180
+var median = 0;		// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
+
+//***********************************************************************************//
+
+
+/** @define {boolean} */
+var debug = false;
+var indextest = 0;
+
+// variables for calculating the min and max
+var FirstDateMax = -99;
+var FirstDateMin = -99;
+var ValueTempMax = -999;
+var ValueMax = -999;
+var ValueTempMin = 999;
+var ValueMin = 999;
+
+// chart title
+var chart_title = 'Vue ' + series_results + ' jours, ';
+if (series_results == 30)
+{
+	var chart_title = 'Vue 1 mois, ';
+}
+if (series_results == 180)
+{
+	var chart_title = 'Vue 6 mois, ';
+}
+if ((median/60) == 0 ) 
+{
+	chart_title += 'toutes les données';
+}
+else 	
+{
+	chart_title += 'une donnée toutes les '+ (median/60) + ' heure';
+}
+if ((median/60) > 1) {chart_title += 's';}
+
+// user's timezone offset
+var my_offset = new Date().getTimezoneOffset();
+// chart variable
+var my_chart;
+
+// when the document is ready
+$(document).on('ready', function() {
+	// add a blank chart
+	addChart();
+	// add the first series (median)
+	addSeries(series_1_field_number, series_1_color);
+	// add the second and third series
+	// add the third series
+
+	if (median == 0)
+	{
+		addSeries(series_2_field_number, series_2_color);
+		addSeries(series_3_field_number, series_3_color);
+	}
+});
+
+// add the base chart
+function addChart() 
+	{
+	// variable for the local date in milliseconds
+	var localDate;
+
+	// specify the chart options
+	var chartOptions = {
+chart: {
+renderTo: 'chart-container',
+defaultSeriesType: 'spline',
+backgroundColor: '#ffffff',
+events: { }
+		},
+title: { text: chart_title },
+plotOptions: {
+series: {
+marker: { radius: 3 },
+animation: true,
+step: false,
+borderWidth: 0,
+turboThreshold: 0
+			}
+		},
+tooltip: {
+			// reformat the tooltips so that local times are displayed
+formatter: function() {
+				var d = new Date(this.x + (my_offset*60000));
+				var n = (this.point.name === undefined) ? '' : '<br>' + this.point.name;
+				return this.series.name + ':<b>' + this.y + '</b>' + n + '<br>' + d.toDateString() + '<br>' + d.toTimeString().replace(/\(.*\)/, "");
+			}
+		},
+xAxis: {
+type: 'datetime',
+title: { text: 'Date' }
+		},
+yAxis: { title: { text: y_axis_title } },
+exporting: { enabled: true },
+legend: { enabled: false },
+credits: {
+text: 'ThingSpeak.com',
+href: 'https://thingspeak.com/',
+style: { color: '#D62020' }
+		}
+	};
+
+	// draw the chart
+	my_chart = new Highcharts.Chart(chartOptions);
+}
+
+// add a series to the chart
+function addSeries(field_number, color) 
+{
+	var field_name = 'field' + field_number;
+
+	// get the data with a webservice call
+	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + api_key, function(data) 
+	{
+		// blank array for holding chart data
+		var chart_data = [];
+		var chart_dataMax = [];
+
+		// iterate through each feed
+		$.each(data.feeds, function() 
+		{
+			var point = new Highcharts.Point();
+			// set the proper values
+			var value = this[field_name];
+			point.x = getChartDate(this.created_at);
+			point.y = parseFloat(value);
+			// add location if possible
+			if (this.location) { point.name = this.location; }
+			// if a numerical value exists add it
+			if (!isNaN(parseInt(value))) 
+			{ 
+				if (FirstDateMax == -99 && !isNaN (parseInt (Date.parse(this.created_at))))
+				{
+					FirstDateMax = getChartDate (this.created_at) + (median * 60000);
+					if (debug) {console.log(' FirstDateMax : ' + FirstDateMax);}
+					FirstDateMin = getChartDate (this.created_at) + (median * 60000);
+					if (debug) {console.log(' FirstDateMin : ' + FirstDateMin);}
+					if (median != 0)
+					{
+						addSeriesMin(series_2_field_number, series_2_color);
+						addSeriesMax(series_3_field_number, series_3_color);
+					}
+				}
+				chart_data.push(point); 	
+			}
+		});
+
+		// add the chart data
+		my_chart.addSeries({ data: chart_data, name: data.channel[field_name], color: color });
+	});
+}
+
+function addSeriesMax(field_number, color) 
+{
+	var field_name = 'field' + field_number;
+
+	// get the data with a webservice call
+	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&days=' + series_results + '&api_key=' + api_key, function(data) 
+	{
+		// blank array for holding chart data
+		var chart_data = [];
+		indextest += 1;
+		// iterate through each feed
+		$.each(data.feeds, function() 
+		{
+			if ((Date.parse(this.created_at) - (my_offset * 60000)) > FirstDateMax)
+			{
+
+				// if a numerical value exists add it
+				if (ValueMax != -999) 
+				{ 
+					var point = new Highcharts.Point();
+					point.x = FirstDateMax - (median * 60000);
+					if (debug) {console.log ('Max date : ' + point.x + ' ValueMax : ' + ValueMax + ' Index boucle ' + indextest);}
+					point.y = parseFloat(ValueMax);
+					chart_data.push(point); 
+					ValueMax = -999;
+					FirstDateMax += (median * 60000);
+				}
+				if (debug) {console.log ('avant boucle else et while max ');}
+				while ((Date.parse(this.created_at) - (my_offset * 60000))  > FirstDateMax)
+				{
+					FirstDateMax += (median * 60000);
+					if (debug) {console.log ('Boucle while. ValueDateMax ' + FirstDateMax);}
+				}
+				
+				ValueTempMax = this[field_name];
+				if (!isNaN(parseInt(ValueTempMax))) 
+				{ 
+					if (Math.round(ValueTempMax*100)/100 > Math.round(ValueMax*100)/100) {ValueMax = ValueTempMax;}
+					if (debug) {console.log ('ValueTempMax if if : ' + ValueTempMax + ' ValueMax : ' + ValueMax);}
+				}
+
+				
+			}
+			
+			ValueTempMax = this[field_name];
+			if (!isNaN(parseInt(ValueTempMax))) 
+			{ 
+				if (Math.round(ValueTempMax*100)/100 > Math.round(ValueMax*100)/100) {ValueMax = ValueTempMax;}
+				if (debug) {console.log ('ValueTempMax if : ' + ValueTempMax + ' ValueMax : ' + ValueMax);}
+			}
+
+		});
+		if (ValueMax != -999)
+		{
+			// if a numerical value exists add it
+			if (!isNaN(parseInt(ValueMax))) 
+			{ 
+				var point = new Highcharts.Point();
+				point.x = FirstDateMax - (median * 60000);
+				point.y = parseFloat(ValueMax);
+				chart_data.push(point); 
+			}
+		}		
+
+		// add the chart data
+		my_chart.addSeries({ data: chart_data, name: data.channel[field_name], color: color });
+	});
+}
+
+
+function addSeriesMin(field_number, color) {
+	var field_name = 'field' + field_number;
+
+	// get the data with a webservice call
+	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&days=' + series_results + '&api_key=' + api_key, function(data) 
+	{
+		// blank array for holding chart data
+		var chart_data = [];
+		// iterate through each feed
+		$.each(data.feeds, function() 
+		{
+			if ((Date.parse(this.created_at) - (my_offset * 60000)) > FirstDateMin)
+			{
+
+				// if a numerical value exists add it
+				if (ValueMin != 999) 
+				{ 
+					var point = new Highcharts.Point();
+					point.x = FirstDateMin - (median * 60000);
+					if (debug) {console.log ('Min date : ' + point.x + ' ValueMin : ' + ValueMin + ' Index boucle ' + indextest);}
+					point.y = parseFloat(ValueMin);
+					chart_data.push(point); 
+					ValueMin = 999;
+					FirstDateMin += (median * 60000);
+				}
+				if (debug) {console.log ('avant boucle else et while max ');}
+				while ((Date.parse(this.created_at) - (my_offset * 60000))  > FirstDateMin)
+				{
+					FirstDateMin += (median * 60000);
+					if (debug) {console.log ('Boucle while. ValueDateMin ' + FirstDateMin);}
+				}
+				
+				ValueTempMin = this[field_name];
+				if (!isNaN(parseInt(ValueTempMin))) 
+				{ 
+					if (Math.round(ValueTempMin*100)/100 < Math.round(ValueMin*100)/100) {ValueMin = ValueTempMin;}
+					if (debug) {console.log ('ValueTempMin if if : ' + ValueTempMin + ' ValueMin : ' + ValueMin);}
+				}
+
+				
+			}
+			
+			ValueTempMin = this[field_name];
+			if (!isNaN(parseInt(ValueTempMin))) 
+			{ 
+				if (Math.round(ValueTempMin*100)/100 < Math.round(ValueMin*100)/100) {ValueMin = ValueTempMin;}
+				if (debug) {console.log ('ValueTempMin if : ' + ValueTempMin + ' ValueMin : ' + ValueMin);}
+			}
+
+		});
+		if (ValueMin != -999)
+		{
+			// if a numerical value exists add it
+			if (!isNaN(parseInt(ValueMin))) 
+			{ 
+				var point = new Highcharts.Point();
+				point.x = FirstDateMin - (median * 60000);
+				point.y = parseFloat(ValueMin);
+				chart_data.push(point); 
+			}
+		}		
+
+		// add the chart data
+		my_chart.addSeries({ data: chart_data, name: data.channel[field_name], color: color });
+	});
+}
+
+// converts date format from JSON
+function getChartDate(d) 
+{
+	// offset in minutes is converted to milliseconds and subtracted so that chart's x-axis is correct
+	return Date.parse(d) - (my_offset * 60000);
+}
+
+</script>
+
+</head>
+<body>
+<div id="chart-container">
+<img alt="Ajax loader" src="//thingspeak.com/assets/loader-transparent.gif" style="position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;" />
+</div>
+</body>
+</html>
