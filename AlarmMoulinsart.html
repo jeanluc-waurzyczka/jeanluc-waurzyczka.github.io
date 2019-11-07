@@ -26,9 +26,10 @@ var api_key = '2WTHUAZL6YMI175Y';
 
 var TexteTitre = "<a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 var TexteTitre1 = "/\">";
-var TexteTitre2 = "</a><span style=\"font-size:1.0em; font-family: Arial, Helvetica, sans-serif;\" >";
+var TexteTitre2 = "</a><span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
 var TexteTitre3 = ":";
-var TexteTitre4 = "</span></p>";
+var TexteTitre4 = "<br>";
+var TexteTitre5 = "</span></p>";
 
 var date_last_update;
 
@@ -56,6 +57,8 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	else {MinutesTemp = MinutesWorking;}
 	TexteTitre += MinutesTemp;
 	TexteTitre += TexteTitre4;
+	TexteTitre += this[field1];
+	TexteTitre += TexteTitre5;
 	document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
 	
 }	);
