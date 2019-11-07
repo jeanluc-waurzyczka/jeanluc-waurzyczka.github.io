@@ -53,7 +53,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json
 	
 	
 //	date_last_update = new Date(data.created_at);
-	date_last_update = this.created_at;
+	date_last_update = getChartDate(this.created_at);
 
 
 	var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
