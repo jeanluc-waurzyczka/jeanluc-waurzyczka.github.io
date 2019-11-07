@@ -44,6 +44,14 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	TexteTitre += TexteTitre1;
 //	TexteTitre += room;
 	TexteTitre += TexteTitre2
+	
+	
+	
+			// iterate through each feed
+		$.each(data.feeds, function() 
+		{
+	
+	
 	date_last_update = new Date(data.created_at);
 
 
@@ -58,8 +66,14 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	TexteTitre += MinutesTemp;
 	TexteTitre += TexteTitre4;
 	TexteTitre += this["field1"];
-	TexteTitre += TexteTitre5;
+	TexteTitre += TexteTitre4;
+
+	
+		}
+		
+	TexteTitre += TexteTitre5;	
 	document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
+
 	
 }	);
 
