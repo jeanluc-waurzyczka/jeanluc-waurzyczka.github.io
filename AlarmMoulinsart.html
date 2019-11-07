@@ -48,8 +48,8 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	
 	
 			// iterate through each feed
-		$.each(data.feeds, function() 
-		{
+//		$.each(data.feeds, function() 
+//		{
 	
 	
 	date_last_update = new Date(data.created_at);
@@ -69,7 +69,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	TexteTitre += TexteTitre4;
 
 	
-		} )
+//		} )
 		
 	TexteTitre += TexteTitre5;	
 	document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
