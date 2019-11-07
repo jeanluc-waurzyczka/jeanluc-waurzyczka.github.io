@@ -51,12 +51,12 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	
 	
 		
-		var value = this["field1"];
+		var value = data["field1"];
 
 		if (value !== null)
 		{
-//			date_last_update = new Date(data.created_at);
-			date_last_update = new Date(this.created_at);
+			date_last_update = new Date(data.created_at);
+//			date_last_update = new Date(this.created_at);
 			TexteTitre += "<strong>";
 			var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 			TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
