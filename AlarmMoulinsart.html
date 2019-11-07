@@ -46,7 +46,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	date_last_update = new Date(data.created_at);
 
 
-	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 	TexteTitre += " ";  
 	TexteTitre += date_last_update.getHours();
