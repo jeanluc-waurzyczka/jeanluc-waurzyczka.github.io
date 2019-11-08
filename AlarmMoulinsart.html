@@ -102,12 +102,13 @@ if (value !== null)
 					TexteTitre += "<font size=\"2\">";
 					TexteTitre += value;
 					TexteTitre += "</td></tr>";
-					table_alarm.unshift(TexteTitre);
+					table_alarm.push(TexteTitre);
 				}
 
 				
 			} )
 			
+			TexteTitreTrie.reverse();
 			for (var i = 0; i < table_alarm.length; i++) 
 			{
 			TexteTitreTrie += table_alarm[i];
