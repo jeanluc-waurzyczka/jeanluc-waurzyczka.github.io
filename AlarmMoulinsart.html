@@ -109,10 +109,10 @@ if (value !== null)
 			} )
 			
 //			table_alarm.reverse();
-			for (var i = 0; i < table_alarm.length; i++) 
+			table_alarm.forEach(function(item, index, array)
 			{
-			TexteTitreTrie += table_alarm[i];
-			}
+			TexteTitreTrie += item;
+			});
 			TexteTitreTrie += "</table></span></p>";	
 			document.getElementById("AffichageAlarm").innerHTML = TexteTitreTrie;
 
