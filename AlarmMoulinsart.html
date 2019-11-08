@@ -81,7 +81,7 @@ if (value !== null)
 				if (value !== null)
 				{
 					date_last_update = new Date(this.created_at);
-					TexteTitre += "<p><tr><td>";
+					TexteTitre += "<tr><td>";
 					var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 					TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 					TexteTitre += " ";  
@@ -93,7 +93,7 @@ if (value !== null)
 					TexteTitre += MinutesTemp;
 					TexteTitre += " </td><td> ";
 					TexteTitre += value;
-					TexteTitre += "</td></tr></p>";
+					TexteTitre += "</td></tr>";
 				}
 
 				
