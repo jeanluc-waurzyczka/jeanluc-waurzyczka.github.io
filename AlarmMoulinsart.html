@@ -4,7 +4,7 @@
 </head>
 <body>
 <div id="chart-container">
-<p id="AffichageAlarm" style="text-align:left; color:#040457;"></p>
+<p id="AffichageAlarm" style="text-align:left; color:#ff2222;"></p>
 <style type="text/css">
 { background-color: white; height: 100%; margin: 0; padding: 0;}
 a { text-decoration:none;}
@@ -15,6 +15,7 @@ a { text-decoration:none;}
 
 <script type="text/javascript">
 
+
 //=============================== TitreMoulinsart =================================//
 var site = "arthur";
 var room = "Moulinsart";
@@ -22,6 +23,23 @@ var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
 
 //================================================================================//
+
+//***********************************************************************************//
+
+
+//======================================= 4D  ===================================//
+
+//var DaysAlarmDisplay = 4;	// Alarm period to be displayed
+
+//======================================= 1M  ===================================//
+
+//var DaysAlarmDisplay = 31;	// Alarm period to be displayed
+
+//======================================= 6M  ==================================//
+
+var DaysAlarmDisplay = 184;	// Alarm period to be displayed
+
+//***********************************************************************************//
 
 var TexteTitre;
 
@@ -36,49 +54,61 @@ var my_offset = new Date().getTimezoneOffset();
 
 var data;
 
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key, function(data) {
+
+
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
+	
 		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
-		
-	// iterate through each feed
-	$.each(data.feeds, function() 
-	{
-		
-		var value = this["field1"];
-
-		if (value !== null)
-		{
-			date_last_update = new Date(this.created_at);
-			TexteTitre += "<strong><br>";
-			var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-			TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
-			TexteTitre += " ";  
-			TexteTitre += date_last_update.getHours();
-			TexteTitre += ":";
-			MinutesWorking = date_last_update.getMinutes();
-			if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
-			else {MinutesTemp = MinutesWorking;}
-			TexteTitre += MinutesTemp;
-			TexteTitre += " </strong> ";
-			TexteTitre += value;
-			TexteTitre += "<br>";
-		}
-
-		
-	} )
-	
-	TexteTitre += "</span></p>";	
-	document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
-
-	
-}	);
-
-// converts date format from JSON
-function getChartDate(d) 
+var value = data["field1"];
+if (value !== null)
 {
-	// offset in minutes is converted to milliseconds and subtracted so that chart's x-axis is correct
-	return Date.parse(d) - (my_offset * 60000);
-}
+	date_last_update = new Date(data.created_at);
+	var date_last_alarm_millis = Date.parse (date_last_update);
+	var date_today = new Date(Date.now());
+	var date_today_millis =  Date.parse (date_today);
+	var date_alarm_limit_millis = date_today_millis - (DaysAlarmDisplay * 86400000);
+	var date_alarm_limit = new date (date_alarm_limit_millis);
+	
+	if (date_last_alarm_millis > (date_alarm_limit_millis))
+	{
 
+		$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key, function(data) {
+			TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
+			
+			// iterate through each feed
+			$.each(data.feeds, function() 
+			{
+				
+				var value = this["field1"];
+
+				if (value !== null)
+				{
+					date_last_update = new Date(this.created_at);
+					TexteTitre += "<strong><br>";
+					var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+					TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
+					TexteTitre += " ";  
+					TexteTitre += date_last_update.getHours();
+					TexteTitre += ":";
+					MinutesWorking = date_last_update.getMinutes();
+					if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
+					else {MinutesTemp = MinutesWorking;}
+					TexteTitre += MinutesTemp;
+					TexteTitre += " </strong> ";
+					TexteTitre += value;
+					TexteTitre += "<br>";
+				}
+
+				
+			} )
+			
+			TexteTitre += "</span></p>";	
+			document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
+
+			
+		}	);
+	}
+}
 
 </script>
 </div>
