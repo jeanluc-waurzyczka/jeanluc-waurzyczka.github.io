@@ -44,7 +44,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 		{
 			date_last_update = new Date(data.created_at);
 			var date_today = Date.now();
-			if (date_last_update > (date_today - 44640))
+			if (date_last_update > (date_today - 2678400))
 			{
 				TexteTitre += "<strong>";
 				var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
@@ -61,7 +61,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 				TexteTitre += "<br>";
 			}
 		}
-	
+		
 	TexteTitre += "</span></p>";	
 	document.getElementById("AffichageNewAlarm").innerHTML = TexteTitre;
 	
