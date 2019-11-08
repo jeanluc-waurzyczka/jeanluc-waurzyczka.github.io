@@ -67,7 +67,7 @@ if (value !== null)
 	var date_today = new Date(Date.now());
 	var date_today_millis =  Date.parse (date_today);
 	var date_alarm_limit_millis = date_today_millis - (DaysAlarmDisplay * 86400000);
-	var date_alarm_limit = new date (date_alarm_limit_millis);
+	var date_alarm_limit = new Date (date_alarm_limit_millis);
 	
 	if (date_last_alarm_millis > (date_alarm_limit_millis))
 	{
