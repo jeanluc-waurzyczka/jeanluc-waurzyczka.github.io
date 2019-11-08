@@ -46,6 +46,9 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 			date_last_update_millis = Date.parse (date_last_update);
 			var date_today = Date.now();
 			TexteTitre += date_last_update;
+			TexteTitre += date_last_update_millis;
+			TexteTitre += " ";
+			TexteTitre += date_today;
 			
 			if (date_last_update_millis > (date_today - 2678400))
 			{
