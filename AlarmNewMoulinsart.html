@@ -36,10 +36,10 @@ var my_offset = new Date().getTimezoneOffset();
 
 var data;
 
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/status/last.json?api_key=' + api_key, function(data) {
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key + '&status=true', function(data) {
 	
 		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
-		var value = data["status"];
+		var value = data["field1"];
 		if (value !== null)
 		{
 			date_last_update = new Date(data.created_at);
@@ -51,6 +51,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/status
 			TexteTitre += " ";
 			TexteTitre += date_today;
 			TexteTitre += date_today_millis;
+			TexteTitre + = data["status"];
 			
 			if (date_last_update_millis > (date_today_millis - 2678400000))
 			{
