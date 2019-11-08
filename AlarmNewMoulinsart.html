@@ -43,19 +43,23 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 		if (value !== null)
 		{
 			date_last_update = new Date(data.created_at);
-			TexteTitre += "<strong>";
-			var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-			TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
-			TexteTitre += " ";  
-			TexteTitre += date_last_update.getHours();
-			TexteTitre += ":";
-			MinutesWorking = date_last_update.getMinutes();
-			if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
-			else {MinutesTemp = MinutesWorking;}
-			TexteTitre += MinutesTemp;
-			TexteTitre += "</strong><br><br> ";
-			TexteTitre += value;
-			TexteTitre += "<br>";
+			var date_today = Date.now();
+			if (date_last_update > (date_today - 44640)
+			{
+				TexteTitre += "<strong>";
+				var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+				TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
+				TexteTitre += " ";  
+				TexteTitre += date_last_update.getHours();
+				TexteTitre += ":";
+				MinutesWorking = date_last_update.getMinutes();
+				if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
+				else {MinutesTemp = MinutesWorking;}
+				TexteTitre += MinutesTemp;
+				TexteTitre += "</strong><br><br> ";
+				TexteTitre += value;
+				TexteTitre += "<br>";
+			}
 		}
 	
 	TexteTitre += "</span></p>";	
