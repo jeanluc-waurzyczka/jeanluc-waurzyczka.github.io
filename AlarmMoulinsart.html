@@ -83,6 +83,8 @@ if (value !== null)
 					date_last_update = new Date(this.created_at);
 					TexteTitre += "<tr><td>";
 					var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+					
+					TexteTitre += "</span><span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><font size=\"2\">";
 					TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 					TexteTitre += " ";  
 					TexteTitre += date_last_update.getHours();
