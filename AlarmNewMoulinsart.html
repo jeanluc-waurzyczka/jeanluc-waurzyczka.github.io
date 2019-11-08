@@ -39,7 +39,7 @@ var data;
 $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/status.json?results=2?api_key=' + api_key + '&status=true', function(data) {
 	
 		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
-		var value = data["field1"];
+		var value = data["status"];
 		if (value !== null)
 		{
 			date_last_update = new Date(data.created_at);
