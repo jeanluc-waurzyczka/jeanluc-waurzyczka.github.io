@@ -72,7 +72,7 @@ if (value !== null)
 	if (date_last_alarm_millis > (date_alarm_limit_millis))
 	{
 
-		$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key, function(data) {
+		$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&start=' + date_alarm_limit + '&end=' + date_last_update, function(data) {
 			TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
 			
 			// iterate through each feed
