@@ -6,7 +6,7 @@
 <div id="chart-container">
 <p id="AffichageAlarm" style="text-align:left; "></p>
 <style type="text/css">
-
+tableau {color:#ff2222;}
 </style>
 
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
@@ -70,7 +70,7 @@ if (value !== null)
 	{
 
 		$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&start=' + date_alarm_limit + '&end=' + date_last_update, function(data) {
-			TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h2>Alarmes</h2><table><span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" >";
+			TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h1>Alarmes</h1><table><tableau>";
 			
 			// iterate through each feed
 			$.each(data.feeds, function() 
