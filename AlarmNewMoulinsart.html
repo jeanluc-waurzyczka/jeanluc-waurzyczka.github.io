@@ -36,10 +36,10 @@ var my_offset = new Date().getTimezoneOffset();
 
 var data;
 
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/9/last.json?api_key=' + api_key, function(data) {
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
 	
 		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
-		var value = data["field9"];
+		var value = data["field1"];
 		if (value !== null)
 		{
 			date_last_update = new Date(data.created_at);
