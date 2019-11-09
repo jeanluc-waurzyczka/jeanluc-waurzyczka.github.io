@@ -9,7 +9,7 @@
 #chart-container {color:#ff2222; font-size: 0.875em; }
 </style>
 
-//<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 
 <script type="text/javascript">
 	
@@ -59,71 +59,10 @@ var data;
 
 var TexteTitreTrie = "";
 
-var date_last_alarm_millis;
 
-var date_alarm_limit_millis;
-
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
-	
-		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >Inside";
-		var value = data["field1"];
-		if (value !== null)
-		{
-			date_last_update = new Date(data.created_at);
-			var date_last_update_millis = Date.parse (date_last_update);
-			var date_today = new Date(Date.now());
-			var date_today_millis =  Date.parse (date_today);
-			
-			if (date_last_update_millis > (date_today - 2678400000))
-			{
-				TexteTitre += "<strong><br>";
-				var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-				TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
-				TexteTitre += " ";  
-				TexteTitre += date_last_update.getHours();
-				TexteTitre += ":";
-				MinutesWorking = date_last_update.getMinutes();
-				if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
-				else {MinutesTemp = MinutesWorking;}
-				TexteTitre += MinutesTemp;
-				TexteTitre += "</strong><br><br> ";
-				TexteTitre += value;
-				TexteTitre += "<br>";
-			}
-		}
-		
-	TexteTitreTrie += TexteTitre;
-	
-}	);
-
-
-
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
-	var value = data["field1"];
-	TexteTitreTrie += value;
-	if (value !== null)
-	{
-		date_last_update = new Date(data.created_at);
-		date_last_alarm_millis = Date.parse (date_last_update);
-		var date_today = new Date(Date.now());
-		var date_today_millis =  Date.parse (date_today);
-		date_alarm_limit_millis = date_today_millis - (DaysAlarmDisplay * 86400000);
-		var date_alarm_limit = new Date (date_alarm_limit_millis);
-		TexteTitreTrie += " test dans last ";
-	}
-});
-
-TexteTitreTrie += " test avant each last alarm: ";
-TexteTitreTrie += date_last_alarm_millis;
-TexteTitreTrie += " test avant each alarm limit: ";
-TexteTitreTrie += date_alarm_limit_millis;
-
-if (date_last_alarm_millis > (date_alarm_limit_millis))
-{
-	var date_alarm_limit = new Date (date_alarm_limit_millis);
 	table_alarm.length = 0;
 	testi=0;
-	$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&start=' + date_alarm_limit + '&end=' + date_last_update, function(data) 
+	$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&days=' + DaysAlarmDisplay, function(data) 
 	{
 		TexteTitreTrie = "<span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h1>Alarmes</h1></span><span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><font size=\"2\"><table>";
 
@@ -157,6 +96,7 @@ if (date_last_alarm_millis > (date_alarm_limit_millis))
 				TexteTitre += value;
 				TexteTitre += "</td></tr>";
 				table_alarm [testi] = (TexteTitre);
+				TexteTitreTrie += TexteTitre;
 			}
 
 			
@@ -170,10 +110,10 @@ if (date_last_alarm_millis > (date_alarm_limit_millis))
 //		TexteTitreTrie += item;
 //	});
 	TexteTitreTrie += "</table></span></p>";	
-}	document.getElementById("AffichageAlarm").innerHTML = TexteTitreTrie;
+	document.getElementById("AffichageAlarm").innerHTML = TexteTitreTrie;
 
 	
-//}
+
 
 </script>
 </div>
