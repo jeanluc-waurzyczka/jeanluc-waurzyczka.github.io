@@ -57,14 +57,14 @@ var my_offset = new Date().getTimezoneOffset();
 
 var data;
 
-var TexteTitreTrie = "";
+var TexteTitreTrie =  = "<span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h1>Alarmes</h1></span><span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><font size=\"2\"><table>";
 
 
 table_alarm.length = 0;
 testi=0;
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key , function(data) 
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&days=' + DaysAlarmDisplay, function(data) 
 {
-	TexteTitreTrie = "<span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h1>Alarmes</h1></span><span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><font size=\"2\"><table>";
+//	TexteTitreTrie = "<span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h1>Alarmes</h1></span><span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><font size=\"2\"><table>";
 
 	// iterate through each feed
 	$.each(data.feeds, function() 
@@ -82,7 +82,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json
 			
 			var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 			
-			TexteTitre += "</span><span style=\" color:#ff2222; \" >";
+			TexteTitre += "</span><span style=\" color:#ff2222; \" ><font-size=\"2\">";
 			TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 			TexteTitre += " ";  
 			TexteTitre += date_last_update.getHours();
