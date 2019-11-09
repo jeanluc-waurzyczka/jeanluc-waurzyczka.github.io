@@ -96,9 +96,10 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 		}	
 		TexteTitre += " fin recherche si alarme ";
 	TexteTitre1 += "</span></p>";	
-	return TexteTitre;
-		
  document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
+ return TexteTitre;
+		
+
 }	);
 
 }
