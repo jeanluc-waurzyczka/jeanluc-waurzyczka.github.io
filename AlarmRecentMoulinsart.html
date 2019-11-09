@@ -60,8 +60,9 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 			var date_last_update_millis = Date.parse (date_last_update);
 			var date_today = new Date(Date.now());
 			var date_today_millis =  Date.parse (date_today);
+			var date_limit_millis = date_today_millis - (DaysAlarmDisplay * 86400000)‬;
 			
-			if (date_last_update_millis > (date_today_millis - (DaysAlarmDisplay * 86400000‬)))
+			if (date_last_update_millis > date_limit_millis)
 			{
 				TexteTitre += "<strong><br>";
 				var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
