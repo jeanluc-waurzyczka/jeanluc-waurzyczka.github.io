@@ -102,11 +102,11 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json
 
 		
 	});
-//			table_alarm.reverse();
-//	table_alarm.forEach(function(item, index, array)
-//	{
-//		TexteTitreTrie += item;
-//	});
+			table_alarm.reverse();
+	table_alarm.forEach(function(item, index, array)
+	{
+		TexteTitreTrie += item;
+	});
 TexteTitreTrie += "</table></span></p>";	
 document.getElementById("AffichageAlarm").innerHTML = TexteTitreTrie;
 });
