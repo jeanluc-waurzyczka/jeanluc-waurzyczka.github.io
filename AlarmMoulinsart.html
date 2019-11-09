@@ -91,6 +91,10 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 		}
 		
 	TexteTitreTrie += TexteTitre;
+	
+}	);
+
+
 
 $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
 	var value = data["field1"];
