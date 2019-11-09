@@ -44,7 +44,7 @@ var TexteTitre1 = " initial titre1 ";
 $(document).on('ready', function() {
 
 // check if alarm exists
-	check_last_field1(date_last_update, TexteTitre1);
+	TexteTitre += check_last_field1(date_last_update, TexteTitre1);
 	TexteTitre += TexteTitre1;
 	TexteTitre += " retour du last ";
 document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
@@ -95,6 +95,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 		}	
 		TexteTitre += " fin recherche si alarme ";
 	TexteTitre += "</span></p>";	
+	return (TexteTitre);
 		
 // document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
 }	);
