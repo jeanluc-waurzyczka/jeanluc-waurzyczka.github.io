@@ -63,6 +63,17 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 				TexteTitre += value;
 				TexteTitre += "<br>";
 			}
+			
+			
+			date_last_update = new Date(data.created_at);
+			var date_last_alarm_millis = Date.parse (date_last_update);
+			var date_today = new Date(Date.now());
+			var date_today_millis =  Date.parse (date_today);
+			var date_alarm_limit_millis = date_today_millis - (DaysAlarmDisplay * 86400000);
+			var date_alarm_limit = new Date (date_alarm_limit_millis);
+			TexteTitre += " test dans 1st ";
+			
+			
 		}
 		
 	TexteTitre += "</span></p>";	
