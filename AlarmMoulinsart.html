@@ -78,9 +78,9 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last
 	}
 });
 TexteTitreTrie = " test avant each last alarm: ";
-TexteTitreTrie = date_last_alarm_millis;
-TexteTitreTrie = " test avant each alarm limit: ";
-TexteTitreTrie = date_alarm_limit_millis;
+TexteTitreTrie += date_last_alarm_millis;
+TexteTitreTrie += " test avant each alarm limit: ";
+TexteTitreTrie += date_alarm_limit_millis;
 
 if (date_last_alarm_millis > (date_alarm_limit_millis))
 {
