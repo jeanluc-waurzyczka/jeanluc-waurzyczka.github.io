@@ -9,12 +9,11 @@
 p {color:#ff2222; font-size: 0.875em; }
 </style>
 
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+//<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 
 <script type="text/javascript">
 	
-var max_elements_table = 100;
-var table_alarm = [];
+
 
 
 //=============================== TitreMoulinsart =================================//
@@ -42,6 +41,9 @@ var DaysAlarmDisplay = 184;	// Alarm period to be displayed
 
 //***********************************************************************************//
 
+var max_elements_table = 100;
+var table_alarm = [];
+
 var TexteTitre ="";
 
 var date_last_update;
@@ -63,7 +65,7 @@ var date_alarm_limit_millis;
 
 $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
 	
-		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
+		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >Inside";
 		var value = data["field1"];
 		if (value !== null)
 		{
