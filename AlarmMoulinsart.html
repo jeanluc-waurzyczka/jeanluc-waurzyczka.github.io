@@ -83,9 +83,10 @@ if (date_last_alarm_millis > (date_alarm_limit_millis))
 	var date_alarm_limit = new Date (date_alarm_limit_millis);
 	table_alarm.length = 0;
 	testi=0;
-	$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&start=' + date_alarm_limit + '&end=' + date_last_update, function(data) {
+	$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&start=' + date_alarm_limit + '&end=' + date_last_update, function(data) 
+	{
 		TexteTitreTrie = "<span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><h1>Alarmes</h1></span><span style=\" font-family: Arial, Helvetica, sans-serif; text-align:center; color:#ff2222; \" ><font size=\"2\"><table>";
-		
+
 		// iterate through each feed
 		$.each(data.feeds, function() 
 		{
@@ -119,15 +120,15 @@ if (date_last_alarm_millis > (date_alarm_limit_millis))
 			}
 
 			
-		} );
+		});
 	});
 	
 	
 	//			table_alarm.reverse();
-	table_alarm.forEach(function(item, index, array)
-	{
-		TexteTitreTrie += item;
-	});
+//	table_alarm.forEach(function(item, index, array)
+//	{
+//		TexteTitreTrie += item;
+//	});
 	TexteTitreTrie += "</table></span></p>";	
 	document.getElementById("AffichageAlarm").innerHTML = TexteTitreTrie;
 
