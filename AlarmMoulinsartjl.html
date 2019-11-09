@@ -42,14 +42,14 @@ var data;
 $(document).on('ready', function() {
 
 // check if alarm exists
-	check_last_field1(date_last_update);
+	check_last_field1(date_last_update, TexteTitre);
 	TexteTitre += " retour du last ";
 document.getElementById("AffichageAlarm").innerHTML = TexteTitre;
 
 });
 
 
-function check_last_field1 (date_last_update)
+function check_last_field1 (date_last_update, TexteTitre)
 {
 $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
 	
