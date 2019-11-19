@@ -1,0 +1,24 @@
+
+
+Here is a work around to show a 'not public' plugin on your own website.
+For the description I used Chrome, but it can also be done in other browsers:
+
+1. Make and test the plugin within ThingSpeak
+2. When done click on view, showing the output on screen
+3. Right click and choose Inspect
+4. click Sources, and click the thingspeak-number
+5. Copy the source of it and paste it in a empty html text-file
+6. remove the 2 lines (4 and 5)with: window.NREUM||(NREUM={})……
+
+This file can be placed on your website-server.
+In your website html file in the iFrame point to this file.
+
+For example:
+iframe width="750" height="1000" style="border: 1px solid #cccccc;" src="thingspeakplugin.html">
+
+With this method you can use your plugin on your website
+
+Disadvantage of this method is, when you make a change within Thingspeak, you have to manually copy this to
+your file again
+
+Il faut également enlever les titres etc...

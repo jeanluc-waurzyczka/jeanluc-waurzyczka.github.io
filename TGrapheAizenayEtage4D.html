@@ -2,6 +2,7 @@
 <head>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="//thingspeak.com/highcharts-3.0.8.js"></script>
+<script type="text/javascript" src="//thingspeak.com/exporting.js"></script>
 
 <style type="text/css">
 body { background-color: white; height: 100%; margin: 0; padding: 0; }
@@ -13,25 +14,7 @@ body { background-color: white; height: 100%; margin: 0; padding: 0; }
 
 //***********************************************************************************//
 
-//====================================== AQGraphe  =================================//
-
-// variables for the first series - médiane
-var series_1_field_number = 8;
-var series_1_color = '#d62020';
-
-// variables for the second series
-var series_2_field_number = 6;
-var series_2_color = '#00aaff';
-
-// variables for the third series
-var series_3_field_number = 7;
-var series_3_color = '#ffbf00';
-
-// y axis title
-var y_axis_title = 'Qualité de l\'air - CO2 ppm';
-
-
-//================================= TGraphe  =============================//
+//================================= Temperature graphe  =============================//
 
 // variables for the first series - médiane
 var series_1_field_number = 5;
@@ -52,51 +35,18 @@ var y_axis_title = 'Température - °C';
 //***********************************************************************************//
 
 
-//=============================== AizenayVeranda =================================//
+//=============================== TGrapheMoulinsart =================================//
 var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
-
-
-//=============================== QsDJL ======================================//
-var channel_id = 91536;
-var api_key = 'FFY5YX284BZGMF6T';
-
-//=============================== Aizenay ====================================//
-var channel_id = 102444;
-var api_key = '7AA31ENPR2WM5CER';
-
-//=============================== AizenayVeranda ====================================//
-var channel_id = 901544;
-var api_key = 'Z996IH7IT3K2DHQ2';
-
-//=============================== CampingCar =================================//
-var channel_id = 109638;
-var api_key = '7C6M9N84JEOZ3D2Z';
-
-//=============================== QsDSejour =================================//
-var channel_id = 125023;
-var api_key = 'CG3416WAHN3WD981';
 
 
 //***********************************************************************************//
 
 
-//======================================= 4D  ===================================//
+//======================================= 4 Days  ===================================//
 
 var series_results = 4;	// Number of days for the Graph: 4, 30 or 180
 var median = 0;		// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
-
-
-
-//======================================= 1M  ===================================//
-
-var series_results = 30;	// Number of days for the Graph: 4, 30 or 180
-var median = 240;		// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
-
-//======================================= 6M  ==================================//
-
-var series_results = 180;	// Number of days for the Graph: 4, 30 or 180
-var median = 1440;			// if = 0 all data else in minutes (240 or 1440) the period that the average must be calculated by Thingspeak
 
 
 //***********************************************************************************//

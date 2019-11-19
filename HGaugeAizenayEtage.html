@@ -10,39 +10,17 @@ body
 <script type='text/javascript'>
 
 
-//=============================== AQGaugeAizenayVeranda =================================//
+//=============================== HGaugeMoulinsart =================================//
 var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
 
 
-//=============================== AQGaugeQsDJL ======================================//
-var channel_id = 91536;
-var api_key = 'FFY5YX284BZGMF6T';
-
-//=============================== AQGaugeAizenay ====================================//
-var channel_id = 102444;
-var api_key = '7AA31ENPR2WM5CER';
-
-//=============================== AQGaugeAizenayVeranda ====================================//
-var channel_id = 901544;
-var api_key = 'Z996IH7IT3K2DHQ2';
-
-//=============================== AQGaugeCampingCar =================================//
-var channel_id = 109638;
-var api_key = '7C6M9N84JEOZ3D2Z';
-
-//=============================== AQGaugeQsDSejour =================================//
-var channel_id = 125023;
-var api_key = 'CG3416WAHN3WD981';
-
-
-
 // name of the gauge
-var gauge_name = 'ppm';
+var gauge_name = '%';
 // Color parameters
-var RedFrom = 1000;
-var YellowFrom = 600;
-var GreenFrom = 0;  
+var RedFrom = 80;
+var YellowFrom = 65;
+var GreenFrom = 40;  
 
 // global variables
 var chart, charts, data;
@@ -69,7 +47,7 @@ function loadData()
 	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/feed/last.json?api_key=' + api_key, function(data) 
 	{
 		// get the data point
-		p = data.field8;
+		p = data.field2;
 
 		// if there is a data point display it
 		if (p) 
@@ -88,7 +66,7 @@ function initChart()
 	data.addColumn('number', 'Value');
 	data.addRows(1);
 	chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
-	options = {width: 180, height: 180, min: 200, max: 1400, redColor: '#ff5b5b', redFrom: RedFrom, redTo: 2500, yellowColor: '#ffd468', yellowFrom: YellowFrom, yellowTo: RedFrom, greenColor: '#c4ffa5', greenFrom: GreenFrom, greenTo: YellowFrom,minorTicks: 4, majorTicks: [200, 400, 600, 800, 1000, 1200, 1400]};
+	options = {width: 180, height: 180, min: 0, max: 100, redColor: '#ff5b5b', redFrom: RedFrom, redTo: 100, yellowColor: '#ffd468', yellowFrom: YellowFrom, yellowTo: RedFrom, greenColor: '#c4ffa5', greenFrom: GreenFrom, greenTo: YellowFrom,minorTicks: 4, majorTicks: ['0', 20, 40, 60, 80, 100]};
 	loadData();
 }
 
