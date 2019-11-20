@@ -14,7 +14,7 @@
 <script type="text/javascript">
 
 
-//=============================== AlarmAizenayVeranda =================================//
+//=============================== AlarmAizenayEtage =================================//
 var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
 
@@ -78,13 +78,13 @@ var TexteTitreTrie =  "<span style=\" font-family: Arial, Helvetica, sans-serif;
 table_alarm.length = 0;
 testi=0;
 
-$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&days=' + DaysAlarmDisplay, function(data) 
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json?api_key=' + api_key + '&days=' + DaysAlarmDisplay, function(data)
 {
 
 	// iterate through each feed
-	$.each(data.feeds, function() 
+	$.each(data.feeds, function()
 	{
-		
+
 		var value = this["field1"];
 
 		if (value !== null && value !== undefined)
@@ -94,7 +94,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json
 			var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 			TexteTitre += "</span><span style=\" color:#ff2222; font-size: 0.875em;\">";
 			TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
-			TexteTitre += "&nbsp;&nbsp; </td><td> </span><span style=\" color:#ff2222; font-size:0.875em;\">";  
+			TexteTitre += "&nbsp;&nbsp; </td><td> </span><span style=\" color:#ff2222; font-size:0.875em;\">";
 			TexteTitre += date_last_update.getHours();
 			TexteTitre += ":";
 			MinutesWorking = date_last_update.getMinutes();
@@ -117,7 +117,7 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1.json
 		{
 			TexteTitreTrie += item;
 		});
-		TexteTitreTrie += "</table></span></p>";	
+		TexteTitreTrie += "</table></span></p>";
 		document.getElementById("AffichageAlarm").innerHTML = TexteTitreTrie;
 	}
 });

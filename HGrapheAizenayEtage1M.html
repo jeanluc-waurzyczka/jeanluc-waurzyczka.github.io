@@ -30,7 +30,7 @@ var y_axis_title = 'Humidité - %';
 //***********************************************************************************//
 
 
-//=============================== HGrapheMoulinsart? =================================//
+//=============================== HGrapheAizenayEtage? =================================//
 var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
 
@@ -58,11 +58,11 @@ if (series_results == 180)
 {
 	var chart_title = 'Vue 6 mois, ';
 }
-if ((median/60) == 0 ) 
+if ((median/60) == 0 )
 {
 	chart_title += 'toutes les données';
 }
-else 	
+else
 {
 	chart_title += 'une donnée toutes les '+ (median/60) + ' heure';
 }
@@ -82,7 +82,7 @@ $(document).on('ready', function() {
 });
 
 // add the base chart
-function addChart() 
+function addChart()
 	{
 	// variable for the local date in milliseconds
 	var localDate;
@@ -132,19 +132,19 @@ style: { color: '#D62020' }
 }
 
 // add a series to the chart
-function addSeries(field_number, color) 
+function addSeries(field_number, color)
 {
 	var field_name = 'field' + field_number;
 
 	// get the data with a webservice call
-$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + api_key, function(data) 
+$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + field_number + '.json?offset=0&round=2&median=' + median + '&days=' + series_results + '&api_key=' + api_key, function(data)
 	{
 		// blank array for holding chart data
 		var chart_data = [];
 		var chart_dataMax = [];
 
 		// iterate through each feed
-		$.each(data.feeds, function() 
+		$.each(data.feeds, function()
 		{
 			var point = new Highcharts.Point();
 			// set the proper values
@@ -154,9 +154,9 @@ $.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + fie
 			// add location if possible
 			if (this.location) { point.name = this.location; }
 			// if a numerical value exists add it
-			if (!isNaN(parseInt(value))) 
-			{ 
-				chart_data.push(point); 	
+			if (!isNaN(parseInt(value)))
+			{
+				chart_data.push(point);
 			}
 		});
 
@@ -166,7 +166,7 @@ $.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/' + fie
 }
 
 // converts date format from JSON
-function getChartDate(d) 
+function getChartDate(d)
 {
 	// offset in minutes is converted to milliseconds and subtracted so that chart's x-axis is correct
 	return Date.parse(d) - (my_offset * 60000);

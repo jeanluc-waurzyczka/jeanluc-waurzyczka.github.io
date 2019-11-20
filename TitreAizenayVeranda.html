@@ -17,8 +17,8 @@ a { text-decoration:none;}
 
 
 //=============================== TitreAizenayVeranda ====================================//
-var site = "aizenayveranda";
-var room = "Aizenay Véranda";
+var site = "campingcar";
+var room = "Camping-Car";
 var channel_id = 901544;
 var api_key = 'Z996IH7IT3K2DHQ2';
 
@@ -51,12 +51,12 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/feeds/last.js
 	if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
 	else {MinutesTemp = MinutesWorking;}
 	TexteTitre += MinutesTemp;
-	TexteTitre += " ";  
+	TexteTitre += " ";
 	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
-	
+
 }	);
 
 </script>

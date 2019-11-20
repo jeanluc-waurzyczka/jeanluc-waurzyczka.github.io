@@ -15,9 +15,9 @@ a { text-decoration:none;}
 
 <script type="text/javascript">
 
-//=============================== TitreAizenayVeranda =================================//
+//=============================== TitreAizenayEtage =================================//
 var site = "Arthur";
-var room = "Aizenay Véranda";
+var room = "Aizenay Étage";
 var channel_id = 809574;
 var api_key = '2WTHUAZL6YMI175Y';
 
@@ -81,12 +81,12 @@ $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/feeds/last.js
 	if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
 	else {MinutesTemp = MinutesWorking;}
 	TexteTitre += MinutesTemp;
-	TexteTitre += " ";  
+	TexteTitre += " ";
 	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
-	
+
 }	);
 
 </script>
