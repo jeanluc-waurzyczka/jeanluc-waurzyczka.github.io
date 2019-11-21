@@ -66,7 +66,7 @@ function loadData()
 	var p;
 
 	// get the data from thingspeak
-	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/feed/last.json?api_key=' + api_key, function(data)
+	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/2/last.json?api_key=' + api_key, function(data)
 	{
 		// get the data point
 		p = data.field2;
