@@ -1,5 +1,3 @@
-
-
 Here is a work around to show a 'not public' plugin on your own website.
 For the description I used Chrome, but it can also be done in other browsers:
 
