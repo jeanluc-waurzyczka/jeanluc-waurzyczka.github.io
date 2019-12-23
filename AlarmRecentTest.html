@@ -1,0 +1,89 @@
+<html lang="fr-FR";>
+<head>
+<meta  charset=UTF-8">
+</head>
+<body>
+<div id="chart-container">
+<p id="AffichageNewAlarm" style="text-align:left; color:#ff2222;"></p>
+<style type="text/css">
+{ background-color: white; height: 100%; margin: 0; padding: 0;}
+a { text-decoration:none;}
+#chart-container {  display: block; position:absolute; bottom:0; top:0; left:0; right:0; margin: 5px 15px 15px 0; overflow: hidden; }
+</style>
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+
+<script type="text/javascript">
+
+
+//=============================== AlarmRecentTest =====================================//
+var channel_id = 109638;
+var api_key = '7C6M9N84JEOZ3D2Z';
+
+//======================================= 4D  ===================================//
+
+//var DaysAlarmDisplay = 4;	// Alarm period to be displayed
+
+//======================================= 1M  ===================================//
+
+var DaysAlarmDisplay = 31;	// Alarm period to be displayed
+
+//======================================= 6M  ==================================//
+
+//var DaysAlarmDisplay = 184;	// Alarm period to be displayed
+
+//***********************************************************************************//
+
+var TexteTitre;
+
+var date_last_update;
+
+var MinutesTemp;
+
+var MinutesWorking;
+
+// user's timezone offset
+var my_offset = new Date().getTimezoneOffset();
+
+var data;
+
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/1/last.json?api_key=' + api_key, function(data) {
+
+		TexteTitre = "<span style=\"font-size:0.8em; font-family: Arial, Helvetica, sans-serif;\" >";
+		var value = data["field1"];
+		if (value !== null)
+		{
+			date_last_update = new Date(data.created_at);
+			var date_last_update_millis = Date.parse (date_last_update);
+			var date_today = new Date(Date.now());
+			var date_today_millis =  Date.parse (date_today);
+			var date_limit_millis = DaysAlarmDisplay * 86400000;
+			date_limit_millis = date_today_millis - date_limit_millis;
+
+			if (date_last_update_millis > date_limit_millis)
+			{
+				TexteTitre += "<strong><br>";
+				var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+				TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
+				TexteTitre += " ";
+				TexteTitre += date_last_update.getHours();
+				TexteTitre += ":";
+				MinutesWorking = date_last_update.getMinutes();
+				if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
+				else {MinutesTemp = MinutesWorking;}
+				TexteTitre += MinutesTemp;
+				TexteTitre += "</strong><br><br> ";
+				TexteTitre += value;
+				TexteTitre += "<br>";
+			}
+		}
+
+	TexteTitre += "</span></p>";
+	document.getElementById("AffichageNewAlarm").innerHTML = TexteTitre;
+
+}	);
+
+</script>
+</div>
+</body>
+</html>
