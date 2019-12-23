@@ -1,0 +1,95 @@
+<html lang="fr-FR";>
+<head>
+<meta  charset=UTF-8">
+</head>
+<body>
+<div id="chart-container">
+<p id="AffichageTitre" style="text-align:center; color:#040457;"></p>
+<style type="text/css">
+{ background-color: white; height: 100%; margin: 0; padding: 0;}
+a { text-decoration:none;}
+#chart-container { width: 700px; height: 55px; display: block; position:absolute; bottom:0; top:0; left:0; right:0; margin: 5px 15px 15px 0; overflow: hidden; }
+</style>
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+
+<script type="text/javascript">
+
+//=============================== TitreAizenayEtage =================================//
+var site = "Arthur";
+var room = "Aizenay Étage";
+var channel_id = 809574;
+var api_key = '2WTHUAZL6YMI175Y';
+
+
+//=============================== TitreQsDJL ======================================//
+var site = "quesnoy-sur-deule-atelier-jl";
+var room = "Quesnoy-sur-Deûle atelier JL";
+var channel_id = 91536;
+var api_key = 'FFY5YX284BZGMF6T';
+
+//=============================== TitreAizenay ====================================//
+var site = "aizenay";
+var room = "Aizenay Séjour";
+var channel_id = 102444;
+var api_key = '7AA31ENPR2WM5CER';
+
+//=============================== TitreCampingCar ====================================//
+var site = "campingcar";
+var room = "Camping-Car";
+var channel_id = 901544;
+var api_key = 'Z996IH7IT3K2DHQ2';
+
+//=============================== TitreTest =================================//
+var site = "Test";
+var room = "Test";
+var channel_id = 109638;
+var api_key = '7C6M9N84JEOZ3D2Z';
+
+//=============================== TitreQsDSejour =================================//
+var site = "quesnoy-sur-deule";
+var room = "Quesnoy-sur-Deûle Séjour";
+var channel_id = 125023;
+var api_key = 'CG3416WAHN3WD981';
+
+//================================================================================//
+
+
+var TexteTitre = "<span style=\"font-size:1.875em;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+var TexteTitre1 = "/\"><strong>";
+var TexteTitre2 = "</strong></a> </span><span style=\"font-size:1.125em;\"> { ";
+var TexteTitre3 = ":";
+var TexteTitre4 = " }</span></p>";
+
+var date_last_update;
+
+var MinutesTemp;
+
+var MinutesWorking;
+
+var data;
+
+$.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/5/last.json?api_key=' + api_key, function(data) {
+	TexteTitre += site;
+	TexteTitre += TexteTitre1;
+	TexteTitre += room;
+	TexteTitre += TexteTitre2
+	date_last_update = new Date(data.created_at);
+	TexteTitre += date_last_update.getHours();
+	TexteTitre += TexteTitre3;
+	MinutesWorking = date_last_update.getMinutes();
+	if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
+	else {MinutesTemp = MinutesWorking;}
+	TexteTitre += MinutesTemp;
+	TexteTitre += " ";
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
+	TexteTitre += TexteTitre4;
+	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
+
+}	);
+
+</script>
+</div>
+</body>
+</html>
