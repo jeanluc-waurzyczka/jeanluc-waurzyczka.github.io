@@ -48,8 +48,9 @@ $.getJSON( 'http://api.iotguru.live/device/find/rxCNbrHrLfzxwd2AJ8sR6g', functio
 	TexteTitre += TexteTitre1;
 	TexteTitre += room;
 	TexteTitre += TexteTitre2;
-	date_last_update = new Date(lastCheck);
-	TexteTitre += date_last_update.getHours();
+//	date_last_update = new Date(lastCheck);
+//	TexteTitre += date_last_update.getHours();
+	TexteTitre += lastcheck;
 	TexteTitre += TexteTitre3;
 	MinutesWorking = date_last_update.getMinutes();
 	if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
