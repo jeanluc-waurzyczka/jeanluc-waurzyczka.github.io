@@ -48,7 +48,7 @@ function loadData()
 	$.getJSON('http://api.iotguru.live/measurement/loadLastFloatValue/thlAxICXGNACIl9UZn1Ofg/temperature', function(data)
 	{
 		// get the data point
-		p = Math.round( data * 100 ) / 100;
+		p = 12;
 
 		// if there is a data point display it
 		if (p)
