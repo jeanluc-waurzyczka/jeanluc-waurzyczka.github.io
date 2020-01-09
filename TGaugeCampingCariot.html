@@ -45,10 +45,10 @@ function loadData()
 	var p;
 
 	// get the data from thingspeak
-	$.getJSON('https://api.thingspeak.com/channels/' + channel_id + '/fields/5/last.json?api_key=' + api_key, function(data)
+	$.getJSON('http://api.iotguru.live/measurement/loadLastFloatValue/thlAxICXGNACIl9UZn1Ofg/temperature', function(data)
 	{
 		// get the data point
-		p = Math.round( data.field5 * 10 ) / 10;
+		p = Math.round( data * 100 ) / 100;
 
 		// if there is a data point display it
 		if (p)
