@@ -44,22 +44,62 @@ function loadData()
 	// variable for the data point
 	var p;
 
-	// get the data from thingspeak
-	$.getJSON('http://api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1', function(data)
-	{
-		// get the data point
-		p = 12;
+	// get the data from IoTGuru
 
-		// if there is a data point display it
-		if (p)
-		{
-			displayData(p);
-		}
+	$.ajax(
+{
+			type: "GET",
+			url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
+			dataType: "json",
+			beforeSend: function (xhr)
+{
+					var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
+					if (accessToken)
+{
+							xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+					}
+			},
+			success: function (data)
+{
+					lastValuesListResponse(data);
+			},
+			error: function (xhr)
+{
+					lastValuesListError(xhr);
+			}
 	});
-	if (p != 12)
-	{
-		displayData(14);
+}
+
+
+
+
+function lastValuesListResponse(data) {
+	if (data === undefined || data.length === 0) {
+			$("#lastValueList tbody").html('');
+			$('<tr>').append(
+							$('<td colspan="2">').text('you have no measurements yet')
+							).appendTo('#lastValueList tbody');
+	} else {
+			$("#lastValueList tbody").html('');
+			data.sort(function (n1, n2) {
+					return n1[0] > n2[0]
+			});
+			$.each(data, function (idx, n) {
+
+//					$('<tr>').append(
+//									$('<td>').text(fluentDuration(n[0])),
+//									$('<td>').text(n[1])
+//									).appendTo('#lastValueList tbody');
+					displayData(n[1]);
+			});
 	}
+}
+
+function lastValuesListError(xhr) {
+	$("#lastValueList tbody").html('');
+	$('<tr>').append(
+					$('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
+					).appendTo('#lastValueList tbody');
 }
 
 // initialize the chart
