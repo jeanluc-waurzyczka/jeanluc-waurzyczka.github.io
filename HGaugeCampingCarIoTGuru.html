@@ -80,10 +80,10 @@ function lastValuesListResponse(data) {
 							$('<td colspan="2">').text('you have no measurements yet')
 							).appendTo('#lastValueList tbody');
 	} else {
-			$("#lastValueList tbody").html('');
-			data.sort(function (n1, n2) {
-					return n1[0] > n2[0]
-			});
+//			$("#lastValueList tbody").html('');
+	//		data.sort(function (n1, n2) {
+//					return n1[0] > n2[0]
+//			});
 			$.each(data, function (idx, n) {
 
 //					$('<tr>').append(
