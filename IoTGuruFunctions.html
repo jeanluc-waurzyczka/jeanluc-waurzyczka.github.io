@@ -1,0 +1,52 @@
+function lastValues(nodeKey, fieldName)
+{
+    $.ajax(
+{
+        type: "GET",
+        url: '//api.iotguru.live/measurement/loadLastFloatValues/' + nodeKey + '/' + fieldName + '/10',
+        dataType: "json",
+        beforeSend: function (xhr)
+{
+            var accessToken = Cookies.get('accessToken');
+            if (accessToken)
+{
+                xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+            }
+        },
+        success: function (data)
+{
+            lastValuesListResponse(data);
+        },
+        error: function (xhr)
+{
+            lastValuesListError(xhr);
+        }
+    });
+}
+
+function lastValuesListResponse(data) {
+    if (data === undefined || data.length === 0) {
+        $("#lastValueList tbody").html('');
+        $('<tr>').append(
+                $('<td colspan="2">').text('you have no measurements yet')
+                ).appendTo('#lastValueList tbody');
+    } else {
+        $("#lastValueList tbody").html('');
+        data.sort(function (n1, n2) {
+            return n1[0] > n2[0]
+        });
+        $.each(data, function (idx, n) {
+            $('<tr>').append(
+                    $('<td>').text(fluentDuration(n[0])),
+                    $('<td>').text(n[1])
+                    ).appendTo('#lastValueList tbody');
+        });
+    }
+}
+
+function lastValuesListError(xhr) {
+    $("#lastValueList tbody").html('');
+    $('<tr>').append(
+            $('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
+            ).appendTo('#lastValueList tbody');
+}
