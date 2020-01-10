@@ -85,14 +85,14 @@ function lastValuesListResponse(data) {
 //			data.sort(function (n1, n2) {
 //					return n1[0] > n2[0]
 //			});
-//			$.each(data, function (idx, n) {
+			$.each(data, function (idx, n) {
 
 //					$('<tr>').append(
 //									$('<td>').text(fluentDuration(n[0])),
 //									$('<td>').text(n[1])
 //									).appendTo('#lastValueList tbody');
 					displayData(n[1]);
-//			});
+			});
 	}
 }
 
