@@ -15,10 +15,6 @@ a { text-decoration:none;}
 
 <script type="text/javascript">
 
-$.ajaxSetup({
-headers : {'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis'  }
-});
-
 
 //=========================== TitreCampingCar ==============================//
 var site = "campingcar";
@@ -41,29 +37,110 @@ var MinutesTemp;
 
 var MinutesWorking;
 
-var data; //Test
+var data;
 
-$.getJSON( 'http://api.iotguru.live/device/find/rxCNbrHrLfzxwd2AJ8sR6g', function(data) {
+$.ajax({
+		type: "GET",
+		url: '//api.iotguru.live/device/find/rxCNbrHrLfzxwd2AJ8sR6g',
+		dataType: "json",
+		beforeSend: function (xhr) {
+				var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
+				if (accessToken) {
+						xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+				}
+		},
+		success: function (data) {
+				deviceFindResponse(data);
+		},
+		error: function (xhr) {
+				deviceFindError(xhr);
+		}
+});
+
+function deviceFindError(xhr) {
+$('#loading').css('display', 'none');
+}
+
+function deviceFindResponse(data) {
+
+// $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/5/last.json?api_key=' + api_key, function(data) {
 	TexteTitre += site;
 	TexteTitre += TexteTitre1;
 	TexteTitre += room;
 	TexteTitre += TexteTitre2;
-//	date_last_update = new Date(lastCheck);
-//	TexteTitre += date_last_update.getHours();
-	TexteTitre += description;
-	TexteTitre += TexteTitre3;
-	MinutesWorking = date_last_update.getMinutes();
-	if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
-	else {MinutesTemp = MinutesWorking;}
-	TexteTitre += MinutesTemp;
-	TexteTitre += " ";
-	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
+	TexteTitre += fluentDuration(device.lastCheck);
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
-}	);
+}	;
 
+    function fluentDuration(timestamp) {
+        if (!timestamp) {
+            return 'n/a';
+        }
+
+        var totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+        var days = ~~(totalSeconds / 86400);
+        var hours = ~~((totalSeconds % 86400) / 3600);
+        var minutes = ~~((totalSeconds % 3600) / 60);
+        var seconds = ~~(totalSeconds % 60);
+
+        var message = [];
+        if (days > 0) {
+            message.push(' ');
+            message.push(days);
+            message.push(' ');
+            if (days > 1) {
+                message.push('days');
+            } else {
+                message.push('day');
+            }
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('hours');
+            } else {
+                message.push('hour');
+            }
+        } else if (hours > 0) {
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('hours');
+            } else {
+                message.push('hour');
+            }
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+        } else {
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+            message.push(' ');
+            message.push(seconds);
+            message.push(' ');
+            if (seconds > 1) {
+                message.push('seconds');
+            } else {
+                message.push('second');
+            }
+        }
+
+        return message.join('');
+    }
 </script>
 </div>
 </body>
