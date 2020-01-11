@@ -58,7 +58,8 @@ $.ajax({
 });
 
 function deviceFindError(xhr) {
-$('#loading').css('display', 'none');
+	TexteTitre = 'Error IoTGuru';
+	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }
 
 function deviceFindResponse(data) {
