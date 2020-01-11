@@ -12,21 +12,19 @@ body
 
 
 
-//=============================== HGaugeCampingCar ====================================//
+//=============================== TGaugeCampingCar ====================================//
 var channel_id = 901544;
 var api_key = 'Z996IH7IT3K2DHQ2';
 
 
 // name of the gauge
-var gauge_name = '%';
+var gauge_name = '°C';
 // Color parameters
-var RedFrom = 80;
-var YellowFrom = 65;
-var GreenFrom = 40;
+var redTo = 5;
+var yellowTo = 12;
 
 // global variables
 var chart, charts, data;
-
 
 // load the google gauge visualization
 google.load('visualization', '1', {packages:['gauge']});
@@ -51,7 +49,7 @@ function loadData()
 	$.ajax(
 {
 			type: "GET",
-			url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/humidity/1',
+			url: '//api.iotguru.live/measurement/loadLastFloatValues/kLfpkfHoA3mUXPHYVJRPuA/humidity/1',
 			dataType: "json",
 			beforeSend: function (xhr)
 {

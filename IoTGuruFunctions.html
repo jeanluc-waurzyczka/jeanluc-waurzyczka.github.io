@@ -1,3 +1,22 @@
+
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+
+
+    </head>
+    <body class="is-preload">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+
+
 function lastValues(nodeKey, fieldName)
 {
     $.ajax(
@@ -7,7 +26,7 @@ function lastValues(nodeKey, fieldName)
         dataType: "json",
         beforeSend: function (xhr)
 {
-            var accessToken = Cookies.get('accessToken');
+            var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
             if (accessToken)
 {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
@@ -50,3 +69,8 @@ function lastValuesListError(xhr) {
             $('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
             ).appendTo('#lastValueList tbody');
 }
+
+
+</script>
+</body>
+</html>
