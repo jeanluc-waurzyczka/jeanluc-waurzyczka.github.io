@@ -18,13 +18,15 @@ var api_key = 'Z996IH7IT3K2DHQ2';
 
 
 // name of the gauge
-var gauge_name = '°C';
+var gauge_name = '%';
 // Color parameters
-var redTo = 5;
-var yellowTo = 12;
+var RedFrom = 80;
+var YellowFrom = 65;
+var GreenFrom = 40;
 
 // global variables
 var chart, charts, data;
+
 
 // load the google gauge visualization
 google.load('visualization', '1', {packages:['gauge']});
