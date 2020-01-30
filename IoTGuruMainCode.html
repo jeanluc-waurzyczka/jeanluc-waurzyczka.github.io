@@ -1,0 +1,1446 @@
+
+
+<!DOCTYPE HTML>
+<!--
+        Industrious by TEMPLATED
+        templated.co @templatedco
+        Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <title id="title">The IoT GURU &ndash; Field details</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="The IoT GURU" />
+        <meta name="keywords" content="IoT, internet of things, chart, storage" />
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <link rel="stylesheet" href="/assets/css/materialTextField.css" />
+        
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130199522-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-130199522-1');
+    gtag('config', 'AW-776353553');
+</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3108095552154841",
+    enable_page_level_ads: true
+  });
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '218536832157047');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=218536832157047&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+    </head>
+    <body class="is-preload">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+
+<script>
+    fbq('track', 'ViewContent');
+</script>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    function credentialAccessToken(successCallback, errorCallback) {
+        var refreshToken = Cookies.get('refreshToken');
+        if (refreshToken) {
+            $.ajax({
+                type: "GET",
+                url: '//api.iotguru.live/credential/accessToken/' + refreshToken,
+                dataType: "text",
+                success: function (data) {
+                    if (typeof successCallback === "function") {
+                        successCallback(data);
+                    } else {
+                        credentialAccessTokenResponse(data);
+                    }
+                },
+                error: function (xhr) {
+                    if (typeof errorCallback === "function") {
+                        errorCallback(xhr);
+                    } else {
+                        credentialAccessTokenError(xhr);
+                    }
+                }
+            });
+        }
+    }
+
+    function credentialAccessTokenResponse(data) {
+        Cookies.set('accessToken', data);
+    }
+
+    function credentialAccessTokenError(xhr) {
+        alert('Cannot obtain access token, force logout...');
+        window.location = '/logout';
+    }
+
+    function credentialCheckToken(successCallback, errorCallback) {
+        var accessToken = Cookies.get('accessToken');
+        if (accessToken) {
+            $.ajax({
+                type: "GET",
+                url: '//api.iotguru.live/credential/checkToken',
+                dataType: "text",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                },
+                success: function (data) {
+                    if (typeof successCallback === "function") {
+                        successCallback(data);
+                    } else {
+                        credentialCheckTokenResponse(data);
+                    }
+                },
+                error: function (xhr) {
+                    if (typeof errorCallback === "function") {
+                        errorCallback(xhr);
+                    } else {
+                        credentialCheckTokenError(xhr);
+                    }
+                }
+            });
+        }
+    }
+
+    function credentialCheckTokenResponse(data) {
+        Cookies.set('userId', data);
+    }
+
+    function credentialCheckTokenError(xhr) {
+        Cookies.remove('accessToken');
+        Cookies.remove('userId');
+
+        console.log('Cannot obtain check token, redirect to dashboard...');
+        window.location = '/';
+    }
+
+    function credentialFind() {
+        $.ajax({
+            type: "GET",
+            url: '//api.iotguru.live/credential/find',
+            dataType: "json",
+            beforeSend: function (xhr) {
+                var accessToken = Cookies.get('accessToken');
+                if (accessToken) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                }
+            },
+            success: function (data) {
+                credentialFindResponse(data);
+            },
+            error: function (xhr) {
+                credentialFindError(xhr);
+            }
+        });
+    }
+
+    function credentialFindResponse(data) {
+        if (data.length === 0) {
+            localStorage.removeItem('credential');
+            $('#verifyButton').css('display', 'none');
+        } else {
+            localStorage.setItem('credential', JSON.stringify(data));
+            var activated = data.activated;
+            if (activated === undefined || activated === null) {
+                $('#verifyButton').css('display', 'inline-block');
+            }
+        }
+    }
+
+    function credentialFindError(xhr) {
+        localStorage.removeItem('credential');
+        $('#verifyButton').css('display', 'none');
+    }
+
+    $(document).ready(function () {
+        if (localStorage.getItem('credential') === null) {
+            credentialFind();
+        } else {
+            var activated = JSON.parse(localStorage.getItem('credential')).activated;
+            if (activated === undefined || activated === null) {
+                $('#verifyButton').css('display', 'inline-block');
+            }
+        }
+
+        var userId = Cookies.get('userId');
+        if (userId) {
+            $('#hrefSignup').css('display', 'none');
+            $('#hrefLogin').css('display', 'none');
+            $('#hrefAccount').css('display', 'inline-block');
+            $('#hrefAccount').attr('href', '/account/' + userId);
+            $('#hrefLogout').css('display', 'inline-block');
+        } else {
+            $('#hrefSignup').css('display', 'inline-block');
+            $('#hrefLogin').css('display', 'inline-block');
+            $('#hrefAccount').css('display', 'none');
+            $('#hrefAccount').attr('href', '/account');
+            $('#hrefLogout').css('display', 'none');
+        }
+
+        intervalCheckToken();
+        setInterval(intervalCheckToken, 900000);
+        function intervalCheckToken() {
+            credentialCheckToken(function (data) {
+                Cookies.set('userId', data);
+            }, function (xhr) {
+                credentialAccessToken(function (data) {
+                    Cookies.set('accessToken', data);
+                }, function (xhr) {
+                    window.location = '/logout';
+                });
+            });
+        }
+    });
+
+    function fluentDuration(timestamp) {
+        if (!timestamp) {
+            return 'n/a';
+        }
+
+        var totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+        var days = ~~(totalSeconds / 86400);
+        var hours = ~~((totalSeconds % 86400) / 3600);
+        var minutes = ~~((totalSeconds % 3600) / 60);
+        var seconds = ~~(totalSeconds % 60);
+
+        var message = [];
+        if (days > 0) {
+            message.push(' ');
+            message.push(days);
+            message.push(' ');
+            if (days > 1) {
+                message.push('days');
+            } else {
+                message.push('day');
+            }
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('hours');
+            } else {
+                message.push('hour');
+            }
+        } else if (hours > 0) {
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('hours');
+            } else {
+                message.push('hour');
+            }
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+        } else {
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+            message.push(' ');
+            message.push(seconds);
+            message.push(' ');
+            if (seconds > 1) {
+                message.push('seconds');
+            } else {
+                message.push('second');
+            }
+        }
+
+        return message.join('');
+    }
+</script>
+
+<!-- Header -->
+<header id="header">
+    <a class="logo" href="/">
+        <img src="/assets/guru128.png">
+        <span>The IoT GURU</span>
+    </a>
+
+    <nav>
+        <button id="verifyButton" value="Verify your email address!" class="button primary" style="display:none;" onclick="location.href='/verify/' + Cookies.get('userId') + '/resend';">Verify your email address!</button>
+        <a id="hrefForum" href="https://forum.iotguru.live" style="display:inline-block;">Forum</a>
+        <a id="hrefPricing" href="/#pricing">Pricing</a>
+        <a id="hrefSignup" href="/signup" style="display:none;">Sign up</a>
+        <a id="hrefLogin" href="/login" style="display:none;">Login</a></span>
+        <a id="hrefAccount" href="/account/" style="display:none;">Account</a>
+        <a id="hrefLogout" href="/logout" style="display:none;">Logout</a>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+        
+
+<script>
+    $(document).ready(function () {
+        var userId = Cookies.get('userId');
+        if (userId) {
+            $('#hrefDevices').css('display', 'inline-block');
+            $('#hrefDevices').attr('href', '/devices/' + userId);
+            $('#hrefFirmwares').css('display', 'inline-block');
+            $('#hrefFirmwares').attr('href', '/firmwares');
+            $('#hrefStatus').css('display', 'inline-block');
+            $('#hrefStatus').attr('href', '/status/' + userId);
+        } else {
+            $('#hrefDevices').css('display', 'none');
+            $('#hrefDevices').attr('href', '/devices');
+            $('#hrefFirmwares').css('display', 'none');
+            $('#hrefFirmwares').attr('href', '/firmwares');
+            $('#hrefStatus').css('display', 'none');
+            $('#hrefStatus').attr('href', '/status');
+        }
+    });
+</script>
+
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a id="hrefDevices" href="/devices" style="display:none;">Devices</a></li>
+        <li><a id="hrefFirmwares" href="/firmwares" style="display:none;">Firmwares</a></li>
+        <li><a id="hrefStatus" href="/status" style="display:none;">Status</a></li>
+    </ul>
+</nav>
+
+
+        <script>
+            var pathArray = window.location.pathname.split('/');
+            var fieldName = pathArray[pathArray.length - 1];
+            var nodeId = pathArray[pathArray.length - 2];
+            var nodeName;
+            var nodeKey;
+
+            function deviceFind(deviceId) {
+                $('#loading').css('display', 'block');
+
+                $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/device/find/' + deviceId,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        deviceFindResponse(data);
+                    },
+                    error: function (xhr) {
+                        deviceFindError(xhr);
+                    }
+                });
+            }
+
+            function deviceFindResponse(data) {
+                $('#loading').css('display', 'none');
+
+                $('#navigationDevice').html('<a href="/device/' + data.deviceId + '">\'' + data.name + '\' device</a>&nbsp;→ ');
+                $('#navigationDevice').css('display', 'inline-block');
+            }
+
+            function deviceFindError(xhr) {
+                $('#loading').css('display', 'none');
+            }
+
+            function nodeFind() {
+                $('#loading').css('display', 'block');
+
+                $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/node/find/' + nodeId,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        nodeFindResponse(data);
+                    },
+                    error: function (xhr) {
+                        nodeFindError(xhr);
+                    }
+                });
+            }
+
+            function nodeFindResponse(node) {
+                $('#loading').css('display', 'none');
+
+                nodeName = node.name;
+                nodeKey = node.nodeKey;
+
+                fieldFind();
+                deviceFind(node.deviceId);
+
+                $('#title').html('\'' + nodeName + '\' node &ndash; \'' + fieldName + '\' field');
+                $('#detailsFieldTitle').html('\'' + nodeName + '\' node &ndash; \'' + fieldName + '\' field');
+
+                $('#navigationAccount').html('<a href="/account/' + node.userId + '">My account</a>&nbsp;→ ');
+                $('#navigationAccount').css('display', 'inline-block');
+
+                $('#navigationDevices').html('<a href="/devices/' + node.userId + '">My devices</a>&nbsp;→ ');
+                $('#navigationDevices').css('display', 'inline-block');
+
+                $('#navigationNode').html('<a href="/node/' + nodeId + '">\'' + nodeName + '\' node</a>&nbsp;→ ');
+                $('#navigationNode').css('display', 'inline-block');
+
+                if (nodeKey) {
+                    $('#nodeIntegration').css('display', 'block');
+                    $('#lastValuesTabButton').css('display', 'inline-block');
+                    $('#rangeAlertsTabButton').css('display', 'inline-block');
+                    $('#integrationTabButton').css('display', 'inline-block');
+                    $('#apiUrl').html('https://api.iotguru.live/measurement/create/' + nodeKey + '/' + fieldName + '/21.00');
+                    $('#arduinoIDE').html('float value = 21.00;\n' +
+                        'HTTPClient http;\n' +
+                        'http.useHTTP10(true);\n' +
+                        'http.setTimeout(8000);\n' +
+                        'http.begin("http://api.iotguru.cloud/measurement/create/' + nodeKey + '/' + fieldName + '/" + value);\n' +
+                        'http.GET();\n' +
+                        'http.end();\n');
+                } else {
+                    $('#nodeIntegration').css('display', 'none');
+                    $('#lastValuesTabButton').css('display', 'none');
+                    $('#rangeAlertsTabButton').css('display', 'none');
+                    $('#integrationTabButton').css('display', 'none');
+                }
+            }
+
+            function nodeFindError(xhr) {
+                $('#loading').css('display', 'none');
+
+                $('#nodeIntegration').css('display', 'none');
+            }
+
+            function fieldFind() {
+                $('#loading').css('display', 'block');
+
+                $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/field/find/' + nodeId + '/' + fieldName,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        fieldFindResponse(data);
+                    },
+                    error: function (xhr) {
+                        fieldFindError(xhr);
+                    }
+                });
+            }
+
+            function fieldFindResponse(data) {
+                $('#loading').css('display', 'none');
+
+                $('#navigationField').html('<a href="/field/' + nodeId + '/' + data.name + '">\'' + data.description + '\' field</a>');
+                $('#navigationField').css('display', 'inline-block');
+
+                if (data.length === 0) {
+                } else {
+                    $('#detailsFieldNameField').val(data.name);
+                    $('#detailsFieldDescriptionField').val(data.description);
+
+                    $('#rangeAlertFieldNameField').val(data.name);
+                    $('#rangeAlertFieldDescriptionField').val(data.description);
+
+                    var accessToken = Cookies.get('accessToken');
+                    if (accessToken) {
+                        var userId = data.userId;
+                        var loggedInUserId = Cookies.get('userId');
+                        if (userId === loggedInUserId) {
+                            $('#detailsFieldDescriptionField').removeAttr('readonly');
+                            $('#detailsFieldSubmit').css('display', 'inline-block');
+
+                            $('#rangeAlertFieldAlertEnabled').css('display', 'block');
+                            $('#rangeAlertFieldAlertMinimum').css('display', 'block');
+                            $('#rangeAlertFieldAlertMaximum').css('display', 'block');
+                            $('#rangeAlertFieldAlertDelay').css('display', 'block');
+                            $('#rangeAlertFieldAlertFrequency').css('display', 'block');
+                            $('#rangeAlertFieldSubmit').css('display', 'inline-block');
+
+                            if (data.retention === 2592000) {
+                                $('#freeSubscriptionSubmit').addClass('primary');
+                                $('#standardSubscriptionSubmit').removeClass('primary');
+                                $('#premiumSubscriptionSubmit').removeClass('primary');
+                            }
+                            if (data.retention === 31622400) {
+                                $('#freeSubscriptionSubmit').removeClass('primary');
+                                $('#standardSubscriptionSubmit').addClass('primary');
+                                $('#premiumSubscriptionSubmit').removeClass('primary');
+                            }
+                            if (data.retention === 2147483647) {
+                                $('#freeSubscriptionSubmit').removeClass('primary');
+                                $('#standardSubscriptionSubmit').removeClass('primary');
+                                $('#premiumSubscriptionSubmit').addClass('primary');
+                            }
+                        } else {
+                            $('#freeSubscriptionSubmit').css('display', 'none');
+                            $('#standardSubscriptionSubmit').css('display', 'none');
+                            $('#premiumSubscriptionSubmit').css('display', 'none');
+                        }
+                    }
+                }
+            }
+
+            function fieldFindError(xhr) {
+                $('#loading').css('display', 'none');
+
+                $('#detailsFieldCommonError').html('An error occurred: the field is not exists or you have no access right to show it... if you think there is an error on your field feel free to <a href="mailto:support@iotguru.live">contact us</a>.');
+            }
+
+            function fieldSubs(subscription) {
+                $('#loading').css('display', 'block');
+
+                $.ajax({
+                    type: "POST",
+                    url: '//api.iotguru.live/field/subscription/' + nodeId + '/' + fieldName + '/' + subscription,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        fieldFindResponse(data);
+                    },
+                    error: function (xhr) {
+                        fieldFindError(xhr);
+                    }
+                });
+            }
+
+            function updateField(name, description) {
+                $('#loading').css('display', 'block');
+
+                var field = {
+                    nodeId: nodeId,
+                    name: name,
+                    description: description
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '//api.iotguru.live/field/update',
+                    data: JSON.stringify(field),
+                    dataType: "json",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        fieldUpdateResponse(data);
+                    },
+                    error: function (xhr) {
+                        fieldUpdateError(xhr);
+                    }
+                });
+            }
+
+            function fieldUpdateResponse(data) {
+                $('#loading').css('display', 'none');
+
+                clearDetailsFieldForm(false);
+
+                var detailsFieldCommonMessage = $('#detailsFieldCommonMessage');
+                detailsFieldCommonMessage.css('display', 'block');
+
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            }
+
+            function fieldUpdateError(xhr) {
+                $('#loading').css('display', 'none');
+
+                var detailsFieldCommonError = $('#detailsFieldCommonError');
+                detailsFieldCommonError.text('Field update failed (error code ' + xhr.status + ')... :(');
+                detailsFieldCommonError.css('display', 'block');
+
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            }
+
+            function updateFieldAlert(fieldName, enabled, minimum, maximum, delay, frequency) {
+                $('#loading').css('display', 'block');
+
+                var fieldAlert = {
+                    nodeId: nodeId,
+                    fieldName: fieldName,
+                    delay: delay,
+                    enabled: enabled,
+                    frequency: frequency,
+                    max: maximum,
+                    min: minimum
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: '//api.iotguru.live/fieldAlert/update',
+                    data: JSON.stringify(fieldAlert),
+                    dataType: "json",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        fieldAlertUpdateResponse(data);
+                    },
+                    error: function (xhr) {
+                        fieldAlertUpdateError(xhr);
+                    }
+                });
+            }
+
+            function fieldAlertUpdateResponse(data) {
+                $('#loading').css('display', 'none');
+
+                clearDetailsFieldForm(false);
+
+                var detailsFieldCommonMessage = $('#detailsFieldAlertCommonMessage');
+                detailsFieldCommonMessage.css('display', 'block');
+
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            }
+
+            function fieldAlertUpdateError(xhr) {
+                $('#loading').css('display', 'none');
+
+                var detailsFieldAlertCommonError = $('#detailsFieldAlertCommonError');
+                detailsFieldAlertCommonError.text('Field alert update failed (error code ' + xhr.status + ')... :(');
+                detailsFieldAlertCommonError.css('display', 'block');
+
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            }
+
+            function clearDetailsFieldForm(clearMessages) {
+                if (clearMessages) {
+                    var detailsFieldCommonMessage = $('#detailsFieldCommonMessage');
+                    detailsFieldCommonMessage.css('display', 'none');
+                }
+
+                var detailsFieldCommonError = $('#detailsFieldCommonError');
+                detailsFieldCommonError.text('');
+                detailsFieldCommonError.css('display', 'none');
+
+                var detailsFieldNameError = $('#detailsFieldNameError');
+                detailsFieldNameError.text('');
+                detailsFieldNameError.css('display', 'none');
+
+                var detailsFieldDescriptionError = $('#detailsFieldDescriptionError');
+                detailsFieldDescriptionError.text('');
+                detailsFieldDescriptionError.css('display', 'none');
+            }
+
+            function fieldAlertList() {
+                $('#loading').css('display', 'block');
+
+                $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/fieldAlert/list/' + nodeId + '/' + fieldName,
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        fieldAlertListResponse(data);
+                    },
+                    error: function (xhr) {
+                        fieldAlertListError(xhr);
+                    }
+                });
+            }
+
+            function fieldAlertListResponse(data) {
+                $('#loading').css('display', 'none');
+
+                if (data === undefined || data.length === 0) {
+                    $('#rangeAlertFieldAlertEnabledField').prop("checked", false);
+                    $('#rangeAlertFieldAlertMinimumField').attr('disabled', '');
+                    $('#rangeAlertFieldAlertMaximumField').attr('disabled', '');
+                    $('#rangeAlertFieldAlertDelayField').attr('disabled', '');
+                    $('#rangeAlertFieldAlertFrequencyField').attr('disabled', '');
+
+                    $('#rangeAlertFieldAlertMinimumField').val('0');
+                    $('#rangeAlertFieldAlertMaximumField').val('10');
+                    $('#rangeAlertFieldAlertDelayField').val('600');
+                    $('#rangeAlertFieldAlertFrequencyField').val('3600');
+                } else {
+                    var rangeAlert = data[0];
+                    if (rangeAlert.enabled) {
+                        $('#rangeAlertFieldAlertEnabledField').prop("checked", true);
+                        $('#rangeAlertFieldAlertMinimumField').removeAttr('disabled');
+                        $('#rangeAlertFieldAlertMaximumField').removeAttr('disabled');
+                        $('#rangeAlertFieldAlertDelayField').removeAttr('disabled');
+                        $('#rangeAlertFieldAlertFrequencyField').removeAttr('disabled');
+                    } else {
+                        $('#rangeAlertFieldAlertEnabledField').prop("checked", false);
+                        $('#rangeAlertFieldAlertMinimumField').attr('disabled', '');
+                        $('#rangeAlertFieldAlertMaximumField').attr('disabled', '');
+                        $('#rangeAlertFieldAlertDelayField').attr('disabled', '');
+                        $('#rangeAlertFieldAlertFrequencyField').attr('disabled', '');
+                    }
+
+                    $('#rangeAlertFieldAlertMinimumField').val(rangeAlert.min);
+                    $('#rangeAlertFieldAlertMaximumField').val(rangeAlert.max);
+                    $('#rangeAlertFieldAlertDelayField').val(rangeAlert.delay);
+                    $('#rangeAlertFieldAlertFrequencyField').val(rangeAlert.frequency);
+                }
+            }
+
+            function fieldAlertListError(xhr) {
+                $('#loading').css('display', 'none');
+
+                var detailsFieldAlertCommonError = $('#rangeAlertFieldAlertCommonError');
+                detailsFieldAlertCommonError.text('Field alert list failed (error code ' + xhr.status + ')... :(');
+                detailsFieldAlertCommonError.css('display', 'block');
+
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            }
+
+            function lastValues(nodeKey, fieldName) {
+                $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/measurement/loadLastFloatValues/' + nodeKey + '/' + fieldName + '/10',
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        var accessToken = Cookies.get('accessToken');
+                        if (accessToken) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        }
+                    },
+                    success: function (data) {
+                        lastValuesListResponse(data);
+                    },
+                    error: function (xhr) {
+                        lastValuesListError(xhr);
+                    }
+                });
+            }
+
+            function lastValuesListResponse(data) {
+                if (data === undefined || data.length === 0) {
+                    $("#lastValueList tbody").html('');
+                    $('<tr>').append(
+                            $('<td colspan="2">').text('you have no measurements yet')
+                            ).appendTo('#lastValueList tbody');
+                } else {
+                    $("#lastValueList tbody").html('');
+                    data.sort(function (n1, n2) {
+                        return n1[0] > n2[0]
+                    });
+                    $.each(data, function (idx, n) {
+                        $('<tr>').append(
+                                $('<td>').text(fluentDuration(n[0])),
+                                $('<td>').text(n[1])
+                                ).appendTo('#lastValueList tbody');
+                    });
+                }
+            }
+
+            function lastValuesListError(xhr) {
+                $("#lastValueList tbody").html('');
+                $('<tr>').append(
+                        $('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
+                        ).appendTo('#lastValueList tbody');
+            }
+
+            var lastValuesInterval;
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+
+                if (lastValuesInterval)
+                    clearInterval(lastValuesInterval);
+
+                if (tabName === 'chartsTab') {
+                    loadDay();
+                    loadWeek();
+                    loadMonth();
+                    loadYear();
+                }
+                if (tabName === 'lastValuesTab') {
+                    lastValues(nodeKey, fieldName);
+                    lastValuesInterval = setInterval(lastValues, 5000, nodeKey, fieldName);
+                }
+                if (tabName === 'detailsTab') {
+                    fieldFind();
+                }
+                if (tabName === 'rangeAlertsTab') {
+                    fieldAlertList();
+                }
+                if (tabName === 'integrationTab') {
+                }
+
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" primary", "");
+                }
+
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " primary";
+            }
+
+            $(document).ready(function () {
+                nodeFind();
+                document.getElementById("chartsTabButton").click();
+
+                $('form#detailsFieldForm').submit(function (e) {
+                    clearDetailsFieldForm(true);
+
+                    var detailsFieldName = $('#detailsFieldNameField').val();
+                    if (detailsFieldName.length === 0) {
+                        var detailsFieldNameError = $('#detailsFieldNameError');
+                        detailsFieldNameError.text('This field is required');
+                        detailsFieldNameError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (detailsFieldName.length > 24) {
+                        var detailsFieldNameError = $('#detailsFieldNameError');
+                        detailsFieldNameError.text('Too long, maximum 24 characters allowed');
+                        detailsFieldNameError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var detailsFieldDescription = $('#detailsFieldDescriptionField').val();
+                    if (detailsFieldDescription.length === 0) {
+                        var detailsFieldDescriptionError = $('#detailsFieldDescriptionError');
+                        detailsFieldDescriptionError.text('This field is required');
+                        detailsFieldDescriptionError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (detailsFieldDescription.length > 96) {
+                        var detailsFieldDescriptionError = $('#detailsFieldDescriptionError');
+                        detailsFieldDescriptionError.text('Too long, maximum 96 characters allowed');
+                        detailsFieldDescriptionError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    updateField(detailsFieldName, detailsFieldDescription);
+                    e.preventDefault();
+                });
+
+                $('form#rangeAlertFieldForm').submit(function (e) {
+                    clearDetailsFieldForm(true);
+
+                    var rangeAlertFieldName = $('#rangeAlertFieldNameField').val();
+                    if (rangeAlertFieldName.length === 0) {
+                        var rangeAlertFieldNameError = $('#rangeAlertFieldNameError');
+                        rangeAlertFieldNameError.text('This field is required');
+                        rangeAlertFieldNameError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (rangeAlertFieldName.length > 24) {
+                        var rangeAlertFieldNameError = $('#rangeAlertFieldNameError');
+                        rangeAlertFieldNameError.text('Too long, maximum 24 characters allowed');
+                        rangeAlertFieldNameError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var rangeAlertFieldDescription = $('#rangeAlertFieldDescriptionField').val();
+                    if (rangeAlertFieldDescription.length === 0) {
+                        var rangeAlertFieldDescriptionError = $('#rangeAlertFieldDescriptionError');
+                        rangeAlertFieldDescriptionError.text('This field is required');
+                        rangeAlertFieldDescriptionError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (rangeAlertFieldDescription.length > 96) {
+                        var rangeAlertFieldDescriptionError = $('#rangeAlertFieldDescriptionError');
+                        rangeAlertFieldDescriptionError.text('Too long, maximum 96 characters allowed');
+                        rangeAlertFieldDescriptionError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var rangeAlertFieldAlertEnabled = $('#rangeAlertFieldAlertEnabledField').prop("checked");
+
+                    var rangeAlertFieldAlertMinimum = $('#rangeAlertFieldAlertMinimumField').val();
+                    if (rangeAlertFieldAlertMinimum.length === 0 && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertMinimumError = $('#rangeAlertFieldAlertMinimumError');
+                        rangeAlertFieldAlertMinimumError.text('This field is required');
+                        rangeAlertFieldAlertMinimumError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (isNaN(rangeAlertFieldAlertMinimum) && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertMinimumError = $('#rangeAlertFieldAlertMinimumError');
+                        rangeAlertFieldAlertMinimumError.text('Only number allowed');
+                        rangeAlertFieldAlertMinimumError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var rangeAlertFieldAlertMaximum = $('#rangeAlertFieldAlertMaximumField').val();
+                    if (rangeAlertFieldAlertMaximum.length === 0 && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertMaximumError = $('#rangeAlertFieldAlertMaximumError');
+                        rangeAlertFieldAlertMaximumError.text('This field is required');
+                        rangeAlertFieldAlertMaximumError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (isNaN(rangeAlertFieldAlertMaximum) && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertMaximumError = $('#rangeAlertFieldAlertMaximumError');
+                        rangeAlertFieldAlertMaximumError.text('Only number allowed');
+                        rangeAlertFieldAlertMaximumError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var rangeAlertFieldAlertDelay = $('#rangeAlertFieldAlertDelayField').val();
+                    if (rangeAlertFieldAlertDelay.length === 0 && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertDelayError = $('#rangeAlertFieldAlertDelayError');
+                        rangeAlertFieldAlertDelayError.text('This field is required');
+                        rangeAlertFieldAlertDelayError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (rangeAlertFieldAlertDelay < 60 && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertDelayError = $('#rangeAlertFieldAlertDelayError');
+                        rangeAlertFieldAlertDelayError.text('Too low, minimum 60 seconds allowed');
+                        rangeAlertFieldAlertDelayError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var rangeAlertFieldAlertFrequency = $('#rangeAlertFieldAlertFrequencyField').val();
+                    if (rangeAlertFieldAlertFrequency.length === 0 && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertFrequencyError = $('#rangeAlertFieldAlertFrequencyError');
+                        rangeAlertFieldAlertFrequencyError.text('This field is required');
+                        rangeAlertFieldAlertFrequencyError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (rangeAlertFieldAlertFrequency < 1800 && rangeAlertFieldAlertEnabled) {
+                        var rangeAlertFieldAlertFrequencyError = $('#rangeAlertFieldAlertFrequencyError');
+                        rangeAlertFieldAlertFrequencyError.text('Too low, minimum 1800 seconds allowed');
+                        rangeAlertFieldAlertFrequencyError.css('display', 'block');
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    updateFieldAlert(rangeAlertFieldName, rangeAlertFieldAlertEnabled, rangeAlertFieldAlertMinimum, rangeAlertFieldAlertMaximum, rangeAlertFieldAlertDelay, rangeAlertFieldAlertFrequency);
+                    e.preventDefault();
+                });
+
+                $('#freeSubscriptionSubmit').click(function () {
+                    fieldSubs("FREE");
+                });
+                $('#standardSubscriptionSubmit').click(function () {
+                    fieldSubs("STANDARD");
+                });
+                $('#premiumSubscriptionSubmit').click(function () {
+                    fieldSubs("PREMIUM");
+                });
+
+                $('#rangeAlertFieldAlertEnabledField').click(function () {
+                    if ($('#rangeAlertFieldAlertEnabledField').prop("checked")) {
+                        $('#rangeAlertFieldAlertMinimumField').removeAttr('disabled');
+                        $('#rangeAlertFieldAlertMaximumField').removeAttr('disabled');
+                        $('#rangeAlertFieldAlertDelayField').removeAttr('disabled');
+                        $('#rangeAlertFieldAlertFrequencyField').removeAttr('disabled');
+                    } else {
+                        $('#rangeAlertFieldAlertMinimumField').attr('disabled', '');
+                        $('#rangeAlertFieldAlertMaximumField').attr('disabled', '');
+                        $('#rangeAlertFieldAlertDelayField').attr('disabled', '');
+                        $('#rangeAlertFieldAlertFrequencyField').attr('disabled', '');
+                    }
+                });
+            });
+        </script>
+
+        <div class="inner" style="padding-top: 1rem;">
+            <span id="navigationAccount" style="display:none;">Account →</span>
+            <span id="navigationDevices" style="display:none;">Devices →</span>
+            <span id="navigationDevice" style="display:none;">Device →</span>
+            <span id="navigationNode" style="display:none;">Node →</span>
+            <span id="navigationField" style="display:none;">Field</span>
+        </div>
+
+        <section class="wrapper">
+            <div class="inner">
+                <div>
+                    <div>
+                        <h2 id="detailsFieldTitle">Field details</h2>
+                    </div>
+                </div>
+
+                <blockquote id="commonError" style="background-color:#FFCCCC;display: none;"></blockquote>
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'chartsTab')" id="chartsTabButton">Charts</button>
+                    <button class="tablinks" onclick="openTab(event, 'lastValuesTab')" id="lastValuesTabButton" style="display: none;">Last values</button>
+                    <button class="tablinks" onclick="openTab(event, 'detailsTab')" id="detailsTabButton">Details</button>
+                    <button class="tablinks" onclick="openTab(event, 'rangeAlertsTab')" id="rangeAlertsTabButton" style="display: none;">Range alert</button>
+                    <button class="tablinks" onclick="openTab(event, 'integrationTab')" id="integrationTabButton" style="display: none;">Integration</button>
+                    <img src="/images/loading.gif" style="margin:auto;display:none;float:right;height:32px;margin:9px;" id="loading"/>
+                </div>
+
+                <div id="chartsTab" class="tabcontent">
+                    <div class="charts" style="top:4vw;">
+                        <div style="position: relative;width: 100%;padding-top: 60%;min-height:320px;"><div style="position: absolute; top: 0;left: 0;bottom: 0;right: 0;" id="graphDaily"></div></div>
+                        <div style="position: relative;width: 100%;padding-top: 60%;min-height:320px;"><div style="position: absolute; top: 0;left: 0;bottom: 0;right: 0;" id="graphWeekly"></div></div>
+                        <div style="position: relative;width: 100%;padding-top: 60%;min-height:320px;"><div style="position: absolute; top: 0;left: 0;bottom: 0;right: 0;" id="graphMonthly"></div></div>
+                        <div style="position: relative;width: 100%;padding-top: 60%;min-height:320px;"><div style="position: absolute; top: 0;left: 0;bottom: 0;right: 0;" id="graphYearly"></div></div>
+                    </div>
+                </div>
+
+                <div id="lastValuesTab" class="tabcontent">
+                    <table id="lastValueList">
+                        <thead>
+                            <tr>
+                                <th>Received</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><img src="/images/loading.gif" style="margin:auto;display:block;"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="detailsTab" class="tabcontent">
+                    <form id="detailsFieldForm" onsubmit="return false;">
+                        <blockquote id="detailsFieldCommonMessage" style="background-color:#CCFFCC;display:none;">The field details has been updated!</blockquote>
+                        <blockquote id="detailsFieldCommonError" style="background-color:#FFCCCC;display: none;"></blockquote>
+                        <div class="row gtr-uniform">
+                            <div class="col-12" id="detailsFieldName">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="detailsFieldNameField" placeholder=" " readonly>
+                                    <span>Field name</span>
+                                </label>
+                                <span id="detailsFieldNameError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12" id="detailsFieldDescription">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="detailsFieldDescriptionField" placeholder=" " readonly>
+                                    <span>Field description</span>
+                                </label>
+                                <span id="detailsFieldDescriptionError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12">
+                                <input type="submit" value="Save" name="detailsFieldSubmit" id="detailsFieldSubmit" style="display: none;" class="button primary">
+                                <input type="button" value="Free" name="freeSubscriptionSubmit" id="freeSubscriptionSubmit" style="display: inline-block;float:right;margin-left:14px;margin-top:14px;" class="button">
+                                <input type="button" value="Standard" name="standardSubscriptionSubmit" id="standardSubscriptionSubmit" style="display: inline-block;float:right;margin-left:14px;margin-top:14px;" class="button">
+                                <input type="button" value="Premium" name="premiumSubscriptionSubmit" id="premiumSubscriptionSubmit" style="display: inline-block;float:right;margin-left:14px;margin-top:14px;" class="button">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="rangeAlertsTab" class="tabcontent">
+                    <form id="rangeAlertFieldForm" onsubmit="return false;">
+                        <blockquote id="rangeAlertFieldCommonMessage" style="background-color:#CCFFCC;display:none;">The field alert details has been updated!</blockquote>
+                        <blockquote id="rangeAlertFieldCommonError" style="background-color:#FFCCCC;display: none;"></blockquote>
+                        <div class="row gtr-uniform">
+                            <div class="col-12" id="rangeAlertFieldName">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="rangeAlertFieldNameField" placeholder=" " readonly>
+                                    <span>Field name</span>
+                                </label>
+                                <span id="rangeAlertFieldNameError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12" id="rangeAlertFieldDescription">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="rangeAlertFieldDescriptionField" placeholder=" " readonly>
+                                    <span>Field description</span>
+                                </label>
+                                <span id="rangeAlertFieldDescriptionError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12" id="rangeAlertFieldAlertEnabled" style="display: none;">
+                                <input type="checkbox" id="rangeAlertFieldAlertEnabledField" name="rangeAlertFieldAlertEnabledField" value="" style="float: none;margin-top: 1rem;" readonly>
+                                <label for="rangeAlertFieldAlertEnabledField" style="margin-bottom: 0;">Alert enabled</label>
+                                <label id="rangeAlertFieldAlertEnabledLabel" style="float: right;"></label>
+                            </div>
+                            <div class="col-12" id="rangeAlertFieldAlertMinimum" style="display: none;">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="rangeAlertFieldAlertMinimumField" placeholder=" ">
+                                    <span>Alert minimum (inclusive)</span>
+                                </label>
+                                <span id="rangeAlertFieldAlertMinimumError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12" id="rangeAlertFieldAlertMaximum" style="display: none;">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="rangeAlertFieldAlertMaximumField" placeholder=" ">
+                                    <span>Alert maximum (exclusive)</span>
+                                </label>
+                                <span id="rangeAlertFieldAlertMaximumError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12" id="rangeAlertFieldAlertDelay" style="display: none;">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="rangeAlertFieldAlertDelayField" placeholder=" ">
+                                    <span>Alert delay (seconds)</span>
+                                </label>
+                                <span id="rangeAlertFieldAlertDelayError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12" id="rangeAlertFieldAlertFrequency" style="display: none;">
+                                <label class="pure-material-textfield-outlined">
+                                    <input id="rangeAlertFieldAlertFrequencyField" placeholder=" ">
+                                    <span>Alert repeat frequency (seconds)</span>
+                                </label>
+                                <span id="rangeAlertFieldAlertFrequencyError" style="color:#FF4444;display: none;"></span>
+                            </div>
+                            <div class="col-12">
+                                <input type="submit" value="Save" name="rangeAlertFieldSubmit" id="rangeAlertFieldSubmit" style="display: none;" class="button primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="integrationTab" class="tabcontent">
+                    <h4>Generic API endpoint</h4>
+                    <pre id="apiUrl" style="background: rgba(0, 0, 0, 0.075);border-color: rgba(0, 0, 0, 0.25);">https://api.iotguru.live/measurement/create/{nodeKey}/{field}/21.00</pre>
+                    <br/>
+                    <h4>Arduino IDE example</h4>
+                    <pre id="arduinoIDE" style="background: rgba(0, 0, 0, 0.075);border-color: rgba(0, 0, 0, 0.25);">
+                        float value = 21.00;
+                        HTTPClient http;
+                        http.useHTTP10(true);
+                        http.setTimeout(8000);
+                        http.begin("http://api.iotguru.cloud/measurement/create/{nodeKey}/{field}/" + value);
+                        http.GET();
+                        http.end();
+                    </pre>
+                    <strong>
+                        Please allow us 5&#8211;10 minutes to start aggregating your measurements, meanwhile,
+                        you can check your last ten measurements on the
+                        <a href="#" onclick="document.getElementById('lastValuesTabButton').click();">Last values</a> tab.
+                    </strong>
+                </div>                
+            </div>
+        </section>
+
+        
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <div class="content">
+            <section>
+                <h3>Social media</h3>
+                <ul class="plain">
+                    <li><a href="https://twitter.com/IoTGuruLive"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
+                    <li><a href="https://facebook.com/IoTGuruLive"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
+                    <li><a href="https://instagram.com/IoTGuruLive"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
+                    <li><a href="https://github.com/IoTGuruLive"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+                    <li><a href="http://eepurl.com/dCs2S1"><i class="icon fa-envelope-o">&nbsp;</i>Newsletter</a></li>
+                </ul>
+            </section>
+            <section>
+                <h4>Useful links</h4>
+                <ul class="alt">
+                    <li><a href="/tutorials">Tutorials</a></li>
+                    <li><a href="https://forum.iotguru.live">Community forum</a></li>
+                    <li><a href="/apidocs">API documentation</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=live.iotguru">Android application</a></li>
+                    <li><a href="/privacy">Privacy</a></li>
+                </ul>
+            </section>
+            <section>
+                <h4>Our team</h4>
+                <ul class="alt">
+                    <li><a href="https://linkedin.com/in/gaborauth/">Gábor AUTH</a></li>
+                    <li><a href="/404">&nbsp;</a></li>
+                    <li><a href="/404">&nbsp;</a></li>
+                    <li><a href="/404">&nbsp;</a></li>
+                    <li><a href="/404">&nbsp;</a></li>
+                </ul>
+            </section>
+        </div>
+        <div class="copyright">
+            Copyright &copy; 2018 &ndash; <a href="mailto:gabor.auth@iotguru.live">Gábor AUTH</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+
+        <script>
+            function loadDay() {
+                loadDataFloat('graphDaily', 'Daily values', 'Date and time', 'Value', nodeId, fieldName, 'DAY/288');
+                setTimeout(function () {
+                    loadDay();
+                }, 150000);
+            }
+
+            function loadWeek() {
+                loadDataFloat('graphWeekly', 'Weekly values', 'Date and time', 'Value', nodeId, fieldName, 'WEEK/168');
+                setTimeout(function () {
+                    loadWeek();
+                }, 1800000);
+            }
+
+            function loadMonth() {
+                loadDataFloat('graphMonthly', 'Monthly values', 'Date and time', 'Value', nodeId, fieldName, 'MONTH/240');
+                setTimeout(function () {
+                    loadMonth();
+                }, 5400000);
+            }
+
+            function loadYear() {
+                loadDataFloat('graphYearly', 'Yearly values', 'Date and time', 'Value', nodeId, fieldName, 'YEAR/366');
+                setTimeout(function () {
+                    loadYear();
+                }, 43200000);
+            }
+
+            function loadDataFloat(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+                $('#loading').css('display', 'block');
+
+                return $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+                    dataType: "json",
+                    success: function (data) {
+                        processData(target, titleText, xAxisText, yAxisText, granulation, data);
+                    }
+                });
+            }
+
+            function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
+                $('#loading').css('display', 'none');
+
+                var averages = [];
+                var ranges = [];
+                for (var i = 0; i < data[0]["data"].length; i++) {
+                    averages.push([data[0]["data"][i][0], data[0]["data"][i][1]]);
+                    ranges.push([data[0]["data"][i][0], data[0]["data"][i][2], data[0]["data"][i][3]]);
+                }
+
+                var options = {
+                    title: {
+                        text: titleText,
+                    },
+                    chart: {
+                        type: 'spline',
+                        renderTo: target,
+                        events: {
+                            load: function () {
+                            },
+                            redraw: function () {
+                            }
+                        }
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        title: {
+                            text: xAxisText
+                        },
+                        gridLineWidth: 1,
+                        tickInterval: 3600 * 1000
+                    },
+                    yAxis: {
+                        title: {
+                            text: yAxisText
+                        }
+                    },
+                    tooltip: {
+                        xDateFormat: '%Y-%m-%d %H:%M',
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            lineWidth: 2,
+                            states: {
+                                hover: {
+                                    lineWidth: 6
+                                }
+                            },
+                            marker: {
+                                enabled: false
+                            },
+                            enableMouseTracking: true,
+                            dataLabels: {
+                                enabled: false,
+                                borderRadius: 2,
+                                backgroundColor: 'rgba(255, 255, 255, 0.75)',
+                                borderWidth: 1,
+                                borderColor: '#888',
+                                x: 48,
+                                formatter: function () {
+                                    if (granulation === 'DAY/288') {
+                                        if (this.x === this.series.data[this.series.data.length - 1].x || this.x === this.series.data[0].x) {
+                                            return this.series.name + ': ' + Math.round(this.y * 10) / 10 + ' ' + yAxisText;
+                                        } else {
+                                            return null;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                            name: 'Average',
+                            data: averages,
+                            type: 'spline',
+                            zIndex: 1,
+                            marker: {
+                                fillColor: 'white',
+                                lineWidth: 2,
+                                lineColor: Highcharts.getOptions().colors[0]
+                            }
+                        }, {
+                            name: 'Range',
+                            data: ranges,
+                            type: 'arearange',
+                            lineWidth: 0,
+                            linkedTo: ':previous',
+                            color: Highcharts.getOptions().colors[0],
+                            fillColor: {
+                                linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                                stops: [
+                                    [0, 'rgba(255, 0, 0, 0.1)'],
+                                    [1, 'rgba(0, 0, 255, 0.1)']
+                                ]
+                            },
+                            zIndex: 0,
+                            marker: {
+                                enabled: false
+                            }
+                        }]
+                };
+
+                if (data[0].rangeFieldAlert) {
+                    options.yAxis.plotBands = [{
+                            from: data[0].rangeFieldAlert.max,
+                            to: Number.MAX_VALUE,
+                            color: 'rgba(255, 0, 0, 0.05)',
+                        }, {
+                            from: -Number.MAX_VALUE,
+                            to: data[0].rangeFieldAlert.min,
+                            color: 'rgba(255, 0, 0, 0.05)',
+                        }];
+                }
+
+                var chart = new Highcharts.Chart(options);
+                if (window.location.hash.indexOf('filter') > 0) {
+                    for (i = 0; i < chart.series.length; i++) {
+                        if (window.location.hash.indexOf(chart.series[i].name) <= 0) {
+                            chart.series[i].setVisible(false, false);
+                        }
+                    }
+                    chart.redraw();
+                }
+            }
+        </script>
+    </body>
+</html>
