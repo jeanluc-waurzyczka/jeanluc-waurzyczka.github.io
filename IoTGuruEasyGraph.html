@@ -24,7 +24,21 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
         <script>
-            function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+        
+                    function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+                $('#loading').css('display', 'block');
+
+                return $.ajax({
+                    type: "GET",
+                    url: '//api.iotguru.live/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+                    dataType: "json",
+                    success: function (data) {
+                        processData(target, titleText, xAxisText, yAxisText, granulation, data);
+                    }
+                });
+            }
+ /*
+ function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
                 return $.ajax({
                     type: "GET",
                     url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
@@ -34,7 +48,7 @@
                     }
                 });
             }
-
+ */
             function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
                 $('#loading').css('display', 'none');
 
