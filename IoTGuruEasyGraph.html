@@ -13,7 +13,7 @@
             <button id="weekly" value="Weekly">Semaine</button>
             <button id="monthly" value="Monthly">Mois</button>
             <button id="yearly" value="Yearly">An</button>
-            Version 1a
+            Version 1b
             <hr/>
             <div class="chartContainer" id="graphAverage">&nbsp;</div>
             <hr/>
@@ -37,7 +37,13 @@
             }
 
             function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
-
+                var averages = [];
+                var ranges = [];
+                for (var i = 0; i < data[0]["data"].length; i++) {
+                    averages.push([data[0]["data"][i][0], data[0]["data"][i][1]]);
+                    ranges.push([data[0]["data"][i][0], data[0]["data"][i][2], data[0]["data"][i][3]]);
+                }
+                
                 var options = {
                     title: {
                         text: titleText,
@@ -200,11 +206,11 @@
                         }]
                 };
 
-                for (var i = 0; i < data.length; i++) {
+ /*               for (var i = 0; i < data.length; i++) {
                     options.series[i] = {data: {}, name: {}};
                     options.series[i].name = data[i]["name"];
                     options.series[i].data = data[i]["data"];
-                }
+ }   */
 
                 var chart = new Highcharts.Chart(options);
                 if (window.location.hash.indexOf('filter') > 0) {
