@@ -12,7 +12,7 @@
             <button id="daily" value="Daily">Jour</button>
             <button id="weekly" value="Weekly">Semaine</button>
             <button id="monthly" value="Monthly">Mois</button>
-            <button id="yearly" value="Yearly">An</button> version 1
+            <button id="yearly" value="Yearly">An</button>
             <hr/>
             <div class="chartContainer" id="graphAverage">&nbsp;</div>
             <hr/>
@@ -164,9 +164,40 @@
                                 }
                             }
                         }
-},   */
-                    series: [{}]
-            };  
+},        */
+ /*                   series: [{}]
+ };  */
+ 
+                     series: [{
+                            name: 'Average',
+                            data: averages,
+                            type: 'spline',
+                            zIndex: 1,
+                            marker: {
+                                fillColor: 'white',
+                                lineWidth: 2,
+                                lineColor: Highcharts.getOptions().colors[0]
+                            }
+                        }, {
+                            name: 'Range',
+                            data: ranges,
+                            type: 'arearange',
+                            lineWidth: 0,
+                            linkedTo: ':previous',
+                            color: Highcharts.getOptions().colors[0],
+                            fillColor: {
+                                linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                                stops: [
+                                    [0, 'rgba(255, 0, 0, 0.1)'],
+                                    [1, 'rgba(0, 0, 255, 0.1)']
+                                ]
+                            },
+                            zIndex: 0,
+                            marker: {
+                                enabled: false
+                            }
+                        }]
+                };
 
                 for (var i = 0; i < data.length; i++) {
                     options.series[i] = {data: {}, name: {}};
