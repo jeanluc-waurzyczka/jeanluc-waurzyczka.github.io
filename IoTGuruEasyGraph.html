@@ -13,7 +13,7 @@
             <button id="weekly" value="Weekly">Semaine</button>
             <button id="monthly" value="Monthly">Mois</button>
             <button id="yearly" value="Yearly">An</button>
-            Version 1b
+            Version 1c
             <hr/>
             <div class="chartContainer" id="graphAverage">&nbsp;</div>
             <hr/>
@@ -28,7 +28,7 @@
             function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {      //ok?
                 return $.ajax({
                     type: "GET",
-                    url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+                    url: 'http://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
                     dataType: "json",
                     success: function (data) {
                         processData(target, titleText, xAxisText, yAxisText, granulation, data);
