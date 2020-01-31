@@ -24,7 +24,7 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
         <script>
-            function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+            function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {      //ok?
                 return $.ajax({
                     type: "GET",
                     url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
@@ -36,7 +36,71 @@
             }
 
             function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
+
                 var options = {
+                    title: {
+                        text: titleText,
+                    },
+                    chart: {
+                        type: 'spline',
+                        renderTo: target,
+                        events: {
+                            load: function () {
+                            },
+                            redraw: function () {
+                            }
+                        }
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        title: {
+                            text: xAxisText
+                        },
+                        gridLineWidth: 1,
+                        tickInterval: 3600 * 1000
+                    },
+                    yAxis: {
+                        title: {
+                            text: yAxisText
+                        }
+                    },
+                    tooltip: {
+                        xDateFormat: '%Y-%m-%d %H:%M',
+                        shared: true
+                    },
+                    plotOptions: {
+                        spline: {
+                            lineWidth: 2,
+                            states: {
+                                hover: {
+                                    lineWidth: 6
+                                }
+                            },
+                            marker: {
+                                enabled: false
+                            },
+                            enableMouseTracking: true,
+                            dataLabels: {
+                                enabled: false,
+                                borderRadius: 2,
+                                backgroundColor: 'rgba(255, 255, 255, 0.75)',
+                                borderWidth: 1,
+                                borderColor: '#888',
+                                x: 48,
+                                formatter: function () {
+                                    if (granulation === 'DAY/288') {
+                                        if (this.x === this.series.data[this.series.data.length - 1].x || this.x === this.series.data[0].x) {
+                                            return this.series.name + ': ' + Math.round(this.y * 10) / 10 + ' ' + yAxisText;
+                                        } else {
+                                            return null;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+/*                    var options = {
                     time: {
                         timezone: 'Europe/Brussels'
                     },
@@ -102,7 +166,7 @@
                         }
                     },
                     series: [{}]
-                };
+};  */
 
                 for (var i = 0; i < data.length; i++) {
                     options.series[i] = {data: {}, name: {}};
