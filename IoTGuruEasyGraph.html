@@ -231,7 +231,6 @@
                 function load() {
                     if (granularity === 'day') {
                         loadData('graphAverage', 'Temperature (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
-                        loadData('graphAverage', 'Temperature (1 semaine)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'WEEK/168');
                     }
 
                     if (granularity === 'week') {
@@ -253,6 +252,9 @@
 
                 $('#daily').click(function() {
                     granularity = 'day'; load();
+                                        granularity = 'week'; load();
+                                                            granularity = 'month'; load();
+                                                                                granularity = 'year'; load();
                 });
                 $('#weekly').click(function() {
                     granularity = 'week'; load();
