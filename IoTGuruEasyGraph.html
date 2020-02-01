@@ -154,14 +154,14 @@ enabled: false
 }
 
 function loadDayTemperature() {
-     loadData('graphTemperature', 'Température (24 dernières heures)', 'Date et heure', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
+     loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
      setTimeout(function () {
           loadDayTemperature();
      }, 150000);
 }
 
 function loadDayHumidity() {
-     loadData('graphDaily', 'Humidité (24 dernières heures)', 'Date et heure', '%', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
+     loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
      setTimeout(function () {
           loadDayHumidity();
      }, 150000);
