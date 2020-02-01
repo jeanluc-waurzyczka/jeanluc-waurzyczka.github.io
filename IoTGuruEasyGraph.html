@@ -13,7 +13,7 @@
             <button id="weekly" value="Weekly">Semaine</button>
             <button id="monthly" value="Monthly">Mois</button>
             <button id="yearly" value="Yearly">An</button>
-            Version 1i
+            Version 1j
             <hr/>
             <div class="chartContainer" id="graphAverage">&nbsp;</div>
             <div class="chartContainer" id="graphDaily">&nbsp;</div>
@@ -250,12 +250,16 @@
                         load();
                     }, 150000);
                 }
+                
+                            function loadDayTemperature() {
+                    loadData('graphAverage', 'Température (24 dernières heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
+                    setTimeout(function () {
+                    loadDayTemperature();
+                }, 150000);
+            }
 
                 $('#daily').click(function() {
-                    granularity = 'day'; load();
-                                        granularity = 'week'; load();
-                                                            granularity = 'month'; load();
-                                                                                granularity = 'year'; load();
+                    granularity = 'day'; loadDayTemperature();
                 });
                 $('#weekly').click(function() {
                     granularity = 'week'; load();
