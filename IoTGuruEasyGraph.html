@@ -13,7 +13,7 @@
             <button id="weekly" value="Weekly">Semaine</button>
             <button id="monthly" value="Monthly">Mois</button>
             <button id="yearly" value="Yearly">An</button>
-            Version 1m
+            Version 1n
             <hr/>
             <div class="chartContainer" id="graphAverage">&nbsp;</div>
             <div class="chartContainer" id="graphDaily">&nbsp;</div>
@@ -233,7 +233,7 @@
             }
 
                             function loadDayHumidity() {
-                                 loadData('graphAverage', 'Humidité (24 dernières heures)', 'Date et heure', '%', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
+                                 loadData('graphDaily', 'Humidité (24 dernières heures)', 'Date et heure', '%', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
                     setTimeout(function () {
                     loadDayHumidity();
                 }, 150000);
