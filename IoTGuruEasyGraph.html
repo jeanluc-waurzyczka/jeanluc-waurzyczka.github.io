@@ -163,21 +163,21 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 function loadTemperature(granulation) {
 	loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
 	setTimeout(function () {
-		loadDayTemperature();
+		loadTemperature();
 	}, 150000);
 }
 
 function loadHumidity(granulation) {
 	loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
 	setTimeout(function () {
-		loadDayHumidity();
+		loadHumidity();
 	}, 150000);
 }
 
 function loadAirQuality(granulation) {
 	loadData('graphAirQuality', 'Qualité de l\'air (24 heures)', 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
 	setTimeout(function () {
-		loadDayHumidity();
+		loadAirQuality();
 	}, 150000);
 }
 
