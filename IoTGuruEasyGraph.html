@@ -29,8 +29,7 @@ Version 1r
 
 <script>
 
-var nodeIdGraphDHT22DHT22 = 'ssbN5XnOFjPkXEuwJikR6g';
-var nodeIdGraphDHT22MQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
+var nodeIdGraph = 'ssbN5XnOFjPkXEuwJikR6g';
      function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {      //ok?
      return $.ajax({
 type: "GET",
@@ -157,21 +156,21 @@ enabled: false
 }
 
 function loadDayTemperature() {
-     loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', nodeIdGraphDHT22, 'temperature', 'DAY/288');
+     loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', nodeIdGraph, 'temperature', 'DAY/288');
      setTimeout(function () {
           loadDayTemperature();
      }, 150000);
 }
 
 function loadDayHumidity() {
-     loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraphDHT22, 'humidity', 'DAY/288');
+     loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraph, 'humidity', 'DAY/288');
      setTimeout(function () {
           loadDayHumidity();
      }, 150000);
 }
 
 function loadDayAirQuality() {
-     loadData('graphAirQuality', 'Qualité de l air (24 heures)', 'Date et heure', '%', nodeIdGraphmQ135, 'airquality', 'DAY/288');
+     loadData('graphAirQuality', 'Qualité de l air (24 heures)', 'Date et heure', '%', nodeIdGraph, 'airquality', 'DAY/288');
      setTimeout(function () {
           loadDayHumidity();
      }, 150000);
