@@ -1,290 +1,218 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>IoT Guru Cloud - Simple chart example</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="main.css" />
+<head>
+<title>IoT Guru Cloud - Simple chart example</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="main.css" />
 
-    </head>
-    <body>
-        <center>
-            <button id="daily" value="Daily">Jour</button>
-            <button id="weekly" value="Weekly">Semaine</button>
-            <button id="monthly" value="Monthly">Mois</button>
-            <button id="yearly" value="Yearly">An</button>
-            Version 1n
-            <hr/>
-            <div class="chartContainer" id="graphAverage">&nbsp;</div>
-            <div class="chartContainer" id="graphDaily">&nbsp;</div>
-            <hr/>
-            <a href="https://iotguru.cloud"><img src="https://iotguru.cloud/images/powered-by-logo.png" style="height:40px;"></a>
-        </center>
+</head>
+<body>
+<center>
+<button id="daily" value="Daily">Jour</button>
+<button id="weekly" value="Weekly">Semaine</button>
+<button id="monthly" value="Monthly">Mois</button>
+<button id="yearly" value="Yearly">An</button>
+Version 1p
+<hr/>
+<div class="chartContainer" id="graphTemperature">&nbsp;</div>
+<div class="chartContainer" id="graphHumidity">&nbsp;</div>
+<div class="chartContainer" id="graphAirQuality">&nbsp;</div>
+<hr/>
+<a href="https://iotguru.cloud"><img src="https://iotguru.cloud/images/powered-by-logo.png" style="height:40px;"></a>
+</center>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/highcharts-more.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-        <script>
-            function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {      //ok?
-                return $.ajax({
-                    type: "GET",
-                    url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
-                    dataType: "json",
-                    success: function (data) {
-                        processData(target, titleText, xAxisText, yAxisText, granulation, data);
+<script>
+function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {      //ok?
+     return $.ajax({
+type: "GET",
+url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+dataType: "json",
+success: function (data) {
+               processData(target, titleText, xAxisText, yAxisText, granulation, data);
+          }
+     });
+}
+
+function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
+     var averages = [];
+     var ranges = [];
+     for (var i = 0; i < data[0]["data"].length; i++) {
+          averages.push([data[0]["data"][i][0], data[0]["data"][i][1]]);
+          ranges.push([data[0]["data"][i][0], data[0]["data"][i][2], data[0]["data"][i][3]]);
+     }
+     
+     var options = {
+title: {
+text: titleText,
+          },
+chart: {
+type: 'spline',
+renderTo: target,
+events: {
+load: function () {
+                    },
+redraw: function () {
                     }
-                });
-            }
-
-            function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
-                var averages = [];
-                var ranges = [];
-                for (var i = 0; i < data[0]["data"].length; i++) {
-                    averages.push([data[0]["data"][i][0], data[0]["data"][i][1]]);
-                    ranges.push([data[0]["data"][i][0], data[0]["data"][i][2], data[0]["data"][i][3]]);
-                }
-                
-                var options = {
-                    title: {
-                        text: titleText,
+               }
+          },
+xAxis: {
+type: 'datetime',
+title: {
+text: xAxisText
+               },
+gridLineWidth: 1,
+tickInterval: 3600 * 1000
+          },
+yAxis: {
+title: {
+text: yAxisText
+               }
+          },
+tooltip: {
+xDateFormat: '%Y-%m-%d %H:%M',
+shared: true
+          },
+plotOptions: {
+spline: {
+lineWidth: 2,
+states: {
+hover: {
+lineWidth: 6
+                         }
                     },
-                    chart: {
-                        type: 'spline',
-                        renderTo: target,
-                        events: {
-                            load: function () {
-                            },
-                            redraw: function () {
-                            }
-                        }
+marker: {
+enabled: false
                     },
-                    xAxis: {
-                        type: 'datetime',
-                        title: {
-                            text: xAxisText
-                        },
-                        gridLineWidth: 1,
-                        tickInterval: 3600 * 1000
-                    },
-                    yAxis: {
-                        title: {
-                            text: yAxisText
-                        }
-                    },
-                    tooltip: {
-                        xDateFormat: '%Y-%m-%d %H:%M',
-                        shared: true
-                    },
-                    plotOptions: {
-                        spline: {
-                            lineWidth: 2,
-                            states: {
-                                hover: {
-                                    lineWidth: 6
-                                }
-                            },
-                            marker: {
-                                enabled: false
-                            },
-                            enableMouseTracking: true,
-                            dataLabels: {
-                                enabled: false,
-                                borderRadius: 2,
-                                backgroundColor: 'rgba(255, 255, 255, 0.75)',
-                                borderWidth: 1,
-                                borderColor: '#888',
-                                x: 48,
-                                formatter: function () {
-                                    if (granulation === 'DAY/288') {
-                                        if (this.x === this.series.data[this.series.data.length - 1].x || this.x === this.series.data[0].x) {
-                                            return this.series.name + ': ' + Math.round(this.y * 10) / 10 + ' ' + yAxisText;
-                                        } else {
-                                            return null;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-
-/*                    var options = {
-                    time: {
-                        timezone: 'Europe/Brussels'
-                    },
-                    title: {
-                        text: titleText
-                    },
-                    chart: {
-                        type: 'spline',
-                        renderTo: target,
-                        events: {
-                            load: function () {
-                            },
-                            redraw: function () {
-                            }
-                        }
-                    },
-                    xAxis: {
-                        type: 'datetime',
-                        title: {
-                            text: xAxisText
-                        },
-                        gridLineWidth: 1,
-                        tickInterval: 3600 * 1000
-                    },
-                    yAxis: {
-                        title: {
-                            text: yAxisText
-                        }
-                    },
-                    tooltip: {
-                        xDateFormat: '%Y-%m-%d %H:%M',
-                        shared: true
-                    },
-                    plotOptions: {
-                        spline: {
-                            lineWidth: 2,
-                            states: {
-                                hover: {
-                                    lineWidth: 6
-                                }
-                            },
-                            marker: {
-                                enabled: false
-                            },
-                            enableMouseTracking: true,
-                            dataLabels: {
-                                enabled: false,
-                                borderRadius: 2,
-                                backgroundColor: 'rgba(255, 255, 255, 0.75)',
-                                borderWidth: 1,
-                                borderColor: '#888',
-                                x: 48,
-                                formatter: function () {
-                                    if (granulation === 'DAY/288') {
-                                        if (this.x === this.series.data[this.series.data.length - 1].x || this.x === this.series.data[0].x) {
-                                            return this.series.name + ': ' + Math.round(this.y * 10) / 10 + ' ' + yAxisText;
-                                        } else {
-                                            return null;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-},        */
- /*                   series: [{}]
- };  */
- 
-                     series: [{
-                            name: 'Moyenne',
-                            data: averages,
-                            type: 'spline',
-                            zIndex: 1,
-                            marker: {
-                                fillColor: 'white',
-                                lineWidth: 2,
-                                lineColor: Highcharts.getOptions().colors[0]
-                            }
-                        }, {
-                            name: 'Range',
-                            data: ranges,
-                            type: 'arearange',
-                            lineWidth: 0,
-                            linkedTo: ':previous',
-                            color: Highcharts.getOptions().colors[0],
-                            fillColor: {
-                                linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
-                                stops: [
-                                    [0, 'rgba(255, 0, 0, 0.1)'],
-                                    [1, 'rgba(0, 0, 255, 0.1)']
-                                ]
-                            },
-                            zIndex: 0,
-                            marker: {
-                                enabled: false
-                            }
-                        }]
-                };
-
- /*               for (var i = 0; i < data.length; i++) {
-                    options.series[i] = {data: {}, name: {}};
-                    options.series[i].name = data[i]["name"];
-                    options.series[i].data = data[i]["data"];
- }   */
-
-                var chart = new Highcharts.Chart(options);
-                if (window.location.hash.indexOf('filter') > 0) {
-                    for (i = 0; i < chart.series.length; i++) {
-                        if (window.location.hash.indexOf(chart.series[i].name) <= 0) {
-                            chart.series[i].setVisible(false, false);
-                        }
+enableMouseTracking: true,
+dataLabels: {
+enabled: false,
+borderRadius: 2,
+backgroundColor: 'rgba(255, 255, 255, 0.75)',
+borderWidth: 1,
+borderColor: '#888',
+x: 48,
+formatter: function () {
+                              if (granulation === 'DAY/288') {
+                                   if (this.x === this.series.data[this.series.data.length - 1].x || this.x === this.series.data[0].x) {
+                                        return this.series.name + ': ' + Math.round(this.y * 10) / 10 + ' ' + yAxisText;
+                                   } else {
+                                        return null;
+                                   }
+                              }
+                         }
                     }
-                    chart.redraw();
-                }
-            }
-            
-                                        function loadDayTemperature() {
-                    loadData('graphAverage', 'Température (24 dernières heures)', 'Date et heure', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
-                    setTimeout(function () {
-                    loadDayTemperature();
-                }, 150000);
-            }
-
-                            function loadDayHumidity() {
-                                 loadData('graphDaily', 'Humidité (24 dernières heures)', 'Date et heure', '%', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
-                    setTimeout(function () {
-                    loadDayHumidity();
-                }, 150000);
-            }
-            
-
-            $(document).ready(function () {
-
-                var granularity = 'day';
-                function load() {
-                    if (granularity === 'day') {
- //                       loadData('graphAverage', 'Température (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
-                        loadData('graphAverage', 'Humidité (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
-                    }
-
-                    if (granularity === 'week') {
-                        loadData('graphAverage', 'Temperature (1 semaine)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'WEEK/168');
-                    }
-
-                    if (granularity === 'month') {
-                        loadData('graphAverage', 'Temperature (1 mois)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'MONTH/240');
-                    }
-
-                    if (granularity === 'year') {
-                        loadData('graphAverage', 'Temperature (1 an)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'YEAR/366');
-                    }
-
-                    setTimeout(function () {
-                        load();
-                    }, 150000);
-                }
-                
+               }
+          },
 
 
-                $('#daily').click(function() {
-                    granularity = 'day'; loadDayTemperature();
-                    granularity = 'day'; loadDayHumidity();
+series: [{
+name: 'Moyenne',
+data: averages,
+type: 'spline',
+zIndex: 1,
+marker: {
+fillColor: 'white',
+lineWidth: 2,
+lineColor: Highcharts.getOptions().colors[0]
+               }
+          }, {
+name: 'Range',
+data: ranges,
+type: 'arearange',
+lineWidth: 0,
+linkedTo: ':previous',
+color: Highcharts.getOptions().colors[0],
+fillColor: {
+linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+stops: [
+                    [0, 'rgba(255, 0, 0, 0.1)'],
+                    [1, 'rgba(0, 0, 255, 0.1)']
+                    ]
+               },
+zIndex: 0,
+marker: {
+enabled: false
+               }
+          }]
+     };
 
-                });
-                $('#weekly').click(function() {
-                    granularity = 'week'; load();
-                });
-                $('#monthly').click(function() {
-                    granularity = 'month'; load();
-                });
-                $('#yearly').click(function() {
-                    granularity = 'year'; load();
-                });
+     var chart = new Highcharts.Chart(options);
+     if (window.location.hash.indexOf('filter') > 0) {
+          for (i = 0; i < chart.series.length; i++) {
+               if (window.location.hash.indexOf(chart.series[i].name) <= 0) {
+                    chart.series[i].setVisible(false, false);
+               }
+          }
+          chart.redraw();
+     }
+}
 
-                load();
-            });
-        </script>
-    </body>
+function loadDayTemperature() {
+     loadData('graphTemperature', 'Température (24 dernières heures)', 'Date et heure', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
+     setTimeout(function () {
+          loadDayTemperature();
+     }, 150000);
+}
+
+function loadDayHumidity() {
+     loadData('graphDaily', 'Humidité (24 dernières heures)', 'Date et heure', '%', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
+     setTimeout(function () {
+          loadDayHumidity();
+     }, 150000);
+}
+
+
+$(document).ready(function () {
+
+     var granularity = 'day';
+     function load() {
+          if (granularity === 'day') {
+               //                       loadData('graphTemperature', 'Température (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
+               loadData('graphTemperature', 'Humidité (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
+          }
+
+          if (granularity === 'week') {
+               loadData('graphTemperature', 'Temperature (1 semaine)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'WEEK/168');
+          }
+
+          if (granularity === 'month') {
+               loadData('graphTemperature', 'Temperature (1 mois)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'MONTH/240');
+          }
+
+          if (granularity === 'year') {
+               loadData('graphTemperature', 'Temperature (1 an)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'YEAR/366');
+          }
+
+          setTimeout(function () {
+               load();
+          }, 150000);
+     }
+     
+
+
+     $('#daily').click(function() {
+          granularity = 'day'; loadDayTemperature();
+          granularity = 'day'; loadDayHumidity();
+
+     });
+     $('#weekly').click(function() {
+          granularity = 'week'; load();
+     });
+     $('#monthly').click(function() {
+          granularity = 'month'; load();
+     });
+     $('#yearly').click(function() {
+          granularity = 'year'; load();
+     });
+
+     load();
+});
+</script>
+</body>
 </html>
