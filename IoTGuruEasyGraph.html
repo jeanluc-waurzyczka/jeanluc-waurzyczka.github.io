@@ -13,7 +13,7 @@
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
-Version 1w
+Version 1x
 <hr/>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -160,22 +160,22 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 	}
 }
 
-function loadTemperature(granulation) {
-	loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
+function loadTemperature(titleText, granulation) {
+	loadData('graphTemperature', titleText, 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
 	setTimeout(function () {
 		loadTemperature();
 	}, 150000);
 }
 
-function loadHumidity(granulation) {
-	loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
+function loadHumidity(titleText, granulation) {
+	loadData('graphHumidity', titleText, 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
 	setTimeout(function () {
 		loadHumidity();
 	}, 150000);
 }
 
-function loadAirQuality(granulation) {
-	loadData('graphAirQuality', 'Qualité de l\'air (24 heures)', 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
+function loadAirQuality(titleText, granulation) {
+	loadData('graphAirQuality', titleText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
 	setTimeout(function () {
 		loadAirQuality();
 	}, 150000);
@@ -187,15 +187,15 @@ $(document).ready(function () {
 	function load() {
 	
 		if (granularity === 'day') {
-		loadTemperature('DAY/288');
-		loadHumidity('DAY/288');
-		loadAirQuality('DAY/288');
+		loadTemperature('Température (journalier)', 'DAY/288');
+		loadHumidity('Humidité (journalier)', 'DAY/288');
+		loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
 		}
 
 		if (granularity === 'week') {
-		loadTemperature('WEEK/168');
-		loadHumidity('WEEK/168');
-		loadAirQuality('WEEK/168');
+		loadTemperature('Température (hebdomadaire)', 'WEEK/168');
+		loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
+		loadAirQuality('Humidité (hebdomadaire)', 'WEEK/168');
 		}
 
 		if (granularity === 'month') {
