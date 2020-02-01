@@ -13,7 +13,7 @@
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
-Version 1s
+Version 1t
 <hr/>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -51,9 +51,11 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
      }
      
      var options = {
+
     time: {
-         timezone: 'America/New_York'
+        useUTC: false
     },
+
     title: {
 text: titleText,
           },
