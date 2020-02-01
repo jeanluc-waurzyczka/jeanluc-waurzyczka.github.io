@@ -167,14 +167,14 @@ function loadTemperature(granulation) {
 	}, 150000);
 }
 
-function loadHumidity() {
+function loadHumidity(granulation) {
 	loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
 	setTimeout(function () {
 		loadDayHumidity();
 	}, 150000);
 }
 
-function loadAirQuality() {
+function loadAirQuality(granulation) {
 	loadData('graphAirQuality', 'Qualité de l\'air (24 heures)', 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
 	setTimeout(function () {
 		loadDayHumidity();
