@@ -13,7 +13,7 @@
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
-Version 1v
+Version 1w
 <hr/>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -187,15 +187,15 @@ $(document).ready(function () {
 	function load() {
 	
 		if (granularity === 'day') {
-		loadDayTemperature('DAY/288');
-		loadDayHumidity('DAY/288');
-		loadDayAirQuality('DAY/288');
+		loadTemperature('DAY/288');
+		loadHumidity('DAY/288');
+		loadAirQuality('DAY/288');
 		}
 
 		if (granularity === 'week') {
-		loadDayTemperature('WEEK/168');
-		loadDayHumidity('WEEK/168');
-		loadDayAirQuality('WEEK/168');
+		loadTemperature('WEEK/168');
+		loadHumidity('WEEK/168');
+		loadAirQuality('WEEK/168');
 		}
 
 		if (granularity === 'month') {
