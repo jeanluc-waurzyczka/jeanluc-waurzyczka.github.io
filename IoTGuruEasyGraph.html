@@ -160,22 +160,22 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 	}
 }
 
-function loadDayTemperature() {
-	loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', nodeIdGraph, 'temperature', 'DAY/288');
+function loadTemperature(granulation) {
+	loadData('graphTemperature', 'Température (24 heures)', 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
 	setTimeout(function () {
 		loadDayTemperature();
 	}, 150000);
 }
 
-function loadDayHumidity() {
-	loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraph, 'humidity', 'DAY/288');
+function loadHumidity() {
+	loadData('graphHumidity', 'Humidité (24 heures)', 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
 	setTimeout(function () {
 		loadDayHumidity();
 	}, 150000);
 }
 
-function loadDayAirQuality() {
-	loadData('graphAirQuality', 'Qualité de l\'air (24 heures)', 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', 'DAY/288');
+function loadAirQuality() {
+	loadData('graphAirQuality', 'Qualité de l\'air (24 heures)', 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
 	setTimeout(function () {
 		loadDayHumidity();
 	}, 150000);
@@ -185,13 +185,17 @@ $(document).ready(function () {
 
 	var granularity = 'day';
 	function load() {
+	
 		if (granularity === 'day') {
-			//                       loadData('graphTemperature', 'Température (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
-			loadData('graphTemperature', 'Humidité (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'humidity', 'DAY/288');
+		loadDayTemperature('DAY/288');
+		loadDayHumidity('DAY/288');
+		loadDayAirQuality('DAY/288');
 		}
 
 		if (granularity === 'week') {
-			loadData('graphTemperature', 'Temperature (1 semaine)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'WEEK/168');
+		loadDayTemperature('WEEK/168');
+		loadDayHumidity('WEEK/168');
+		loadDayAirQuality('WEEK/168');
 		}
 
 		if (granularity === 'month') {
@@ -210,9 +214,7 @@ $(document).ready(function () {
 
 
 	$('#daily').click(function() {
-		granularity = 'day'; loadDayTemperature();
-		granularity = 'day'; loadDayHumidity();
-		loadDayAirQuality();
+		granularity = 'day'; load ();
 
 	});
 	$('#weekly').click(function() {
