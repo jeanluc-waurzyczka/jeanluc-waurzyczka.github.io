@@ -13,7 +13,7 @@
             <button id="weekly" value="Weekly">Semaine</button>
             <button id="monthly" value="Monthly">Mois</button>
             <button id="yearly" value="Yearly">An</button>
-            Version 1f
+            Version 1g
             <hr/>
             <div class="chartContainer" id="graphAverage">&nbsp;</div>
             <div class="chartContainer" id="graphDaily">&nbsp;</div>
@@ -231,6 +231,7 @@
                 function load() {
                     if (granularity === 'day') {
                         loadData('graphAverage', 'Temperature (24 heures)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'DAY/288');
+                        loadData('graphAverage', 'Temperature (1 semaine)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'WEEK/168');
                     }
 
                     if (granularity === 'week') {
