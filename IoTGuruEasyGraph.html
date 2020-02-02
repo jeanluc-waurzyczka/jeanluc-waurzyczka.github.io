@@ -29,10 +29,11 @@ Version 1y
 
 <script>
 
+var DeviceText = "Test JL Atelier";
 var nodeIdGraph = 'ssbN5XnOFjPkXEuwJikR6g';
 var nodeIdMQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
 
-var TimeOutGraph = "150000";
+var TimeOutGraph = 150000;
 
 function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
 	return $.ajax({
@@ -163,7 +164,7 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 }
 
 function loadTemperature(titleText, granulation) {
-	loadData('graphTemperature', titleText, 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
+	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
 	setTimeout(function () {
 		loadTemperature();
 	}, TimeOutGraph);
@@ -216,17 +217,17 @@ $(document).ready(function () {
 
 
 	$('#daily').click(function() {
-		granularity = 'day'; load ();
+		granularity = 'day'; TimeOutGraph = 150000; load ();
 
 	});
 	$('#weekly').click(function() {
-		granularity = 'week'; load();
+		granularity = 'week'; TimeOutGraph = 1800000; load();
 	});
 	$('#monthly').click(function() {
-		granularity = 'month'; load();
+		granularity = 'month'; TimeOutGraph = 5400000; load();
 	});
 	$('#yearly').click(function() {
-		granularity = 'year'; load();
+		granularity = 'year'; TimeOutGraph = 43200000; load();
 	});
 
 	load();
