@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>IoT Guru Cloud - Simple chart example</title>
+<title>Moulinsart</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="main.css" />
@@ -13,7 +13,7 @@
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
-Version 1aa
+Version 1ab
 <hr/>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -30,10 +30,10 @@ Version 1aa
 <script>
 
 var DeviceText = "Test JL Atelier";
-var nodeIdGraphDHT22 = 'ssbN5XnOFjPkXEuwJikR6g';
+var nodeIdDHT22 = 'ssbN5XnOFjPkXEuwJikR6g';
 var nodeIdMQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
 
-var TimeOutGraph = '150000';
+var TimeOutGraph;
 
 function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
 	return $.ajax({
@@ -164,24 +164,24 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 }
 
 function loadTemperature(titleText, granulation) {
-	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdGraphDHT22, 'temperature', granulation);
-	setTimeout(function () {
+	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdDHT22, 'temperature', granulation);
+/*	setTimeout(function () {
 		loadTemperature();
-	}, 150000);
+}, 150000); */
 }
 
 function loadHumidity(titleText, granulation) {
-	loadData('graphHumidity', titleText + ' - ' + DeviceText, 'Date et heure', '%', nodeIdGraphDHT22, 'humidity', granulation);
-	setTimeout(function () {
+	loadData('graphHumidity', titleText + ' - ' + DeviceText, 'Date et heure', '%', nodeIdDHT22, 'humidity', granulation);
+/*	setTimeout(function () {
 		loadHumidity();
-	}, TimeOutGraph);
+}, TimeOutGraph); */
 }
 
 function loadAirQuality(titleText, granulation) {
 	loadData('graphAirQuality', titleText + ' - ' + DeviceText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
-	setTimeout(function () {
+/*	setTimeout(function () {
 		loadAirQuality();
-	}, TimeOutGraph);
+}, TimeOutGraph); */
 }
 
 $(document).ready(function () {
