@@ -167,7 +167,7 @@ function loadTemperature(titleText, granulation) {
 	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
 	setTimeout(function () {
 		loadTemperature();
-	}, TimeOutGraph);
+	}, 150000);
 }
 
 function loadHumidity(titleText, granulation) {
