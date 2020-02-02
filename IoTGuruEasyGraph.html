@@ -13,7 +13,7 @@
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
-Version 1z
+Version 1aa
 <hr/>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -30,7 +30,7 @@ Version 1z
 <script>
 
 var DeviceText = "Test JL Atelier";
-var nodeIdGraph = 'ssbN5XnOFjPkXEuwJikR6g';
+var nodeIdGraphDHT22 = 'ssbN5XnOFjPkXEuwJikR6g';
 var nodeIdMQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
 
 var TimeOutGraph = '150000';
@@ -164,21 +164,21 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 }
 
 function loadTemperature(titleText, granulation) {
-	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
+	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdGraphDHT22, 'temperature', granulation);
 	setTimeout(function () {
 		loadTemperature();
 	}, 150000);
 }
 
 function loadHumidity(titleText, granulation) {
-	loadData('graphHumidity', titleText, 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
+	loadData('graphHumidity', titleText + ' - ' + DeviceText, 'Date et heure', '%', nodeIdGraphDHT22, 'humidity', granulation);
 	setTimeout(function () {
 		loadHumidity();
 	}, TimeOutGraph);
 }
 
 function loadAirQuality(titleText, granulation) {
-	loadData('graphAirQuality', titleText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
+	loadData('graphAirQuality', titleText + ' - ' + DeviceText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
 	setTimeout(function () {
 		loadAirQuality();
 	}, TimeOutGraph);
@@ -187,31 +187,36 @@ function loadAirQuality(titleText, granulation) {
 $(document).ready(function () {
 
 	var granularity = 'day';
+     TimeOutGraph = 150000;
 	function load() {
 	
 		if (granularity === 'day') {
-		loadTemperature('Température (journalier)', 'DAY/288');
-		loadHumidity('Humidité (journalier)', 'DAY/288');
-		loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
+              loadTemperature('Température (journalier)', 'DAY/288');
+              loadHumidity('Humidité (journalier)', 'DAY/288');
+              loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
 		}
 
 		if (granularity === 'week') {
-		loadTemperature('Température (hebdomadaire)', 'WEEK/168');
-		loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
-		loadAirQuality('Humidité (hebdomadaire)', 'WEEK/168');
+              loadTemperature('Température (hebdomadaire)', 'WEEK/168');
+              loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
+              loadAirQuality('Humidité (hebdomadaire)', 'WEEK/168');
 		}
 
 		if (granularity === 'month') {
-			loadData('graphTemperature', 'Temperature (1 mois)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'MONTH/240');
+              loadTemperature('Température (mensuel)', 'MONTH/240');
+              loadHumidity('Humidité (mensuel)', 'MONTH/240');
+              loadAirQuality('Humidité (mensuel)', 'MONTH/240');               
 		}
 
 		if (granularity === 'year') {
-			loadData('graphTemperature', 'Temperature (1 an)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'YEAR/366');
+              loadTemperature('Température (annuel)', 'YEAR/366');
+              loadHumidity('Humidité (annuel)', 'YEAR/366');
+              loadAirQuality('Humidité (annuel)', 'YEAR/366');  
 		}
 
-/*		setTimeout(function () {
+		setTimeout(function () {
 			load();
-                }, 150000);    */
+                }, TimeOutGraph);    
 	}
 	
 
