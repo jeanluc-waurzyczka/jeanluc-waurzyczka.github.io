@@ -13,7 +13,7 @@
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
-Version 1x
+Version 1y
 <hr/>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -31,6 +31,8 @@ Version 1x
 
 var nodeIdGraph = 'ssbN5XnOFjPkXEuwJikR6g';
 var nodeIdMQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
+
+var TimeOutGraph = "150000";
 
 function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
 	return $.ajax({
@@ -164,21 +166,21 @@ function loadTemperature(titleText, granulation) {
 	loadData('graphTemperature', titleText, 'Date et heure', '°C', nodeIdGraph, 'temperature', granulation);
 	setTimeout(function () {
 		loadTemperature();
-	}, 150000);
+	}, TimeOutGraph);
 }
 
 function loadHumidity(titleText, granulation) {
 	loadData('graphHumidity', titleText, 'Date et heure', '%', nodeIdGraph, 'humidity', granulation);
 	setTimeout(function () {
 		loadHumidity();
-	}, 150000);
+	}, TimeOutGraph);
 }
 
 function loadAirQuality(titleText, granulation) {
 	loadData('graphAirQuality', titleText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
 	setTimeout(function () {
 		loadAirQuality();
-	}, 150000);
+	}, TimeOutGraph);
 }
 
 $(document).ready(function () {
@@ -206,9 +208,9 @@ $(document).ready(function () {
 			loadData('graphTemperature', 'Temperature (1 an)', 'Date and time', '°C', 'ssbN5XnOFjPkXEuwJikR6g', 'temperature', 'YEAR/366');
 		}
 
-		setTimeout(function () {
+/*		setTimeout(function () {
 			load();
-		}, 150000);
+                }, 150000);    */
 	}
 	
 
