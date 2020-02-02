@@ -5,37 +5,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="main.css" />
+<style>
+     .button {
+  background-color: lightgreen;
+  border: none;
+  color: blue;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: lightblue
+  ;
+}
+</style>
 
 </head>
 <body>
 <center>
-<a href="#" class="myButton">Jour</a>
-
-.myButton {
-	box-shadow: 0px 0px 0px 2px #9fb4f2;
-	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
-	background-color:#7892c2;
-	border-radius:10px;
-	border:1px solid #4e6096;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:19px;
-	padding:12px 37px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #283966;
-}
-.myButton:hover {
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-	background-color:#476e9e;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
-
-        
+<button class="button" id="daily" value="Daily">Jour</button>
 <button id="weekly" value="Weekly">Semaine</button>
 <button id="monthly" value="Monthly">Mois</button>
 <button id="yearly" value="Yearly">An</button>
