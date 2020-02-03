@@ -204,67 +204,68 @@ function loadAirQuality(titleText, granulation) {
 
 $(document).ready(function () {
 
-	var granularity = 'day';
-     TimeOutGraph = 150000;
+var granularity = 'day';
+TimeOutGraph = 150000;
 	
-	// Add active class to the current button (highlight it)
+	// Add active class to the current button (sets it to light blue)
 var header = document.getElementById("mybuttonDIV");
 var btns = header.getElementsByClassName("button");
 for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("active");
-  current[0].className = current[0].className.replace(" active", "");
-  this.className += " active";
-  });
+	btns[i].addEventListener("click", function() {
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
+		});
 }
+
+function load() {
+
+	if (granularity === 'day') {
+	    loadTemperature('Température (journalier)', 'DAY/288');
+	    loadHumidity('Humidité (journalier)', 'DAY/288');
+	    loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
+	}
+
+	if (granularity === 'week') {
+	    loadTemperature('Température (hebdomadaire)', 'WEEK/168');
+	    loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
+	    loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
+	}
+
+	if (granularity === 'month') {
+	    loadTemperature('Température (mensuel)', 'MONTH/240');
+	    loadHumidity('Humidité (mensuel)', 'MONTH/240');
+	    loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
+	}
+
+	if (granularity === 'year') {
+	    loadTemperature('Température (annuel)', 'YEAR/366');
+	    loadHumidity('Humidité (annuel)', 'YEAR/366');
+	    loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
+	}
+
+	setTimeout(function () {
+		load();
+		}, TimeOutGraph);    
+	}
 	
-	function load() {
-	
-		if (granularity === 'day') {
-              loadTemperature('Température (journalier)', 'DAY/288');
-              loadHumidity('Humidité (journalier)', 'DAY/288');
-              loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
-		}
-
-		if (granularity === 'week') {
-              loadTemperature('Température (hebdomadaire)', 'WEEK/168');
-              loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
-              loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
-		}
-
-		if (granularity === 'month') {
-              loadTemperature('Température (mensuel)', 'MONTH/240');
-              loadHumidity('Humidité (mensuel)', 'MONTH/240');
-              loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
-		}
-
-		if (granularity === 'year') {
-              loadTemperature('Température (annuel)', 'YEAR/366');
-              loadHumidity('Humidité (annuel)', 'YEAR/366');
-              loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
-		}
-
-		setTimeout(function () {
-			load();
-               }, TimeOutGraph);    
-          }
-	
 
 
-	$('#daily').click(function() {
-        granularity = 'day'; TimeOutGraph = 150000; load ();
-        });
-	$('#weekly').click(function() {
-        granularity = 'week'; TimeOutGraph = 1800000; load();
-        });
-	$('#monthly').click(function() {
-        granularity = 'month'; TimeOutGraph = 5400000; load();
-        });
-	$('#yearly').click(function() {
-        granularity = 'year'; TimeOutGraph = 43200000; load();
-        });
+$('#daily').click(function() {
+   granularity = 'day'; TimeOutGraph = 150000; load ();
+   });
+$('#weekly').click(function() {
+   granularity = 'week'; TimeOutGraph = 1800000; load();
+   });
+$('#monthly').click(function() {
+   granularity = 'month'; TimeOutGraph = 5400000; load();
+   });
+$('#yearly').click(function() {
+   granularity = 'year'; TimeOutGraph = 43200000; load();
+   });
 
-	load();
+load();
+
 });
 
 
