@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Moulinsart graph</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="main.css" />
+<style>
+     .button {
+        color: blue;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 24px;
+        background: lightgreen;
+        padding: 15px 25px;
+        border-radius: 50px;
+        display: inline-block;
+        border: none;
+        transition: all 0.4s ease 0s;
+     }
+
+    .button:hover {
+        background-color: lightblue;
+     }
+</style>
+
+</head>
+<body>
+<center><p>
+<button class="button" id="daily" value="Daily">Jour</button>
+<button class="button" id="weekly" value="Weekly">Semaine</button>
+<button class="button" id="monthly" value="Monthly">Mois</button>
+<button class="button" id="yearly" value="Yearly">An</button>
+</p> <p>
+<div class="chartContainer" id="graphTemperature">&nbsp;</div>
+<div class="chartContainer" id="graphHumidity">&nbsp;</div>
+<div class="chartContainer" id="graphAirQuality">&nbsp;</div>
+</p> <p>
+<a href="https://iotguru.cloud"><img src="https://iotguru.cloud/images/powered-by-logo.png" style="height:40px;"></a>
+ </p></center>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script>
+
+var DeviceText = "Test JL Atelier";
+var nodeIdDHT22 = 'ssbN5XnOFjPkXEuwJikR6g';
+var nodeIdMQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
+
+var TimeOutGraph;
+
+function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+	return $.ajax({
+            type: "GET",
+            url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+            dataType: "json",
+            success: function (data)
+                        {
+                           processData(target, titleText, xAxisText, yAxisText, granulation, data);
+                        }
+	});
+}
+
+function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
+	var averages = [];
+	var ranges = [];
+	for (var i = 0; i < data[0]["data"].length; i++) {
+		averages.push([data[0]["data"][i][0], data[0]["data"][i][1]]);
+		ranges.push([data[0]["data"][i][0], data[0]["data"][i][2], data[0]["data"][i][3]]);
+	}
+	
+	var options = {
+            time: {
+            useUTC: false
+                      },
+            title: {
+            text: titleText,
+                      },
+            chart: {
+            type: 'spline',
+            renderTo: target,
+            events: {
+            load: function () {
+                                },
+            redraw: function () {
+                                }
+                           }
+                      },
+            xAxis: {
+            type: 'datetime',
+            title: {
+            text: xAxisText
+                           },
+            gridLineWidth: 1,
+            tickInterval: 3600 * 1000
+                      },
+            yAxis: {
+            title: {
+            text: yAxisText
+                           }
+                      },
+            tooltip: {
+            xDateFormat: '%Y-%m-%d %H:%M',
+            shared: true
+                      },
+            plotOptions: {
+			 spline: {
+				lineWidth: 2,
+				states: {
+				hover: {
+				lineWidth: 6
+									}
+								},
+				marker: {
+				enabled: false
+								},
+				enableMouseTracking: true,
+				dataLabels: {
+				    enabled: false,
+				    borderRadius: 2,
+				    backgroundColor: 'rgba(255, 255, 255, 0.75)',
+				    borderWidth: 1,
+				    borderColor: '#888',
+				    x: 48,
+				    formatter: function () {
+						if (granulation === 'DAY/288') {
+							if (this.x === this.series.data[this.series.data.length - 1].x || this.x === this.series.data[0].x) {
+								return this.series.name + ': ' + Math.round(this.y * 10) / 10 + ' ' + yAxisText;
+							} else {
+								return null;
+							}
+						}
+					}
+				}
+			 }
+            },
+
+            series: [{
+			 name: 'Moyenne',
+			 data: averages,
+			 type: 'spline',
+			 zIndex: 1,
+			 marker: {
+				fillColor: 'white',
+				lineWidth: 2,
+				lineColor: Highcharts.getOptions().colors[0]
+			 }
+            }, {
+			 name: 'Range',
+			 data: ranges,
+			 type: 'arearange',
+			 lineWidth: 0,
+			 linkedTo: ':previous',
+			 color: Highcharts.getOptions().colors[0],
+			 fillColor: {
+				linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+				stops: [
+								[0, 'rgba(255, 0, 0, 0.1)'],
+								[1, 'rgba(0, 0, 255, 0.1)']
+								]
+			 },
+			 zIndex: 0,
+			 marker: {
+			 enabled: false
+						 }
+                      }]
+            };
+
+	var chart = new Highcharts.Chart(options);
+	if (window.location.hash.indexOf('filter') > 0) {
+		for (i = 0; i < chart.series.length; i++) {
+			if (window.location.hash.indexOf(chart.series[i].name) <= 0) {
+				chart.series[i].setVisible(false, false);
+			}
+		}
+		chart.redraw();
+	}
+}
+
+function loadTemperature(titleText, granulation) {
+	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdDHT22, 'temperature', granulation);
+}
+
+function loadHumidity(titleText, granulation) {
+	loadData('graphHumidity', titleText + ' - ' + DeviceText, 'Date et heure', '%', nodeIdDHT22, 'humidity', granulation);
+}
+
+function loadAirQuality(titleText, granulation) {
+	loadData('graphAirQuality', titleText + ' - ' + DeviceText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
+}
+
+$(document).ready(function () {
+
+	var granularity = 'day';
+     TimeOutGraph = 150000;
+	function load() {
+	
+		if (granularity === 'day') {
+              loadTemperature('Température (journalier)', 'DAY/288');
+              loadHumidity('Humidité (journalier)', 'DAY/288');
+              loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
+		}
+
+		if (granularity === 'week') {
+              loadTemperature('Température (hebdomadaire)', 'WEEK/168');
+              loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
+              loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
+		}
+
+		if (granularity === 'month') {
+              loadTemperature('Température (mensuel)', 'MONTH/240');
+              loadHumidity('Humidité (mensuel)', 'MONTH/240');
+              loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
+		}
+
+		if (granularity === 'year') {
+              loadTemperature('Température (annuel)', 'YEAR/366');
+              loadHumidity('Humidité (annuel)', 'YEAR/366');
+              loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
+		}
+
+		setTimeout(function () {
+			load();
+               }, TimeOutGraph);    
+          }
+	
+
+
+	$('#daily').click(function() {
+        granularity = 'day'; TimeOutGraph = 150000; load ();
+        });
+	$('#weekly').click(function() {
+        granularity = 'week'; TimeOutGraph = 1800000; load();
+        });
+	$('#monthly').click(function() {
+        granularity = 'month'; TimeOutGraph = 5400000; load();
+        });
+	$('#yearly').click(function() {
+        granularity = 'year'; TimeOutGraph = 43200000; load();
+        });
+
+	load();
+});
+</script>
+</body>
+</html>
