@@ -35,10 +35,12 @@
 </head>
 <body>
 <center><p>
+<div id="mybuttonDIV">
 <button class="button" id="daily" value="Daily">Jour</button> &nbsp;
 <button class="button" id="weekly" value="Weekly">Semaine</button> &nbsp;
 <button class="button" id="monthly" value="Monthly">Mois</button> &nbsp;
 <button class="button" id="yearly" value="Yearly">An</button>
+</div>
 </p> <p>
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
@@ -204,6 +206,18 @@ $(document).ready(function () {
 
 	var granularity = 'day';
      TimeOutGraph = 150000;
+	
+	// Add active class to the current button (highlight it)
+var header = document.getElementById("mybuttonDIV");
+var btns = header.getElementsByClassName("button");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
+	
 	function load() {
 	
 		if (granularity === 'day') {
@@ -252,6 +266,8 @@ $(document).ready(function () {
 
 	load();
 });
+
+
 </script>
 </body>
 </html>
