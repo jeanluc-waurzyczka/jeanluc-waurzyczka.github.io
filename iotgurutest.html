@@ -24,7 +24,7 @@ var api_key = 'Z996IH7IT3K2DHQ2';
 
 
 //============================================== Test Atelier JL =======================================================//
-var DeviceShortId = 'jDy2YhGGVqPbRrxg_fhKeA';
+var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
 var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
 var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
 var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
@@ -70,7 +70,7 @@ function deviceFind(deviceId) {
 
 	$.ajax({
 type: "GET",
-url: '//api.iotguru.live/device/find/' + deviceId,
+url: '//api.iotguru.live/node/find/' + deviceId,
 dataType: "json",
 	beforeSend: function (xhr) {
 			var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
@@ -100,8 +100,8 @@ function deviceFindResponse(data) {
 	TexteTitre += TexteTitre1;
 	TexteTitre += data.description;
 
-	TexteTitre += " | ip ";
-	TexteTitre += data.ip;
+	TexteTitre += " | lastUpdate ";
+	TexteTitre += data.lastUpdate;
 	TexteTitre += " | devID: ";
 TexteTitre += data.deviceId;
 
@@ -183,7 +183,7 @@ TexteTitre += data.deviceId;
     }
     
 $(document).ready(function () {
-	deviceFind(DeviceShortId);
+	deviceFind(DHT22NodeShortId);
 });
 
 </script>
