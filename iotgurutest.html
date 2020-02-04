@@ -100,7 +100,7 @@ function deviceFindResponse(data) {
 	TexteTitre += TexteTitre1;
 	TexteTitre += data.name;
 	TexteTitre += TexteTitre2;
-	TexteTitre += String(data.lastCheck);
+	TexteTitre += data.lastCheck;
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
