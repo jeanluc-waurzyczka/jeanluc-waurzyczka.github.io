@@ -22,6 +22,16 @@ var room = "Camping-Car";
 var channel_id = 901544;
 var api_key = 'Z996IH7IT3K2DHQ2';
 
+
+//============================================== Test Atelier JL =======================================================//
+var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
+var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
+var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
+var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
+var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
+var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
+
+
 //================================================================================//
 
 
@@ -39,23 +49,45 @@ var MinutesWorking;
 
 var data;
 
-$.ajax({
-		type: "GET",
-		url: '//api.iotguru.live/device/find/rxCNbrHrLfzxwd2AJ8sR6g',
-		dataType: "json",
-		beforeSend: function (xhr) {
-				var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
-				if (accessToken) {
-						xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-				}
+
+function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+	return $.ajax({
+            type: "GET",
+            url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+            dataType: "json",
+            success: function (data)
+                        {
+                           processData(target, titleText, xAxisText, yAxisText, granulation, data);
+                        }
+	});
+}
+
+
+//==================================================== deviceFind ======================================================//
+
+
+function deviceFind(deviceId) {
+
+	$.ajax({
+type: "GET",
+url: '//api.iotguru.live/device/find/' + deviceId,
+dataType: "json",
+beforeSend: function (xhr) {
+			var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
+			if (accessToken) {
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+			}
 		},
-		success: function (data) {
-				deviceFindResponse(data);
+success: function (data) {
+			deviceFindResponse(data);
 		},
-		error: function (xhr) {
-				deviceFindError(xhr);
+error: function (xhr) {
+			deviceFindError(xhr);
 		}
-});
+	});
+}
+
+
 
 function deviceFindError(xhr) {
 	TexteTitre = 'Error IoTGuru';
@@ -64,12 +96,11 @@ function deviceFindError(xhr) {
 
 function deviceFindResponse(data) {
 
-// $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/5/last.json?api_key=' + api_key, function(data) {
 	TexteTitre += site;
 	TexteTitre += TexteTitre1;
-	TexteTitre += room;
+	TexteTitre += data.name;
 	TexteTitre += TexteTitre2;
-	TexteTitre += fluentDuration(device.lastCheck);
+	TexteTitre += String(data.lastCheck);
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
@@ -142,6 +173,11 @@ function deviceFindResponse(data) {
 
         return message.join('');
     }
+    
+$(document).ready(function () {
+	deviceFind(DeviceShortId);
+}
+
 </script>
 </div>
 </body>
