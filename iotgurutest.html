@@ -72,12 +72,12 @@ function deviceFind(deviceId) {
 type: "GET",
 url: '//api.iotguru.live/device/find/' + deviceId,
 dataType: "json",
-beforeSend: function (xhr) {
+/*beforeSend: function (xhr) {
 			var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
 			if (accessToken) {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 			}
-		},
+},*/
 success: function (data) {
 			deviceFindResponse(data);
 		},
