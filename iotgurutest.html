@@ -70,7 +70,7 @@ function deviceFind(deviceId) {
 
 	$.ajax({
 type: "GET",
-url: '//api.iotguru.live/device/find/' + deviceId,
+url: '//api.iotguru.live/node/find/' + deviceId,
 dataType: "json",
 	beforeSend: function (xhr) {
 			var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
@@ -183,7 +183,7 @@ TexteTitre += data.deviceId;
     }
     
 $(document).ready(function () {
-	deviceFind(DeviceShortId);
+	deviceFind(DHT22NodeShortId);
 });
 
 </script>
