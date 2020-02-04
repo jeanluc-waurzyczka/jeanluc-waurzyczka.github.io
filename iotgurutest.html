@@ -99,8 +99,12 @@ function deviceFindResponse(data) {
 	TexteTitre += site;
 	TexteTitre += TexteTitre1;
 	TexteTitre += data.description;
+	TexteTitre += " devID: ";
 TexteTitre += data.deviceId;
+
+	TexteTitre += " userId: ";
 	TexteTitre += data.userId;
+	TexteTitre += "alertDelay";
 	TexteTitre += data.alertDelay;
 	TexteTitre += TexteTitre2;
 	TexteTitre += data.lastCheck;
