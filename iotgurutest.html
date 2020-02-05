@@ -67,10 +67,11 @@ function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, gr
 
 
 function deviceFind(deviceId) {
+/*
 1, /credential/refreshToken/{email}/{password} -> the result is a new refreshToken
 2, /credential/accessToken/{refreshToken} -> the result is a new accessToken
 3, /credential/checkToken -> check accessToken validity sent in header
-
+*/
 	$.ajax({
 type: "GET",
 url: '//api.iotguru.live/device/find/' + deviceId,
