@@ -289,6 +289,8 @@ function credentialRefreshToken(successCallback, errorCallback) {
 	dataType: "text",
 	success: function (data) {
 			if (typeof successCallback === "function") {
+				Cookies.set('refreshToken', data);
+				credentialAccessToken (false,false);
 				successCallback(data);
 			} else {
 				credentialRefreshTokenResponse(data);
@@ -306,8 +308,8 @@ function credentialRefreshToken(successCallback, errorCallback) {
 
 
 function credentialRefreshTokenResponse(data) {
-	Cookies.set('refreshToken', data);
-	credentialAccessToken (false,false);
+//	Cookies.set('refreshToken', data);
+//	credentialAccessToken (false,false);
 }
 
 function credentialRefreshTokenError(xhr) {
