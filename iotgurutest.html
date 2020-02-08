@@ -73,7 +73,7 @@ function deviceFind(deviceId) {
 3, /credential/checkToken -> check accessToken validity sent in header
 */
 
-credentialRefreshToken(function credentialAccessToken (false,false), false);
+credentialRefreshToken(false, false);
 //credentialAccessToken (false,false);
 
 	$.ajax({
@@ -308,8 +308,8 @@ function credentialRefreshToken(successCallback, errorCallback) {
 
 
 function credentialRefreshTokenResponse(data) {
-//	Cookies.set('refreshToken', data);
-//	credentialAccessToken (false,false);
+	Cookies.set('refreshToken', data);
+	credentialAccessToken (false,false);
 }
 
 function credentialRefreshTokenError(xhr) {
