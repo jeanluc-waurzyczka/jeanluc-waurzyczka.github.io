@@ -230,7 +230,7 @@ function credentialAccessTokenResponse(data) {
 
 function credentialAccessTokenError(xhr) {
 	alert('Cannot obtain access token, force logout...');
-	window.location = '/logout';
+//	window.location = '/logout';
 }
 
 
@@ -273,7 +273,7 @@ function credentialCheckTokenError(xhr) {
 	Cookies.remove('userId');
 
 	console.log('Cannot obtain check token, redirect to dashboard...');
-	window.location = '/';
+//	window.location = '/';
 }
 
 
