@@ -66,8 +66,6 @@ function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, gr
 
 
 function deviceFind(deviceId) {
-
-alert ('test alert');
 	$.ajax({
 type: "GET",
 url: '//api.iotguru.live/device/find/' + deviceId,
@@ -221,8 +219,8 @@ function credentialAccessTokenResponse(data) {
 }
 
 function credentialAccessTokenError(xhr) {
-	alert('Cannot obtain access token, force logout...');
-//	window.location = '/logout';
+	Cookies.remove('accessToken');
+	alert('Cannot obtain access token, contact Admin.');
 }
 
 
@@ -261,11 +259,10 @@ function credentialCheckTokenResponse(data) {
 }
 
 function credentialCheckTokenError(xhr) {
+	Cookies.remove('refreshToken');
 	Cookies.remove('accessToken');
 	Cookies.remove('userId');
-
-	console.log('Cannot obtain check token, redirect to dashboard...');
-//	window.location = '/';
+	alert('Cannot obtain check token, contact Admin.');
 }
 
 
@@ -281,8 +278,6 @@ function credentialRefreshToken(successCallback, errorCallback) {
 	dataType: "text",
 	success: function (data) {
 			if (typeof successCallback === "function") {
-//				Cookies.set('refreshToken', data);
-//				credentialAccessToken (false,false);
 				successCallback(data);
 			} else {
 				credentialRefreshTokenResponse(data);
@@ -301,12 +296,11 @@ function credentialRefreshToken(successCallback, errorCallback) {
 
 function credentialRefreshTokenResponse(data) {
 	Cookies.set('refreshToken', data);
-	credentialAccessToken (false,false);
 }
 
 function credentialRefreshTokenError(xhr) {
-	alert('Cannot obtain access token, contact Jean-Luc Waurzyczka');
-//	window.location = '/logout';
+	Cookies.remove('refreshToken');
+	alert('Cannot obtain refresh token, contact Admin.');
 }
 
 
@@ -319,7 +313,7 @@ $(document).ready(function () {
 3, /credential/checkToken -> check accessToken validity sent in header
 */
 
-credentialRefreshToken(false, false);
+//credentialRefreshToken(false, false);
 //credentialAccessToken (false,false);
 	deviceFind(DeviceShortId);
 });
