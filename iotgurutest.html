@@ -31,7 +31,6 @@ var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
 var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
 var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 
-
 //================================================================================//
 
 
@@ -67,14 +66,7 @@ function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, gr
 
 
 function deviceFind(deviceId) {
-/*
-1, /credential/refreshToken/{email}/{password} -> the result is a new refreshToken
-2, /credential/accessToken/{refreshToken} -> the result is a new accessToken
-3, /credential/checkToken -> check accessToken validity sent in header
-*/
 
-credentialRefreshToken(false, false);
-//credentialAccessToken (false,false);
 
 	$.ajax({
 type: "GET",
@@ -321,6 +313,14 @@ function credentialRefreshTokenError(xhr) {
 
     
 $(document).ready(function () {
+	/*
+1, /credential/refreshToken/{email}/{password} -> the result is a new refreshToken
+2, /credential/accessToken/{refreshToken} -> the result is a new accessToken
+3, /credential/checkToken -> check accessToken validity sent in header
+*/
+
+credentialRefreshToken(false, false);
+//credentialAccessToken (false,false);
 	deviceFind(DeviceShortId);
 });
 
