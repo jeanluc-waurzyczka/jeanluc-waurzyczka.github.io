@@ -92,6 +92,8 @@ var LastUpdate = (ActualTime/1000) - data.lastCheck;
 	TexteTitre += Date.now();
 	
 	TexteTitre += ' - ';
+		TexteTitre += fluentDuration (data.lastCheck);
+	TexteTitre += ' - ';
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
