@@ -16,7 +16,7 @@ a { text-decoration:none;}
 <script type="text/javascript">
 
 
-//============================================== Test Atelier JL =======================================================//
+//======================================== Test Atelier JL ===========================================//
 var DevicePage = 'quesnoy-sur-deule-atelier-jl';
 var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
 var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
@@ -24,8 +24,7 @@ var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
 var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
 var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
 var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
-
-//================================================================================//
+//===================================================================================================//
 
 
 var TexteTitre = "<span style=\"font-size:1.875em;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
@@ -102,26 +101,26 @@ function deviceFindResponse(data) {
             message.push(days);
             message.push(' ');
             if (days > 1) {
-                message.push('days');
+                message.push('jours');
             } else {
-                message.push('day');
+                message.push('jour');
             }
             message.push(' ');
             message.push(hours);
             message.push(' ');
             if (hours > 1) {
-                message.push('hours');
+                message.push('heures');
             } else {
-                message.push('hour');
+                message.push('heure');
             }
         } else if (hours > 0) {
             message.push(' ');
             message.push(hours);
             message.push(' ');
             if (hours > 1) {
-                message.push('hours');
+                message.push('heures');
             } else {
-                message.push('hour');
+                message.push('heure');
             }
             message.push(' ');
             message.push(minutes);
@@ -144,9 +143,9 @@ function deviceFindResponse(data) {
             message.push(seconds);
             message.push(' ');
             if (seconds > 1) {
-                message.push('seconds');
+                message.push('secondes');
             } else {
-                message.push('second');
+                message.push('seconde');
             }
         }
 
