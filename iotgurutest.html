@@ -82,7 +82,11 @@ function deviceFindResponse(data) {
 	TexteTitre += data.lastCheck;
 	var d = new Date();
 	var ActualTime= d.getTime();
-	var LastUpdate = ActualTime - data.lastCheck;
+	TexteTitre += ' - ';
+	TexteTitre += ActualTime;
+	
+	TexteTitre += ' - ';
+var LastUpdate = (ActualTime/1000) - data.lastCheck;
 	TexteTitre += fluentDuration (LastUpdate);
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
