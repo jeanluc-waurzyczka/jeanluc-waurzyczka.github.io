@@ -45,10 +45,10 @@ var data;
 //==================================================== deviceFind ======================================================//
 
 
-function deviceFind(deviceId) {
+function deviceFind() {
 	$.ajax({
 type: "GET",
-url: '//api.iotguru.live/device/find/' + deviceId,
+url: '//api.iotguru.live/device/find/' + DeviceShortId,
 dataType: "json",
 	beforeSend: function (xhr) {
 			var accessToken =  Cookies.get('accessToken');
@@ -162,9 +162,9 @@ $(document).ready(function () {
 3, /credential/checkToken -> check accessToken validity sent in header
 */
 
-//credentialRefreshToken(false, false);
-//credentialAccessToken (false,false);
-	deviceFind(DeviceShortId);
+
+	deviceFind();
+	setInterval(deviceFind, 60000);	// Refresh every 60seconds
 });
 
 </script>
