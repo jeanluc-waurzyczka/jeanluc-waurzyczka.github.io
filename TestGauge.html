@@ -92,6 +92,7 @@ function lastValuesListResponse(data) {
 //									$('<td>').text(n[1])
 //									).appendTo('#lastValueList tbody');
 					displayData(n[1]);
+						document.getElementById("when_div").innerHTML = fluentDuration(n[0]);
 			});
 	}
 }
@@ -103,6 +104,73 @@ function lastValuesListError(xhr) {
 					).appendTo('#lastValueList tbody');
 }
 
+    function fluentDuration(timestamp) {
+        if (!timestamp) {
+            return 'n/a';
+        }
+
+        var totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+        var days = ~~(totalSeconds / 86400);
+        var hours = ~~((totalSeconds % 86400) / 3600);
+        var minutes = ~~((totalSeconds % 3600) / 60);
+        var seconds = ~~(totalSeconds % 60);
+
+        var message = [];
+        if (days > 0) {
+            message.push(' ');
+            message.push(days);
+            message.push(' ');
+            if (days > 1) {
+                message.push('jours');
+            } else {
+                message.push('jour');
+            }
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('heures');
+            } else {
+                message.push('heure');
+            }
+        } else if (hours > 0) {
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('heures');
+            } else {
+                message.push('heure');
+            }
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+        } else {
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+            message.push(' ');
+            message.push(seconds);
+            message.push(' ');
+            if (seconds > 1) {
+                message.push('secondes');
+            } else {
+                message.push('seconde');
+            }
+        }
+
+        return message.join('');
+    }
 // initialize the chart
 function initChart()
 {
@@ -116,6 +184,7 @@ function initChart()
 	loadData();
 }
 
+
 </script>
 
 </head>
@@ -123,7 +192,8 @@ function initChart()
 <body>
 <div id="container">
 <div id="inner">
-<div id="gauge_div"></div> Test Gauge2
+<div id="gauge_div"></div>
+<div id="when_div"> Test Gauge3</div>
 </div>
 </div>
 </body>
