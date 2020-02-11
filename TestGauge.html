@@ -29,6 +29,7 @@ var chart, charts, data;
 // load the google gauge visualization
 google.load('visualization', '1', {packages:['gauge']});
 google.setOnLoadCallback(initChart);
+
 // display the data
 function displayData(point)
 {
@@ -46,27 +47,27 @@ function loadData()
 	// get the data from IoTGuru
 
 	$.ajax(
-	{
-		type: "GET",
-		url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
-		dataType: "json",
-		beforeSend: function (xhr)
-		{
-			var accessToken = Cookies.get('accessToken');
-			if (accessToken)
-			{
-				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+{
+			type: "GET",
+			url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
+			dataType: "json",
+			beforeSend: function (xhr)
+{
+					var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
+					if (accessToken)
+{
+							xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+					}
+			},
+			success: function (data)
+{
+//						displayData(n[1]);
+					lastValuesListResponse(data);
+			},
+			error: function (xhr)
+{
+					lastValuesListError(xhr);
 			}
-		},
-		success: function (data)
-		{
-			//						displayData(n[1]);
-			lastValuesListResponse(data);
-		},
-		error: function (xhr)
-		{
-			lastValuesListError(xhr);
-		}
 	});
 }
 
@@ -75,31 +76,31 @@ function loadData()
 
 function lastValuesListResponse(data) {
 	if (data === undefined || data.length === 0) {
-		$("#lastValueList tbody").html('');
-		$('<tr>').append(
-		$('<td colspan="2">').text('you have no measurements yet')
-		).appendTo('#lastValueList tbody');
+			$("#lastValueList tbody").html('');
+			$('<tr>').append(
+							$('<td colspan="2">').text('you have no measurements yet')
+							).appendTo('#lastValueList tbody');
 	} else {
-		//			$("#lastValueList tbody").html('');
-		//			data.sort(function (n1, n2) {
-		//					return n1[0] > n2[0]
-		//			});
-		$.each(data, function (idx, n) {
+//			$("#lastValueList tbody").html('');
+//			data.sort(function (n1, n2) {
+//					return n1[0] > n2[0]
+//			});
+			$.each(data, function (idx, n) {
 
-			//					$('<tr>').append(
-			//									$('<td>').text(fluentDuration(n[0])),
-			//									$('<td>').text(n[1])
-			//									).appendTo('#lastValueList tbody');
-			displayData(n[1]);
-		});
+//					$('<tr>').append(
+//									$('<td>').text(fluentDuration(n[0])),
+//									$('<td>').text(n[1])
+//									).appendTo('#lastValueList tbody');
+					displayData(n[1]);
+			});
 	}
 }
 
 function lastValuesListError(xhr) {
 	$("#lastValueList tbody").html('');
 	$('<tr>').append(
-	$('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
-	).appendTo('#lastValueList tbody');
+					$('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
+					).appendTo('#lastValueList tbody');
 }
 
 // initialize the chart
@@ -122,8 +123,7 @@ function initChart()
 <body>
 <div id="container">
 <div id="inner">
-<div id="gauge_div"></div>
-<br>Test texte
+<div id="gauge_div"></div> Test Gauge2
 </div>
 </div>
 </body>
