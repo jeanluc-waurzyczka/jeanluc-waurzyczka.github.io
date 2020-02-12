@@ -100,10 +100,10 @@ function lastValuesListResponse(data) {
 //									).appendTo('#lastValueList tbody');
 					displayData(n[1]);
 					var Texte = [];
-					Texte.push ('<a>');
-					Texte.push ('Température<br>');
-					Texte.push (fluentDuration(n[0]));
-					Texte.push ('</a>');
+					Texte = ('<a>');
+					Texte += ('Température<br>');
+					Texte += (fluentDuration(n[0]));
+					Texte += ('</a>');
 						document.getElementById("when_div").innerHTML = Texte;
 			});
 	}
