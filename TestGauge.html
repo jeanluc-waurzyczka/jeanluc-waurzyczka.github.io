@@ -99,7 +99,12 @@ function lastValuesListResponse(data) {
 //									$('<td>').text(n[1])
 //									).appendTo('#lastValueList tbody');
 					displayData(n[1]);
-						document.getElementById("when_div").innerHTML = fluentDuration(n[0]);
+					var Texte = [];
+					Texte.push ('<a>');
+					Texte.push ('Température<br>');
+					Texte.push (fluentDuration(n[0]));
+					Texte.push ('</a>');
+						document.getElementById("when_div").innerHTML = Texte;
 			});
 	}
 }
