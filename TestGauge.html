@@ -101,7 +101,7 @@ function lastValuesListResponse(data) {
 					displayData(n[1]);
 					var Texte = [];
 					Texte = ('<p class="a"><span style=\"font-size:1.125em; color:#040457\">');
-					Texte += ('Température</span><br><span style=\"font-size:0.75em;\"> { ');
+					Texte += ('Température</span><br><span style=\"font-size:0.75em; color:#040457\"> { ');
 					Texte += (fluentDuration(n[0]));
 					Texte += (' }</span></p>');
 						document.getElementById("when_div").innerHTML = Texte;
@@ -205,7 +205,7 @@ function initChart()
 <div id="container">
 <div id="inner">
 <div id="gauge_div"></div>
-<div id="when_div"> Test Gauge3</div>
+<div id="when_div"></div>
 </div>
 </div>
 </body>
