@@ -1,6 +1,6 @@
 <html>
 
-	<style type="text/css">
+<style type="text/css">
 { background-color: white; height: 100%; margin: 0; padding: 0;}
 p.a { text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;   text-align: center;}
 #inner { vertical-align: middle; horizontal-align: middle; display: table-cell;}
@@ -20,9 +20,6 @@ body
 
 
 //=============================== TGaugeCampingCar ====================================//
-var channel_id = 901544;
-var api_key = 'Z996IH7IT3K2DHQ2';
-
 
 // name of the gauge
 var gauge_name = '°C';
@@ -32,6 +29,8 @@ var yellowTo = 12;
 
 // global variables
 var chart, charts, data;
+var TexteDuration;
+var totalSeconds;
 
 // load the google gauge visualization
 google.load('visualization', '1', {packages:['gauge']});
@@ -54,27 +53,27 @@ function loadData()
 	// get the data from IoTGuru
 
 	$.ajax(
-{
-			type: "GET",
-			url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
-			dataType: "json",
-			beforeSend: function (xhr)
-{
-					var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
-					if (accessToken)
-{
-							xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-					}
-			},
-			success: function (data)
-{
-//						displayData(n[1]);
-					lastValuesListResponse(data);
-			},
-			error: function (xhr)
-{
-					lastValuesListError(xhr);
+	{
+type: "GET",
+url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
+dataType: "json",
+beforeSend: function (xhr)
+		{
+			var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
+			if (accessToken)
+			{
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 			}
+		},
+		success: function (data)
+		{
+			//						displayData(n[1]);
+			lastValuesListResponse(data);
+		},
+		error: function (xhr)
+		{
+			lastValuesListError(xhr);
+		}
 	});
 }
 
@@ -83,28 +82,24 @@ function loadData()
 
 function lastValuesListResponse(data) {
 	if (data === undefined || data.length === 0) {
-			$("#lastValueList tbody").html('');
-			$('<tr>').append(
-							$('<td colspan="2">').text('you have no measurements yet')
-							).appendTo('#lastValueList tbody');
+		$("#lastValueList tbody").html('');
+		$('<tr>').append(
+		$('<td colspan="2">').text('No measurements yet')
+		).appendTo('#lastValueList tbody');
 	} else {
-//			$("#lastValueList tbody").html('');
-//			data.sort(function (n1, n2) {
-//					return n1[0] > n2[0]
-//			});
-			$.each(data, function (idx, n) {
-
-//					$('<tr>').append(
-//									$('<td>').text(fluentDuration(n[0])),
-//									$('<td>').text(n[1])
-//									).appendTo('#lastValueList tbody');
-					displayData(n[1]);
-					var Texte = [];
-					Texte = ('<p class="a"><span style=\"font-size:1.125em; color:#05109B\">');
-					Texte += ('Température</span><br><span style=\"font-size:0.75em; color:#05109B\"> { ');
-					Texte += (fluentDuration(n[0]));
-					Texte += (' }</span></p>');
-						document.getElementById("when_div").innerHTML = Texte;
+		$.each(data, function (idx, n) {
+			displayData(n[1]);
+			var Texte = [];
+			Texte = ('<p class="a"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>');
+			TexteDuration = fluentDuration (n[0]);
+			if (totalSeconds > 900) {
+				Texte +=  '<span style=\"font-size:0.75em; color:red\"> { '';
+				if (totalSeconds > 3600) {Texte +=  '<b>';}
+			} else if (totalSeconds > 300) {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { <b>';} 
+				else {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
+				Texte += TexteDuration;
+				Texte += (' }</span></p>');
+				document.getElementById("when_div").innerHTML = Texte;
 			});
 	}
 }
@@ -116,73 +111,73 @@ function lastValuesListError(xhr) {
 					).appendTo('#lastValueList tbody');
 }
 
-    function fluentDuration(timestamp) {
-        if (!timestamp) {
-            return 'n/a';
-        }
+function fluentDuration(timestamp) {
+	if (!timestamp) {
+		return 'n/a';
+	}
 
-        var totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
-        var days = ~~(totalSeconds / 86400);
-        var hours = ~~((totalSeconds % 86400) / 3600);
-        var minutes = ~~((totalSeconds % 3600) / 60);
-        var seconds = ~~(totalSeconds % 60);
+	totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+	var days = ~~(totalSeconds / 86400);
+	var hours = ~~((totalSeconds % 86400) / 3600);
+	var minutes = ~~((totalSeconds % 3600) / 60);
+	var seconds = ~~(totalSeconds % 60);
 
-        var message = [];
-        if (days > 0) {
-            message.push(' ');
-            message.push(days);
-            message.push(' ');
-            if (days > 1) {
-                message.push('jours');
-            } else {
-                message.push('jour');
-            }
-            message.push(' ');
-            message.push(hours);
-            message.push(' ');
-            if (hours > 1) {
-                message.push('heures');
-            } else {
-                message.push('heure');
-            }
-        } else if (hours > 0) {
-            message.push(' ');
-            message.push(hours);
-            message.push(' ');
-            if (hours > 1) {
-                message.push('heures');
-            } else {
-                message.push('heure');
-            }
-            message.push(' ');
-            message.push(minutes);
-            message.push(' ');
-            if (minutes > 1) {
-                message.push('minutes');
-            } else {
-                message.push('minute');
-            }
-        } else {
-            message.push(' ');
-            message.push(minutes);
-            message.push(' ');
-            if (minutes > 1) {
-                message.push('minutes');
-            } else {
-                message.push('minute');
-            }
-            message.push(' ');
-            message.push(seconds);
-            message.push(' ');
-            if (seconds > 1) {
-                message.push('secondes');
-            } else {
-                message.push('seconde');
-            }
-        }
+	var message = [];
+	if (days > 0) {
+		message.push(' ');
+		message.push(days);
+		message.push(' ');
+		if (days > 1) {
+			message.push('jours');
+		} else {
+			message.push('jour');
+		}
+		message.push(' ');
+		message.push(hours);
+		message.push(' ');
+		if (hours > 1) {
+			message.push('heures');
+		} else {
+			message.push('heure');
+		}
+	} else if (hours > 0) {
+		message.push(' ');
+		message.push(hours);
+		message.push(' ');
+		if (hours > 1) {
+			message.push('heures');
+		} else {
+			message.push('heure');
+		}
+		message.push(' ');
+		message.push(minutes);
+		message.push(' ');
+		if (minutes > 1) {
+			message.push('minutes');
+		} else {
+			message.push('minute');
+		}
+	} else {
+		message.push(' ');
+		message.push(minutes);
+		message.push(' ');
+		if (minutes > 1) {
+			message.push('minutes');
+		} else {
+			message.push('minute');
+		}
+		message.push(' ');
+		message.push(seconds);
+		message.push(' ');
+		if (seconds > 1) {
+			message.push('secondes');
+		} else {
+			message.push('seconde');
+		}
+	}
 
-        return message.join('');
-    }
+	return message.join('');
+}
 // initialize the chart
 function initChart()
 {
