@@ -28,9 +28,9 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 
 
 var TexteTitre = "<span style=\"font-size:1.875em; color:#040457;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
-var TexteTitreRed = "<span style=\"font-size:1.875em;color:white\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 var TexteTitre1 = "/\"><strong>";
-var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
+var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;\"> { ";
+var TexteTitre2red = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
 var TexteTitre3 = ":";
 var TexteTitre4 = " }</a>";
 
@@ -71,16 +71,16 @@ function deviceFindError(xhr) {
 function deviceFindResponse(data) {
 
 	TexteDuration = fluentDuration (data.lastCheck);
-	if (totalSeconds > 90) {
-		TexteTitre = TexteTitreRed;
-		} else if (totalSeconds > 30) {
-			TexteTitre += '<b>';
-		}
 	TexteTitre += DevicePage;
 	TexteTitre += TexteTitre1;
 
 	TexteTitre += data.description;
-	TexteTitre += TexteTitre2;
+
+		if (totalSeconds > 90) {
+		TexteTitre += TexteTitre2Red;
+		} else if (totalSeconds > 30) {
+			TexteTitre += '<b>';
+			} else {	TexteTitre += TexteTitre2;}
 	TexteTitre += TexteDuration;
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
