@@ -54,24 +54,19 @@ function loadData()
 
 	$.ajax(
 	{
-type: "GET",
-url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
-dataType: "json",
-beforeSend: function (xhr)
-		{
-			var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
-			if (accessToken)
-			{
+		type: "GET",
+		url: '//api.iotguru.live/measurement/loadLastFloatValues/thlAxICXGNACIl9UZn1Ofg/temperature/1',
+		dataType: "json",
+		beforeSend: function (xhr) {
+			var accessToken =  Cookies.get('accessToken');
+			if (accessToken) {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 			}
 		},
-		success: function (data)
-		{
-			//						displayData(n[1]);
+		success: function (data) {
 			lastValuesListResponse(data);
 		},
-		error: function (xhr)
-		{
+		error: function (xhr) {
 			lastValuesListError(xhr);
 		}
 	});
@@ -103,8 +98,8 @@ function lastValuesListResponse(data) {
 function lastValuesListError(xhr) {
 	$("#lastValueList tbody").html('');
 	$('<tr>').append(
-					$('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
-					).appendTo('#lastValueList tbody');
+	$('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
+	).appendTo('#lastValueList tbody');
 }
 
 function fluentDuration(timestamp) {
