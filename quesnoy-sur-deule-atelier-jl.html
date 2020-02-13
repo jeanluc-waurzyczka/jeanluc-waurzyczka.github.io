@@ -9,7 +9,7 @@
 { background-color: white; height: 100%; margin: 0; padding: 0;}
 a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 a:link, a:visited {color: #05109B;}
-a:hover {color: red; transform: scale(1.1);}
+a:hover {color: red;}
 #chart-container { width: 100%; height: 55; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
 </style>
 
@@ -78,8 +78,11 @@ function deviceFindResponse(data) {
 
 	TexteTitre += data.description;
 
-		if (totalSeconds > 90) {
+		if (totalSeconds > 9) {
 		TexteTitre += TexteTitre2Red;
+			if (totalSeconds > 36) {
+				TexteTitre += '<b>';
+			}
 		} else if (totalSeconds > 30) {
 			TexteTitre += TexteTitre2;
 			TexteTitre += '<b>';
