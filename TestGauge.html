@@ -92,10 +92,10 @@ function lastValuesListResponse(data) {
 			var Texte = [];
 			Texte = ('<p class="a"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>');
 			TexteDuration = fluentDuration (n[0]);
-			if (totalSeconds > 900) {
+			if (totalSeconds > 90) {
 				Texte +=  '<span style=\"font-size:0.75em; color:red\"> { ';
-				if (totalSeconds > 3600) {Texte +=  '<b>';}
-			} else if (totalSeconds > 300) {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { <b>';} 
+				if (totalSeconds > 120) {Texte +=  '<b>';}
+			} else if (totalSeconds > 30) {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { <b>';} 
 				else {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
 				Texte += TexteDuration;
 				Texte += (' }</span></p>');
