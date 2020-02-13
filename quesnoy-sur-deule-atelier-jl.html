@@ -72,7 +72,9 @@ function deviceFindResponse(data) {
 	var TexteDuration = fluentDuration (data.lastCheck);
 	if (totalSeconds > 90) {
 		TexteTitre = TexteTitreRed;
-		} else if 
+		} else if (totalSeconds > 30) {
+			TexteTitre += '<b>';
+		}
 	TexteTitre += DevicePage;
 	TexteTitre += TexteTitre1;
 
