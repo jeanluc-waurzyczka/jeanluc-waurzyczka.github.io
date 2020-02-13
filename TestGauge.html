@@ -95,7 +95,7 @@ function lastValuesListResponse(data) {
 			if (totalSeconds > 90) {
 				Texte +=  '<span style=\"font-size:0.75em; color:red\"> { ';
 				if (totalSeconds > 120) {Texte +=  '<b>';}
-			} else if (totalSeconds > 30) {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { <b>';} 
+			} else if (totalSeconds > 30) {Texte += '<span style=\"font-size:0.75em; background:#FFF0F5; color:#05109B\"> { ';} 
 				else {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
 				Texte += TexteDuration;
 				Texte += (' }</span></p>');
