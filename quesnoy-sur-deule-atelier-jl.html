@@ -4,7 +4,7 @@
 </head>
 <body>
 <div id="chart-container">
-<p id="AffichageTitre" style="text-align:center; color:#040457;"></p>
+<p id="AffichageTitre" style="text-align:center;"></p>
 <style type="text/css">
 { background-color: white; height: 100%; margin: 0; padding: 0;}
 a { text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
@@ -27,8 +27,8 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 //===================================================================================================//
 
 
-var TexteTitre = "<span style=\"font-size:1.875em;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
-var TexteTitreRed = "<span style=\"font-size:1.875em;color:red\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+var TexteTitre = "<span style=\"font-size:1.875em; color:#040457;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+var TexteTitreRed = "<span style=\"font-size:1.875em;color:red;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 var TexteTitre1 = "/\"><strong>";
 var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;\"> { ";
 var TexteTitre3 = ":";
@@ -72,7 +72,7 @@ function deviceFindResponse(data) {
 	var TexteDuration = fluentDuration (data.lastCheck);
 	if (totalSeconds > 90) {
 		TexteTitre = TexteTitreRed;
-		}
+		} else if 
 	TexteTitre += DevicePage;
 	TexteTitre += TexteTitre1;
 
