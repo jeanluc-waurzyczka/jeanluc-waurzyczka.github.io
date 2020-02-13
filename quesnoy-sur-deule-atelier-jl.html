@@ -71,11 +71,11 @@ function deviceFindError(xhr) {
 function deviceFindResponse(data) {
 
 	TexteDuration = fluentDuration (data.lastCheck);
-	if (totalSeconds > 90) {
-		TexteTitre = TexteTitreRed;
-		} else if (totalSeconds > 30) {
-			TexteTitre += '<b>';
-		}
+//	if (totalSeconds > 90) {
+//		TexteTitre = TexteTitreRed;
+//		} else if (totalSeconds > 30) {
+//			TexteTitre += '<b>';
+//		}
 	TexteTitre += DevicePage;
 	TexteTitre += TexteTitre1;
 
