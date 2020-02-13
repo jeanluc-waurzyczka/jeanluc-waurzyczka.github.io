@@ -36,6 +36,7 @@ var TexteTitre4 = " }</a>";
 
 var date_last_update;
 var totalSeconds;
+var TexteDuration;
 var data;
 
 
@@ -69,7 +70,7 @@ function deviceFindError(xhr) {
 
 function deviceFindResponse(data) {
 
-	var TexteDuration = fluentDuration (data.lastCheck);
+	TexteDuration = fluentDuration (data.lastCheck);
 	if (totalSeconds > 90) {
 		TexteTitre = TexteTitreRed;
 		} else if (totalSeconds > 30) {
