@@ -28,23 +28,18 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 
 
 var TexteTitre = "<span style=\"font-size:1.875em;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+var TexteTitreRed = "<span style=\"font-size:1.875em;color:red\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 var TexteTitre1 = "/\"><strong>";
 var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;\"> { ";
 var TexteTitre3 = ":";
 var TexteTitre4 = " }</a>";
 
 var date_last_update;
-
-var MinutesTemp;
-
-var MinutesWorking;
-
+var totalSeconds;
 var data;
 
 
 //==================================================== deviceFind ======================================================//
-
-
 function deviceFind() {
 	$.ajax({
 type: "GET",
@@ -68,28 +63,34 @@ error: function (xhr) {
 
 
 function deviceFindError(xhr) {
-	TexteTitre = 'Error IoTGuru';
+	TexteTitre = 'Error IoTGuru: Device not found';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }
 
 function deviceFindResponse(data) {
 
+	var TexteDuration = fluentDuration (data.lastCheck);
+	if (totalSeconds > 90) {
+		TexteTitre = TexteTitreRed;
+		}
 	TexteTitre += DevicePage;
 	TexteTitre += TexteTitre1;
+
 	TexteTitre += data.description;
 	TexteTitre += TexteTitre2;
-	TexteTitre += fluentDuration (data.lastCheck);
+	TexteTitre += TexteDuration;
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	;
 
     function fluentDuration(timestamp) {
+		totalSeconds = 86400;
         if (!timestamp) {
             return 'n/a';
         }
 
-        var totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+        totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
         var days = ~~(totalSeconds / 86400);
         var hours = ~~((totalSeconds % 86400) / 3600);
         var minutes = ~~((totalSeconds % 3600) / 60);
