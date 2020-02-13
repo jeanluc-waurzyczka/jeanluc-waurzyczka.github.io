@@ -30,7 +30,7 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 var TexteTitre = "<span style=\"font-size:1.875em; color:#040457;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 var TexteTitre1 = "/\"><strong>";
 var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;\"> { ";
-var TexteTitre2red = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
+var TexteTitre2Red = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
 var TexteTitre3 = ":";
 var TexteTitre4 = " }</a>";
 
@@ -78,9 +78,12 @@ function deviceFindResponse(data) {
 
 		if (totalSeconds > 90) {
 		TexteTitre += TexteTitre2Red;
-		} else if (totalSeconds > 30) {
+		} else {
+		if (totalSeconds > 30) {
+			TexteTitre += TexteTitre2;
 			TexteTitre += '<b>';
-			} else {	TexteTitre += TexteTitre2;}
+			} 
+			else {TexteTitre += TexteTitre2;}
 	TexteTitre += TexteDuration;
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
