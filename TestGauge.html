@@ -92,15 +92,14 @@ function lastValuesListResponse(data) {
 			var Texte = [];
 			Texte = ('<p class="a"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>');
 			TexteDuration = fluentDuration (n[0]);
-			if (totalSeconds > 90) {
-				Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';
-				if (totalSeconds > 120) {Texte +=  '<b>';}
-			} else if (totalSeconds > 30) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> { ';} 
-				else {Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
-				Texte += TexteDuration;
-				Texte += (' }</span></p>');
-				document.getElementById("when_div").innerHTML = Texte;
-			});
+			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:##ff598f; color:05109B\"> { ';}
+			if (totalSeconds >= 90 && <120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';}
+			if (totalSeconds >= 30 && <90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> { ';}
+			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
+			Texte += TexteDuration;
+			Texte += (' }</span></p>');
+			document.getElementById("when_div").innerHTML = Texte;
+		});
 	}
 }
 
