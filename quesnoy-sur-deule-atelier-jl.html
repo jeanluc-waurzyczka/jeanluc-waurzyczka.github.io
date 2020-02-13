@@ -78,12 +78,12 @@ function deviceFindResponse(data) {
 
 	TexteTitre += data.description;
 
-		if (totalSeconds > 9) {
+		if (totalSeconds > 900) {
 		TexteTitre += TexteTitre2Red;
-			if (totalSeconds > 36) {
+			if (totalSeconds > 3600) {
 				TexteTitre += '<b>';
 			}
-		} else if (totalSeconds > 30) {
+		} else if (totalSeconds > 300) {
 			TexteTitre += TexteTitre2;
 			TexteTitre += '<b>';
 			} 
