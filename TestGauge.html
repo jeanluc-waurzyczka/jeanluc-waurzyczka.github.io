@@ -86,12 +86,13 @@ function lastValuesListResponse(data) {
 			var Texte = [];
 			Texte = '<p class="b"><br></p><p class="a"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
 			TexteDuration = fluentDuration (n[0]);
-			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> { ';}
-			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';}
-			if (totalSeconds >= 30 && totalSeconds < 90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> { ';}
-			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
+			Texte += '<span style=\"font-size:0.75em;color:05109B\"> { </span>';
+			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">';}
+			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\">';}
+			if (totalSeconds >= 30 && totalSeconds < 90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\">';}
+			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\">';}
 			Texte += TexteDuration;
-			Texte += (' }</span></p>');
+			Texte += '</span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\"> } </span>';
 			document.getElementById("when_div").innerHTML = Texte;
 		});
 	}
