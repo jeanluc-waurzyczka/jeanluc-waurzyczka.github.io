@@ -10,7 +10,7 @@ p.a { text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetic
 body
 #container { height: 100%; width: 100%; display: table; }
 #inner { vertical-align: middle; horizontal-align: middle; display: table-cell;}
-#gauge_div { width: 180px; heigh: 190px; margin: 0 auto; }
+#gauge_div { width: 180px; heigh: 180px; margin: 0 auto; }
 </style>
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
@@ -83,7 +83,7 @@ function lastValuesListResponse(data) {
 		$.each(data, function (idx, n) {
 			displayData(n[1]);
 			var Texte = [];
-			Texte = '<p class="a"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
+			Texte = '<p class="a"><br><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
 			TexteDuration = fluentDuration (n[0]);
 			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> { ';}
 			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';}
