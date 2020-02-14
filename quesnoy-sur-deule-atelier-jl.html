@@ -9,7 +9,7 @@
 { background-color: white; height: 100%; margin: 0; padding: 0;}
 a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 a:link, a:visited {color: #05109B;}
-a:hover {color: red;}
+a:hover {text-decoration: underline;}
 #chart-container { width: 100%; height: 55; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
 </style>
 
@@ -77,17 +77,13 @@ function deviceFindResponse(data) {
 	TexteTitre += '/\"><strong>';
 
 	TexteTitre += data.description;
-
-		if (totalSeconds > 900) {
-		TexteTitre += TexteTitre2Red;
-			if (totalSeconds > 3600) {
-				TexteTitre += '<b>';
-			}
-		} else if (totalSeconds > 300) {
-			TexteTitre += TexteTitre2;
-			TexteTitre += '<b>';
-			} 
-			else {TexteTitre += TexteTitre2;}
+			TexteDuration = fluentDuration (n[0]);
+			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> { ';}
+			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';}
+			if (totalSeconds >= 30 && totalSeconds < 90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> { ';}
+			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
+			Texte += TexteDuration;
+	TexteTitre += TexteTitre2;
 	TexteTitre += TexteDuration;
 	TexteTitre += TexteTitre4;
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
