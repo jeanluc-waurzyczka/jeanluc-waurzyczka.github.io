@@ -7,11 +7,11 @@
 <p id="AffichageTitre" style="text-align:center;"></p>
 <style type="text/css">
 { background-color: white; height: 100%; margin: 0; padding: 0;}
-a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
-a:link, a:visited {color: #05109B;}
-a:hover {text-decoration: underline;}
-b { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
-b:hover {text-decoration: none;}
+p.a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
+p.a:link, a:visited {color: #05109B;}
+p.a:hover {text-decoration: underline;}
+p.b { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
+p.b:hover {text-decoration: none;}
 #chart-container { width: 100%; height: 55; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
 </style>
 
@@ -86,7 +86,7 @@ function deviceFindResponse(data) {
 	if (totalSeconds >= 30 && totalSeconds < 90) {TexteTitre += ' background-color:#FFF0F5;\">';}
 	if (totalSeconds < 30){TexteTitre += ' background-color:white;\">';}
 	TexteTitre += TexteDuration;
-	TexteTitre += ' </span><span  style=\"font-size:1.125em; color:#05109B; background-color:transparent;\"> }</span></p>';
+	TexteTitre += ' </span><span  style=\"font-size:1.125em; color:#05109B; background-color:transparent;\">&nbsp;}</span></p>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	
