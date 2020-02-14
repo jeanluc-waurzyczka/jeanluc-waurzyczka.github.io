@@ -7,7 +7,7 @@
 <p id="AffichageTitre" style="text-align:center;"></p>
 <style type="text/css">
 { background-color: white; height: 100%; margin: 0; padding: 0;}
-titre_a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
+p.a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 titre_a:link, titre_a:visited {color: #05109B;}
 titre_a:hover {text-decoration: underline;}
 titre_b { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
@@ -75,7 +75,7 @@ function deviceFindError(xhr) {
 function deviceFindResponse(data) {
 
 	TexteDuration = fluentDuration (data.lastCheck);
-	TexteTitre = "<p class=\"titre_a\"><span style=\"font-size:1.875em; color:#05109B;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+	TexteTitre = "<p class=\"a\"><span style=\"font-size:1.875em; color:#05109B;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 	TexteTitre += DevicePage;
 	TexteTitre += '/\"><strong>';
 
