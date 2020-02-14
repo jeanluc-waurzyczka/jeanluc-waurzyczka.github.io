@@ -8,7 +8,7 @@
 <style type="text/css">
 { background-color: white; height: 100%; margin: 0; padding: 0;}
 titre_a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
-titre_a:link, a:visited {color: #05109B;}
+titre_a:link, titre_a:visited {color: #05109B;}
 titre_a:hover {text-decoration: underline;}
 titre_b { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 titre_b:hover {text-decoration: none;}
@@ -86,7 +86,7 @@ function deviceFindResponse(data) {
 	if (totalSeconds >= 30 && totalSeconds < 90) {TexteTitre += ' background-color:#FFF0F5;\">';}
 	if (totalSeconds < 30){TexteTitre += ' background-color:white;\">';}
 	TexteTitre += TexteDuration;
-	TexteTitre += ' </span><span  style=\"background-color:transparent;\">&nbsp;}</span></p>';
+	TexteTitre += ' </span><span  style=\"background-color:transparent;\"> }</span></p>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	
