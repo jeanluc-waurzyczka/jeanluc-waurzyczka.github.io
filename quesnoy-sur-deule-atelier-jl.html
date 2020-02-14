@@ -31,10 +31,10 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 
 var TexteTitre = "<span style=\"font-size:1.875em; color:#05109B;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 
-var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;color:#05109B;\"> { ";
-var TexteTitre2Red = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
-var TexteTitre3 = ":";
-var TexteTitre4 = " }</a>";
+//var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;color:#05109B;\"> { ";
+//var TexteTitre2Red = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
+//var TexteTitre3 = ":";
+//var TexteTitre4 = " }</a>";
 
 var date_last_update;
 var totalSeconds;
@@ -77,15 +77,14 @@ function deviceFindResponse(data) {
 	TexteTitre += '/\"><strong>';
 
 	TexteTitre += data.description;
-			TexteDuration = fluentDuration (n[0]);
-			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> { ';}
-			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';}
-			if (totalSeconds >= 30 && totalSeconds < 90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> { ';}
-			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
-			Texte += TexteDuration;
-	TexteTitre += TexteTitre2;
+			if (totalSeconds >= 120) {TexteTitre +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> { ';}
+			if (totalSeconds >= 90 && totalSeconds < 120) {TexteTitre +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> { ';}
+			if (totalSeconds >= 30 && totalSeconds < 90) {TexteTitre += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> { ';}
+			if (totalSeconds < 30){TexteTitre += '<span style=\"font-size:0.75em; color:#05109B\"> { ';}
+			TexteTitre += TexteDuration;
+	TexteTitre += "</strong></a> </span><a><span style=\"font-size:1.125em;color:#05109B;\"> { ";
 	TexteTitre += TexteDuration;
-	TexteTitre += TexteTitre4;
+	TexteTitre += " }</a>";
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	
