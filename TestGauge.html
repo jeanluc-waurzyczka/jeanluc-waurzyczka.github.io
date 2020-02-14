@@ -84,7 +84,7 @@ function lastValuesListResponse(data) {
 		$.each(data, function (idx, n) {
 			displayData(n[1]);
 			var Texte = [];
-			Texte = '<p class="b"><br></p><p class="a"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
+			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
 			TexteDuration = fluentDuration (n[0]);
 			Texte += '<span style=\"font-size:0.75em;color:05109B\"> { </span>';
 			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">';}
