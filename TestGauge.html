@@ -99,10 +99,8 @@ function lastValuesListResponse(data) {
 }
 
 function lastValuesListError(xhr) {
-	$("#lastValueList tbody").html('');
-	$('<tr>').append(
-	$('<td colspan="2">').text('Cannot load your measurements at the moment (error code ' + xhr.status + ')...')
-	).appendTo('#lastValueList tbody');
+	var TexteError = "<span style=\"font-size:1.125em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span>";
+	document.getElementById("when_div").innerHTML = TexteError;
 }
 
 function fluentDuration(timestamp) {
