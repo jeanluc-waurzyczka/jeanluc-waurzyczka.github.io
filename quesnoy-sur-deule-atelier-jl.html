@@ -20,7 +20,7 @@ a:hover {text-decoration: underline;}
 
 
 //======================================== Test Atelier JL ===========================================//
-var DevicePage = 'arthur';
+var DeviceWebPage = 'arthur';
 var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
 var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
 var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
@@ -29,19 +29,11 @@ var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
 var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 //===================================================================================================//
 
-
 var TexteTitre;
-
-//var TexteTitre2 = "</strong></a> </span><a><span style=\"font-size:1.125em;color:#05109B;\"> { ";
-//var TexteTitre2Red = "</strong></a> </span><a><span style=\"font-size:1.125em;color:red;\"> { ";
-//var TexteTitre3 = ":";
-//var TexteTitre4 = " }</a>";
-
 var date_last_update;
 var totalSeconds;
 var TexteDuration;
 var data;
-
 
 //==================================================== deviceFind ======================================================//
 function deviceFind() {
@@ -65,7 +57,6 @@ error: function (xhr) {
 }
 
 
-
 function deviceFindError(xhr) {
 	TexteTitre = 'Error IoTGuru: Device not found';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
@@ -75,17 +66,17 @@ function deviceFindResponse(data) {
 
 	TexteDuration = fluentDuration (data.lastCheck);
 	TexteTitre = "<span style=\"font-size:1.875em; color:red ;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
-	TexteTitre += DevicePage;
+	TexteTitre += DeviceWebPage;
 	TexteTitre += '/\"><strong>';
 
 	TexteTitre += data.description;
-TexteTitre += '</a></strong></span><span class="b"; style=\"font-size:1.125em; color:#05109B;\"> &nbsp; { </span><span class="b"; style=\"font-size:1.125em; color:#05109B;';
-	if (totalSeconds >= 120) {TexteTitre +=  ' background-color:#ff598f;\">';}
-	if (totalSeconds >= 90 && totalSeconds < 120) {TexteTitre +=  ' background-color:#fdb1ca;\">';}
-	if (totalSeconds >= 30 && totalSeconds < 90) {TexteTitre += ' background-color:#FFF0F5;\">';}
-	if (totalSeconds < 30){TexteTitre += ' background-color:white;\">';}
+	TexteTitre += '</a></strong></span><span class="b"; style=\"font-size:1.125em; color:#05109B;\"> &nbsp; {</span><span class="b"; style=\"font-size:1.125em; color:#05109B;';
+	if (totalSeconds >= 120) {TexteTitre +=  ' background-color:#ff598f;\"> ';}
+	if (totalSeconds >= 90 && totalSeconds < 120) {TexteTitre +=  ' background-color:#fdb1ca;\"> ';}
+	if (totalSeconds >= 30 && totalSeconds < 90) {TexteTitre += ' background-color:#FFF0F5;\"> ';}
+	if (totalSeconds < 30){TexteTitre += ' background-color:white;\"> ';}
 	TexteTitre += TexteDuration;
-	TexteTitre += '</span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\"> }</span>';
+	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	
