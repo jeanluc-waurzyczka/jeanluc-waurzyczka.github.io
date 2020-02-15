@@ -78,13 +78,13 @@ function deviceFindResponse(data) {
 	TexteTitre += '/\"><strong>';
 
 	TexteTitre += data.description;
-TexteTitre += '</a></strong></span><span style=\"font-size:1.125em; color:#05109B;\"> &nbsp; { </span><span style=\"font-size:1.125em; color:#05109B;';
+TexteTitre += '</strong></span><span style=\"font-size:1.125em; color:#05109B;\"> &nbsp; { </span><span style=\"font-size:1.125em; color:#05109B;';
 	if (totalSeconds >= 120) {TexteTitre +=  ' background-color:#ff598f;\">';}
 	if (totalSeconds >= 90 && totalSeconds < 120) {TexteTitre +=  ' background-color:#fdb1ca;\">';}
 	if (totalSeconds >= 30 && totalSeconds < 90) {TexteTitre += ' background-color:#FFF0F5;\">';}
 	if (totalSeconds < 30){TexteTitre += ' background-color:white;\">';}
 	TexteTitre += TexteDuration;
-	TexteTitre += '</span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\"> }</span>';
+	TexteTitre += '</span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\"> }</span></a>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	
