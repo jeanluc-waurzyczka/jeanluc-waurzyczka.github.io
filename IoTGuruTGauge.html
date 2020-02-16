@@ -67,7 +67,7 @@ function loadData()
 	$.ajax(
 	{
 		type: "GET",
-		url: '//api.iotguru.live/measurement/loadLastFloatValues/Node_Choice/Field_Choice/1',
+		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + Node_Choice + '/' + Field_Choice + '/1',
 		dataType: "json",
 		beforeSend: function (xhr) {
 			var accessToken =  Cookies.get('accessToken');
