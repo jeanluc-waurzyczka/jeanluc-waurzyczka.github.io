@@ -70,6 +70,7 @@ function loadData()
 		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + Node_Choice + '/' + Field_Choice + '/1',
 		dataType: "json",
 		beforeSend: function (xhr) {
+		console.log 'test';
 			var accessToken =  Cookies.get('accessToken');
 			if (accessToken) {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
