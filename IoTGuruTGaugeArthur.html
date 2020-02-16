@@ -30,6 +30,9 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 var Field_Choice	= 'temperature';
 var Node_Choice	= DHT22NodeKey;
 var Gauge_Name		= '°C';
+var Gauge_Description= 'Température';
+var minorTicks		= 5;
+var majorTicks		= [5, 10, 15, 20, 25, 30, 35];
 var Gauge_Min		= 5;
 var Gauge_Max		= 35;
 var redFrom		= 0;
@@ -94,20 +97,19 @@ function lastValuesListResponse(data) {
 		$.each(data, function (idx, n) {
 			displayData(n[1].toFixed(1));
 			var Texte = [];
-			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
+			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br>';
 			TexteDuration = fluentDuration (n[0]);
 			Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
-			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
-			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
-			if (totalSeconds >= 30 && totalSeconds < 90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> ';}
-			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
+			if (totalSeconds >= 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
+			if (totalSeconds >= 1200 && totalSeconds < 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
+			if (totalSeconds >= 300 && totalSeconds < 1200) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> ';}
+			if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
 			Texte += TexteDuration;
 			Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
 			document.getElementById("when_div").innerHTML = Texte;
 		});
 	}
 }
-
 function lastValuesListError(xhr) {
 	var TexteError = "<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>";
 	document.getElementById("when_div").innerHTML = TexteError;
@@ -188,12 +190,10 @@ function initChart()
 	data.addColumn('number', 'Value');
 	data.addRows(1);
 	chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
-	options = {width: 180, height: 180, min: Gauge_Min, max: Gauge_Max, redColor: '#ff5b5b', redFrom: redFrom, redTo: redTo, yellowColor: '#ffd468', yellowFrom: yellowFrom, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: greenFrom, greenTo: greenTo, minorTicks: 5, majorTicks: [5, 10, 15, 20, 25, 30, 35]};
+	options = {width: 180, height: 180, min: Gauge_Min, max: Gauge_Max, redColor: '#ff5b5b', redFrom: redFrom, redTo: redTo, yellowColor: '#ffd468', yellowFrom: yellowFrom, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: greenFrom, greenTo: greenTo, minorTicks: minorTicks, majorTicks: majorTicks};
 
 	loadData();
 }
-
-
 </script>
 
 </head>

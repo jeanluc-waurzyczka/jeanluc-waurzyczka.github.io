@@ -100,10 +100,10 @@ function lastValuesListResponse(data) {
 			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br>';
 			TexteDuration = fluentDuration (n[0]);
 			Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
-			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
-			if (totalSeconds >= 90 && totalSeconds < 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
-			if (totalSeconds >= 30 && totalSeconds < 90) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> ';}
-			if (totalSeconds < 30){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
+			if (totalSeconds >= 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
+			if (totalSeconds >= 1200 && totalSeconds < 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
+			if (totalSeconds >= 300 && totalSeconds < 1200) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> ';}
+			if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
 			Texte += TexteDuration;
 			Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
 			document.getElementById("when_div").innerHTML = Texte;
