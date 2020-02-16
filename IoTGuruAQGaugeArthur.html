@@ -29,9 +29,10 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 //========================================== airquality =============================================//
 var Field_Choice	= 'airquality';
 var Node_Choice	= MQ135NodeKey;
-var minorTicks		= 5;
-var majorTicks		= [5, 10, 15, 20, 25, 30, 35];
+var minorTicks		= 4;
+var majorTicks		= [200, 400, 600, 800, 1000, 1200, 1400];
 var Gauge_Name		= 'ppm';
+var Gauge_Description= 'Qualité de l\'air - CO2';
 var Gauge_Min		= 200;
 var Gauge_Max		= 1400;
 var redFrom		= 1000;
@@ -96,7 +97,7 @@ function lastValuesListResponse(data) {
 		$.each(data, function (idx, n) {
 			displayData(n[1].toFixed(1));
 			var Texte = [];
-			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br>';
+			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br>';
 			TexteDuration = fluentDuration (n[0]);
 			Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
 			if (totalSeconds >= 120) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
