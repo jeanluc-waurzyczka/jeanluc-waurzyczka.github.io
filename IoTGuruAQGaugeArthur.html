@@ -29,17 +29,17 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 //========================================== airquality =============================================//
 var Field_Choice	= 'airquality';
 var Node_Choice	= MQ135NodeKey;
-var minorTicks		= 4;
-var majorTicks		= [200, 400, 600, 800, 1000, 1200, 1400];
 var Gauge_Name		= 'ppm';
 var Gauge_Description= 'Qualité de l\'air - CO2';
-var Gauge_Min		= 410;
+var minorTicks		= 4;
+var majorTicks		= [200, 400, 600, 800, 1000, 1200, 1400];
+var Gauge_Min		= 200;
 var Gauge_Max		= 1400;
 var redFrom		= 1000;
-var redTo			= 2500;
+var redTo			= 1500;
 var yellowFrom		= 600;
 var yellowTo		= redFrom;
-var greenFrom		= 0;
+var greenFrom		= 410;
 var greenTo		= yellowFrom;
 //===================================================================================================//
 // global variables
