@@ -29,6 +29,8 @@ var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
 //========================================== airquality =============================================//
 var Field_Choice	= 'airquality';
 var Node_Choice	= MQ135NodeKey;
+var minorTicks		= 5;
+var majorTicks		= [5, 10, 15, 20, 25, 30, 35];
 var Gauge_Name		= 'ppm';
 var Gauge_Min		= 200;
 var Gauge_Max		= 1400;
@@ -188,7 +190,7 @@ function initChart()
 	data.addColumn('number', 'Value');
 	data.addRows(1);
 	chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
-	options = {width: 180, height: 180, min: Gauge_Min, max: Gauge_Max, redColor: '#ff5b5b', redFrom: redFrom, redTo: redTo, yellowColor: '#ffd468', yellowFrom: yellowFrom, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: greenFrom, greenTo: greenTo, minorTicks: 5, majorTicks: [5, 10, 15, 20, 25, 30, 35]};
+	options = {width: 180, height: 180, min: Gauge_Min, max: Gauge_Max, redColor: '#ff5b5b', redFrom: redFrom, redTo: redTo, yellowColor: '#ffd468', yellowFrom: yellowFrom, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: greenFrom, greenTo: greenTo, minorTicks: minorTicks, majorTicks: majorTicks};
 
 	loadData();
 }
