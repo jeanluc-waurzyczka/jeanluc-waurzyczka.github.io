@@ -246,7 +246,7 @@ $(document).ready(function () {
 	var granularity = 'day';
 	TimeOutGraph = 150000;
 	var promise = deviceFind();
-	promise.then(function(result) { 
+	promise.then(function(resolve, reject) { 
 			
 			// Add active class to the current button (sets it to light blue)
 		var header = document.getElementById("mybuttonDIV");
