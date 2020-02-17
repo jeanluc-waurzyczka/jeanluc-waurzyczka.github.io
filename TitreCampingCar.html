@@ -1,88 +1,160 @@
 <html lang="fr-FR";>
 <head>
-<meta  charset=UTF-8">
+<meta  charset=UTF-8"> <meta http-equiv="refresh" content="60">
 </head>
 <body>
 <div id="chart-container">
-<p id="AffichageTitre" style="text-align:center; color:#040457;"></p>
+<p id="AffichageTitre" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
 <style type="text/css">
-{ background-color: white; height: 100%; margin: 0; padding: 0;}
-a { text-decoration:none;}
-#chart-container { width: 700px; height: 55px; display: block; position:absolute; bottom:0; top:0; left:0; right:0; margin: 5px 15px 15px 0; overflow: hidden; }
+{ background-color: white; height: 100%; font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif; margin: 0; padding: 0;}
+a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
+a:link, a:visited { text-decoration:none; color: #05109B;}
+a:hover {text-decoration: underline;}
+.b { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
+#chart-container { width: 100%; height: 55; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
 </style>
 
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script type="text/javascript">
 
 
-//=========================== TitreCampingCar ==============================//
-var site = "campingcar";
-var room = "Camping-Car";
-var channel_id = 901544;
-var api_key = 'Z996IH7IT3K2DHQ2';
+//========================================== Camping-Car =============================================//
+var DeviceWebPage = 'campingcar';
+var DeviceShortId = 'rxCNbrHrLfzxwd2AJ8sR6g';
+var DeviceKey = 'uNmVlKSUo-8Bh0BtUFdD5Q';
+var DHT22NodeShortId = 'tkFPTNVS1GcELUnwJ8wR6g';
+var DHT22NodeKey = 'thlAxICXGNACIl9UZn1Ofg';
+var MQ135NodeShortId = 'tkFPTNVS1GcSHFYAJ8wR6g';
+var MQ135NodeKey = 'icQbhd0Lxc9azJcggcdK6g';
+//===================================================================================================//
 
-//================================================================================//
-
-
-var TexteTitre = "<span style=\"font-size:1.875em;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
-var TexteTitre1 = "/\"><strong>";
-var TexteTitre2 = "</strong></a> </span><span style=\"font-size:1.125em;\"> { ";
-var TexteTitre3 = ":";
-var TexteTitre4 = " }</span></p>";
-
+var TexteTitre;
 var date_last_update;
-
-var MinutesTemp;
-
-var MinutesWorking;
-
+var totalSeconds;
+var TexteDuration;
 var data;
 
-$.ajax({
-		type: "GET",
-		url: '//api.iotguru.live/device/find/rxCNbrHrLfzxwd2AJ8sR6g',
-		dataType: "json",
-		beforeSend: function (xhr) {
-				var accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3YTc4MGNlMC0yNjE4LTExZWEtYjhhZi04YmIzODAxNzRkMGUiLCJleHAiOjE1ODA0MDI3MTgsImVtYWlsIjoiamVhbmx1Y0B3YXVyenljemthLmZyIn0.AT3FkgwU5SYHUhLGhUiZuSt_7g29-GMGsp127g1tdis';
-				if (accessToken) {
-						xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-				}
+//==================================================== deviceFind ======================================================//
+function deviceFind() {
+	$.ajax({
+type: "GET",
+url: '//api.iotguru.live/device/find/' + DeviceShortId,
+dataType: "json",
+	beforeSend: function (xhr) {
+			var accessToken =  Cookies.get('accessToken');
+			if (accessToken) {
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+			}
+},
+success: function (data) {
+			deviceFindResponse(data);
 		},
-		success: function (data) {
-				deviceFindResponse(data);
-		},
-		error: function (xhr) {
-				deviceFindError(xhr);
+error: function (xhr) {
+			deviceFindError(xhr);
 		}
-});
+	});
+}
+
 
 function deviceFindError(xhr) {
-$('#loading').css('display', 'none');
+	TexteTitre = 'Error IoTGuru: Device not found';
+	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }
 
 function deviceFindResponse(data) {
 
-// $.getJSON( 'https://api.thingspeak.com/channels/' + channel_id + '/fields/5/last.json?api_key=' + api_key, function(data) {
-	TexteTitre += site;
-	TexteTitre += TexteTitre1;
-	TexteTitre += room;
-	TexteTitre += TexteTitre2;
-	date_last_update = new Date(data.created_at);
-	TexteTitre += date_last_update.getHours();
-	TexteTitre += TexteTitre3;
-	MinutesWorking = date_last_update.getMinutes();
-	if (MinutesWorking < 10) {MinutesTemp = '0'; MinutesTemp += MinutesWorking;}
-	else {MinutesTemp = MinutesWorking;}
-	TexteTitre += MinutesTemp;
-	TexteTitre += " ";
-	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-	TexteTitre += date_last_update.toLocaleDateString('fr-FR',options);
-	TexteTitre += TexteTitre4;
+	TexteDuration = fluentDuration (data.lastCheck);
+	TexteTitre = "<span style=\"font-size:1.875em; color:red ;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+	TexteTitre += DeviceWebPage;
+	TexteTitre += '/\"><strong>';
+
+	TexteTitre += data.description;
+	TexteTitre += '</a></strong></span><span class="b"; style=\"font-size:1.125em; color:#05109B;\"> &nbsp; {</span><span class="b"; style=\"font-size:1.125em; color:#05109B;';
+	if (totalSeconds >= 3600) {TexteTitre +=  ' background-color:#ff598f;\"> ';}
+	if (totalSeconds >= 1200 && totalSeconds < 3600) {TexteTitre +=  ' background-color:#fdb1ca;\"> ';}
+	if (totalSeconds >= 300 && totalSeconds < 1200) {TexteTitre += ' background-color:#FFF0F5;\"> ';}
+	if (totalSeconds < 300){TexteTitre += ' background-color:white;\"> ';}
+	TexteTitre += TexteDuration;
+	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
-}	;
-}
+}	
+
+    function fluentDuration(timestamp) {
+		totalSeconds = 86400;
+        if (!timestamp) {
+            return 'n/a';
+        }
+
+        totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+        var days = ~~(totalSeconds / 86400);
+        var hours = ~~((totalSeconds % 86400) / 3600);
+        var minutes = ~~((totalSeconds % 3600) / 60);
+        var seconds = ~~(totalSeconds % 60);
+
+        var message = [];
+        if (days > 0) {
+            message.push(' ');
+            message.push(days);
+            message.push(' ');
+            if (days > 1) {
+                message.push('jours');
+            } else {
+                message.push('jour');
+            }
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('heures');
+            } else {
+                message.push('heure');
+            }
+        } else if (hours > 0) {
+            message.push(' ');
+            message.push(hours);
+            message.push(' ');
+            if (hours > 1) {
+                message.push('heures');
+            } else {
+                message.push('heure');
+            }
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+        } else {
+            message.push(' ');
+            message.push(minutes);
+            message.push(' ');
+            if (minutes > 1) {
+                message.push('minutes');
+            } else {
+                message.push('minute');
+            }
+            message.push(' ');
+            message.push(seconds);
+            message.push(' ');
+            if (seconds > 1) {
+                message.push('secondes');
+            } else {
+                message.push('seconde');
+            }
+        }
+
+        return message.join('');
+    }
+    
+
+$(document).ready(function () {
+	deviceFind();
+});
+
 </script>
 </div>
 </body>

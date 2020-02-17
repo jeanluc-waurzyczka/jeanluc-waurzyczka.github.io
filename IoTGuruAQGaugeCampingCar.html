@@ -1,0 +1,212 @@
+<html>
+
+<style type="text/css">
+{ background-color: white; height: 100%; margin: 0; padding: 0;}
+p.a { line-height:125%; text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0; text-align: center; }
+p.b { line-height:85%; text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0; text-align: center; }
+#inner { vertical-align: middle; horizontal-align: middle; display: table-cell;}
+#chart-container { width: 100%; height: 55; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
+</style>
+<style type="text/css">
+body
+#container { height: 100%; width: 100%; display: table; }
+#inner { vertical-align: middle; horizontal-align: middle; display: table-cell;}
+#gauge_div { width: 180px; heigh: 180px; margin: 0 auto; }
+</style>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+<script type='text/javascript'>
+
+//========================================== Camping-Car =============================================//
+var DeviceWebPage = 'campingcar';
+var DeviceShortId = 'rxCNbrHrLfzxwd2AJ8sR6g';
+var DeviceKey = 'uNmVlKSUo-8Bh0BtUFdD5Q';
+var DHT22NodeShortId = 'tkFPTNVS1GcELUnwJ8wR6g';
+var DHT22NodeKey = 'thlAxICXGNACIl9UZn1Ofg';
+var MQ135NodeShortId = 'tkFPTNVS1GcSHFYAJ8wR6g';
+var MQ135NodeKey = 'icQbhd0Lxc9azJcggcdK6g';
+//========================================== airquality =============================================//
+var Field_Choice	= 'airquality';
+var Node_Choice	= MQ135NodeKey;
+var Gauge_Name		= 'ppm';
+var Gauge_Description= 'Qualité de l\'air - CO2';
+var minorTicks		= 4;
+var majorTicks		= [200, 400, 600, 800, 1000, 1200, 1400];
+var Gauge_Min		= 200;
+var Gauge_Max		= 1400;
+var redFrom		= 1000;
+var redTo			= 1500;
+var yellowFrom		= 600;
+var yellowTo		= redFrom;
+var greenFrom		= 410;
+var greenTo		= yellowFrom;
+//===================================================================================================//
+// global variables
+var chart, charts, data;
+var TexteDuration;
+var totalSeconds;
+
+// load the google gauge visualization
+google.load('visualization', '1', {packages:['gauge']});
+google.setOnLoadCallback(initChart);
+
+// display the data
+function displayData(point)
+{
+	data.setValue(0, 0, Gauge_Name);
+	data.setValue(0, 1, point);
+	chart.draw(data, options);
+}
+
+// load the data
+function loadData()
+{
+	// variable for the data point
+	var p;
+
+	// get the data from IoTGuru
+
+	$.ajax(
+	{
+		type: "GET",
+		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + Node_Choice + '/' + Field_Choice + '/1',
+		dataType: "json",
+		beforeSend: function (xhr) {
+			var accessToken =  Cookies.get('accessToken');
+			if (accessToken) {
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+			}
+		},
+		success: function (data) {
+			lastValuesListResponse(data);
+		},
+		error: function (xhr) {
+			lastValuesListError(xhr);
+		}
+	});
+}
+
+function lastValuesListResponse(data) {
+	if (data === undefined || data.length === 0) {
+		$("#lastValueList tbody").html('');
+		$('<tr>').append(
+		$('<td colspan="2">').text('No measurements yet')
+		).appendTo('#lastValueList tbody');
+	} else {
+		$.each(data, function (idx, n) {
+			displayData(n[1].toFixed(1));
+			var Texte = [];
+			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br>';
+			TexteDuration = fluentDuration (n[0]);
+			Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
+			if (totalSeconds >= 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
+			if (totalSeconds >= 1200 && totalSeconds < 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
+			if (totalSeconds >= 300 && totalSeconds < 1200) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> ';}
+			if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
+			Texte += TexteDuration;
+			Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
+			document.getElementById("when_div").innerHTML = Texte;
+		});
+	}
+}
+
+function lastValuesListError(xhr) {
+	var TexteError = "<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>";
+	document.getElementById("when_div").innerHTML = TexteError;
+}
+
+function fluentDuration(timestamp) {
+	if (!timestamp) {
+		return 'n/a';
+	}
+
+	totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+	var days = ~~(totalSeconds / 86400);
+	var hours = ~~((totalSeconds % 86400) / 3600);
+	var minutes = ~~((totalSeconds % 3600) / 60);
+	var seconds = ~~(totalSeconds % 60);
+
+	var message = [];
+	if (days > 0) {
+		message.push(' ');
+		message.push(days);
+		message.push(' ');
+		if (days > 1) {
+			message.push('jours');
+		} else {
+			message.push('jour');
+		}
+		message.push(' ');
+		message.push(hours);
+		message.push(' ');
+		if (hours > 1) {
+			message.push('heures');
+		} else {
+			message.push('heure');
+		}
+	} else if (hours > 0) {
+		message.push(' ');
+		message.push(hours);
+		message.push(' ');
+		if (hours > 1) {
+			message.push('heures');
+		} else {
+			message.push('heure');
+		}
+		message.push(' ');
+		message.push(minutes);
+		message.push(' ');
+		if (minutes > 1) {
+			message.push('minutes');
+		} else {
+			message.push('minute');
+		}
+	} else {
+		message.push(' ');
+		message.push(minutes);
+		message.push(' ');
+		if (minutes > 1) {
+			message.push('minutes');
+		} else {
+			message.push('minute');
+		}
+		message.push(' ');
+		message.push(seconds);
+		message.push(' ');
+		if (seconds > 1) {
+			message.push('secondes');
+		} else {
+			message.push('seconde');
+		}
+	}
+
+	return message.join('');
+}
+// initialize the chart
+function initChart()
+{
+	data = new google.visualization.DataTable();
+	data.addColumn('string', 'Label');
+	data.addColumn('number', 'Value');
+	data.addRows(1);
+	chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
+	options = {width: 180, height: 180, min: Gauge_Min, max: Gauge_Max, redColor: '#ff5b5b', redFrom: redFrom, redTo: redTo, yellowColor: '#ffd468', yellowFrom: yellowFrom, yellowTo: yellowTo, greenColor: '#c4ffa5', greenFrom: greenFrom, greenTo: greenTo, minorTicks: minorTicks, majorTicks: majorTicks};
+
+	loadData();
+}
+
+
+</script>
+
+</head>
+
+<body>
+<div id="container">
+<div id="inner">
+<div id="gauge_div"></div>
+<div id="when_div"></div>
+</div>
+</div>
+</body>
+</html>
