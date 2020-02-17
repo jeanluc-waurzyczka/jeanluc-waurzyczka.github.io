@@ -199,35 +199,6 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 	}
 }
 
-//==================================================== deviceFind ======================================================//
-function deviceFind() {
-	$.ajax({
-type: "GET",
-url: '//api.iotguru.live/device/find/' + DeviceShortId,
-dataType: "json",
-	beforeSend: function (xhr) {
-			var accessToken =  Cookies.get('accessToken');
-			if (accessToken) {
-				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-			}
-},
-success: function (data) {
-			deviceFindResponse(data);
-		},
-error: function (xhr) {
-			deviceFindError(xhr);
-		}
-	});
-}
-
-
-function deviceFindError(xhr) {
-	DeviceDescription = '';
-}
-
-function deviceFindResponse(data) {
-	DeviceDescription = data.description;
-}	
 
 function loadTemperature(titleText, granulation) {
 	loadData('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation);
@@ -256,7 +227,7 @@ dataType: "json",
 			}
 	},
 success: function (data) {
-			
+			DeviceDescription = data.description;
 				// Add active class to the current button (sets it to light blue)
 			var header = document.getElementById("mybuttonDIV");
 			var btns = header.getElementsByClassName("button");
