@@ -50,15 +50,23 @@
  </p></center>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <script>
 
-var DeviceText = "Test JL Atelier";
-var nodeIdDHT22 = 'ssbN5XnOFjPkXEuwJikR6g';
-var nodeIdMQ135 = 'uK-Ls4AXTQ70cZMgJikR6g';
+//============================================= Arthur ==============================================//
+var DeviceWebPage = 'arthur';
+var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
+var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
+var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
+var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
+var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
+var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
+//===================================================================================================//
+var DeviceDescription = "";
 
 var TimeOutGraph;
 
@@ -191,80 +199,98 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 	}
 }
 
+
 function loadTemperature(titleText, granulation) {
-	loadData('graphTemperature', titleText + ' - ' + DeviceText, 'Date et heure', '°C', nodeIdDHT22, 'temperature', granulation);
+	loadData('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation);
 }
 
 function loadHumidity(titleText, granulation) {
-	loadData('graphHumidity', titleText + ' - ' + DeviceText, 'Date et heure', '%', nodeIdDHT22, 'humidity', granulation);
+	loadData('graphHumidity', titleText + ' - ' + DeviceDescription, 'Date et heure', '%', DHT22NodeShortId, 'humidity', granulation);
 }
 
 function loadAirQuality(titleText, granulation) {
-	loadData('graphAirQuality', titleText + ' - ' + DeviceText, 'Date et heure', 'PPM', nodeIdMQ135, 'airquality', granulation);
+	loadData('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation);
 }
 
 $(document).ready(function () {
 
 	var granularity = 'day';
 	TimeOutGraph = 150000;
-		
-		// Add active class to the current button (sets it to light blue)
-	var header = document.getElementById("mybuttonDIV");
-	var btns = header.getElementsByClassName("button");
-	
-	for (var i = 0; i < btns.length; i++) {
-		btns[i].addEventListener("click", function() {
-			var current = document.getElementsByClassName("active");
-			current[0].className = current[0].className.replace(" active", "");
-			this.className += " active";
-			});
-	}
+		$.ajax({
+type: "GET",
+url: '//api.iotguru.live/device/find/' + DeviceShortId,
+dataType: "json",
+	beforeSend: function (xhr) {
+			var accessToken =  Cookies.get('accessToken');
+			if (accessToken) {
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+			}
+	},
+success: function (data) {
+			DeviceDescription = data.description;
+				// Add active class to the current button (sets it to light blue)
+			var header = document.getElementById("mybuttonDIV");
+			var btns = header.getElementsByClassName("button");
+			
+			for (var i = 0; i < btns.length; i++) {
+				btns[i].addEventListener("click", function() {
+					var current = document.getElementsByClassName("active");
+					current[0].className = current[0].className.replace(" active", "");
+					this.className += " active";
+					});
+			}
 
-	function load() {
-		if (granularity === 'day') {
-		    loadTemperature('Température (journalier)', 'DAY/288');
-		    loadHumidity('Humidité (journalier)', 'DAY/288');
-		    loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
-		}
+			function load() {
+				if (granularity === 'day') {
+				    loadTemperature('Température (journalier)', 'DAY/288');
+				    loadHumidity('Humidité (journalier)', 'DAY/288');
+				    loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
+				}
 
-		if (granularity === 'week') {
-		    loadTemperature('Température (hebdomadaire)', 'WEEK/168');
-		    loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
-		    loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
-		}
+				if (granularity === 'week') {
+				    loadTemperature('Température (hebdomadaire)', 'WEEK/168');
+				    loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
+				    loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
+				}
 
-		if (granularity === 'month') {
-		    loadTemperature('Température (mensuel)', 'MONTH/240');
-		    loadHumidity('Humidité (mensuel)', 'MONTH/240');
-		    loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
-		}
+				if (granularity === 'month') {
+				    loadTemperature('Température (mensuel)', 'MONTH/240');
+				    loadHumidity('Humidité (mensuel)', 'MONTH/240');
+				    loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
+				}
 
-		if (granularity === 'year') {
-		    loadTemperature('Température (annuel)', 'YEAR/366');
-		    loadHumidity('Humidité (annuel)', 'YEAR/366');
-		    loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
-		}
+				if (granularity === 'year') {
+				    loadTemperature('Température (annuel)', 'YEAR/366');
+				    loadHumidity('Humidité (annuel)', 'YEAR/366');
+				    loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
+				}
 
-		setTimeout(function () {
+				setTimeout(function () {
+					load();
+					}, TimeOutGraph);    
+			}
+
+			$('#daily').click(function() {
+			   granularity = 'day'; TimeOutGraph = 150000; load ();
+			   });
+			$('#weekly').click(function() {
+			   granularity = 'week'; TimeOutGraph = 1800000; load();
+			   });
+			$('#monthly').click(function() {
+			   granularity = 'month'; TimeOutGraph = 5400000; load();
+			   });
+			$('#yearly').click(function() {
+			   granularity = 'year'; TimeOutGraph = 43200000; load();
+			   });
+
 			load();
-			}, TimeOutGraph);    
-	}
 
-	$('#daily').click(function() {
-	   granularity = 'day'; TimeOutGraph = 150000; load ();
-	   });
-	$('#weekly').click(function() {
-	   granularity = 'week'; TimeOutGraph = 1800000; load();
-	   });
-	$('#monthly').click(function() {
-	   granularity = 'month'; TimeOutGraph = 5400000; load();
-	   });
-	$('#yearly').click(function() {
-	   granularity = 'year'; TimeOutGraph = 43200000; load();
-	   });
+			},
 
-	load();
-
+error: function (xhr) {
+	deviceFindError(xhr);
+		}
+});
 });
 
 
