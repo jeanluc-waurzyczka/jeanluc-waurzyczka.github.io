@@ -89,7 +89,7 @@ function loadData()
 
 function lastValuesListResponse(data) {
 	if (data === undefined || data.length === 0) {
-		var TexteError = "<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>";
+		var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 		document.getElementById("when_div").innerHTML = TexteError;
 	} else {
 		$.each(data, function (idx, n) {
@@ -109,7 +109,7 @@ function lastValuesListResponse(data) {
 	}
 }
 function lastValuesListError(xhr) {
-	var TexteError = "<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">Température</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>";
+	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 	document.getElementById("when_div").innerHTML = TexteError;
 }
 
