@@ -58,7 +58,7 @@ function deviceFindError(xhr) {
 	TexteTitre = 'Error IoTGuru: Device not found';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }
-Function deviceFindResponse(data) {
+function deviceFindResponse(data) {
 
 	TexteDuration = fluentDuration (data.lastCheck);
 	TexteTitre = "<span style=\"font-size:1.875em; color:red ;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
