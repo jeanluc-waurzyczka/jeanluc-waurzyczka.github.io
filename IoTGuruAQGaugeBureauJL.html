@@ -18,29 +18,29 @@ body
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
 <script type='text/javascript'>
 
-//========================================= Chambre AM JL ===========================================//
-var DeviceWebPage = 'arthur';
-var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
-var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
-var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
-var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
-var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
-var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
-//=========================================== temperature ============================================//
-var Field_Choice	= 'temperature';
-var Node_Choice	= DHT22NodeKey;
-var Gauge_Name		= '°C';
-var Gauge_Description= 'Température';
-var minorTicks		= 5;
-var majorTicks		= [5, 10, 15, 20, 25, 30, 35];
-var Gauge_Min		= 5;
-var Gauge_Max		= 35;
-var redFrom		= 0;
-var redTo			= 5;
-var yellowFrom		= redTo;
-var yellowTo		= 12;
-var greenFrom		= yellowTo;
-var greenTo		= 40;
+//============================================ Bureau JL ============================================//
+var DeviceWebPage = 'bureaujl';
+var DeviceShortId = 'jDP5ZAlISh55VYYQWYIR6g';
+var DeviceKey = 'huodYngtUDGO58-Q8-VFLw';
+var DHT22NodeShortId = 'jDP5ZAlISh60rN5wWYIR6g';
+var DHT22NodeKey = 'iGW59GU2BO6VKDCptEFNrA';
+var MQ135NodeShortId = 'jDP5ZAlISh7TWX_gWYIR6g';
+var MQ135NodeKey = 'sd6iASTvnDK5_G45gj1EfA';
+//===================================================================================================//
+var Field_Choice	= 'airquality';
+var Node_Choice	= MQ135NodeKey;
+var Gauge_Name		= 'ppm';
+var Gauge_Description= 'Qualité de l\'air - CO2';
+var minorTicks		= 4;
+var majorTicks		= [200, 400, 600, 800, 1000, 1200, 1400];
+var Gauge_Min		= 200;
+var Gauge_Max		= 1400;
+var redFrom		= 1000;
+var redTo			= 1500;
+var yellowFrom		= 600;
+var yellowTo		= redFrom;
+var greenFrom		= 410;
+var greenTo		= yellowFrom;
 //===================================================================================================//
 // global variables
 var chart, charts, data;
@@ -108,6 +108,7 @@ function lastValuesListResponse(data) {
 		});
 	}
 }
+
 function lastValuesListError(xhr) {
 	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 	document.getElementById("when_div").innerHTML = TexteError;
@@ -192,6 +193,8 @@ function initChart()
 
 	loadData();
 }
+
+
 </script>
 
 </head>
