@@ -33,6 +33,7 @@ var date_last_update;
 var totalSeconds;
 var TexteDuration;
 var data;
+var iteration = 0;
 
 //============================================== deviceFind ==================================================//
 function deviceFind() {
@@ -69,6 +70,8 @@ function deviceFindResponse(data) {
 	TexteTitre += '/\"><strong>';
 
 	TexteTitre += data.description;
+	iteration++;
+	TexteTitre += iteration;
 	TexteTitre += '</a></strong></span><span class="b"; style=\"font-size:1.125em; color:#05109B;\"> &nbsp; {</span><span class="b"; style=\"font-size:1.125em; color:#05109B;';
 	if (totalSeconds >= 3600) {TexteTitre +=  ' background-color:#ff598f;\"> ';}
 	if (totalSeconds >= 1200 && totalSeconds < 3600) {TexteTitre +=  ' background-color:#fdb1ca;\"> ';}
