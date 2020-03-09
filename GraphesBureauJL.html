@@ -65,7 +65,10 @@ var DHT22NodeShortId = 'jDP5ZAlISh60rN5wWYIR6g';
 var DHT22NodeKey = 'iGW59GU2BO6VKDCptEFNrA';
 var MQ135NodeShortId = 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey = 'sd6iASTvnDK5_G45gj1EfA';
+var SDS011NodeShortId = 'tGib1WSRvEE5Mp-gYUgR6g';
+var SDS011NodeKey = 'qXlMZEFnR1DTs90DwDRGbQ';
 //===================================================================================================//
+
 var DeviceDescription = "";
 
 var TimeOutGraph;
@@ -212,6 +215,14 @@ function loadAirQuality(titleText, granulation) {
 	loadData('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation);
 }
 
+function loadAirQualityPM25(titleText, granulation) {
+	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µm', SDS011NodeShortId, 'pm25', granulation);
+}
+
+function loadAirQualityPM10(titleText, granulation) {
+	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µm', SDS011NodeShortId, 'pm10', granulation);
+}
+
 $(document).ready(function () {
 
 	var granularity = 'day';
@@ -245,6 +256,7 @@ success: function (data) {
 				    loadTemperature('Température (journalier)', 'DAY/288');
 				    loadHumidity('Humidité (journalier)', 'DAY/288');
 				    loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
+				    loadAirQualityPM25('Qualité de l\air (journalier)', 'DAY/288');
 				}
 
 				if (granularity === 'week') {
