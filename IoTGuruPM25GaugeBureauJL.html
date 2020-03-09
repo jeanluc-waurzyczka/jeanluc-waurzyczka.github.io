@@ -41,7 +41,7 @@ var majorTicks		= [5, 10, 15, 20, 25, 30, 35];
 var Gauge_Min		= 0;
 var Gauge_Max		= 35;
 var redFrom		= 10;
-var redTo			= 40;
+var redTo			= 35;
 var yellowFrom		= 5;
 var yellowTo		= redFrom;
 var greenFrom		= 0;
@@ -100,7 +100,7 @@ function lastValuesListResponse(data) {
 		$.each(data, function (idx, n) {
 			displayData(n[1].toFixed(1));
 			var Texte = [];
-			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br>';
+			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.1em; color:#05109B\">' + Gauge_Description + '</span><br>';
 			TexteDuration = fluentDuration (n[0]);
 			Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
 			if (totalSeconds >= 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
