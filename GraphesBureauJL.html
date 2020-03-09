@@ -218,11 +218,11 @@ function loadAirQuality(titleText, granulation) {
 }
 
 function loadAirQualityPM25(titleText, granulation) {
-	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µm', SDS011NodeShortId, 'pm25', granulation);
+	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation);
 }
 
 function loadAirQualityPM10(titleText, granulation) {
-	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µm', SDS011NodeShortId, 'pm10', granulation);
+	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation);
 }
 
 $(document).ready(function () {
