@@ -257,27 +257,33 @@ success: function (data) {
 				if (granularity === 'day') {
 				    loadTemperature('Température (journalier)', 'DAY/288');
 				    loadHumidity('Humidité (journalier)', 'DAY/288');
-				    loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
-				    loadAirQualityPM25('Qualité de l\'air PM2.5(journalier)', 'DAY/288');
-				    loadAirQualityPM10('Qualité de l\'air PM10(journalier)', 'DAY/288');
+				    loadAirQuality('Qualité de l\'air CO2 (journalier)', 'DAY/288');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
 				}
 
 				if (granularity === 'week') {
 				    loadTemperature('Température (hebdomadaire)', 'WEEK/168');
 				    loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
-				    loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
+				    loadAirQuality('Qualité de l\'air CO2 (hebdomadaire)', 'WEEK/168');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (hebdomadaire)', 'WEEK/168');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (hebdomadaire)', 'WEEK/168');
 				}
 
 				if (granularity === 'month') {
 				    loadTemperature('Température (mensuel)', 'MONTH/240');
 				    loadHumidity('Humidité (mensuel)', 'MONTH/240');
-				    loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
+				    loadAirQuality('Qualité de l\'air CO2 (mensuel)', 'MONTH/240');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (mensuel)', 'MONTH/240');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (mensuel)', 'MONTH/240');
 				}
 
 				if (granularity === 'year') {
 				    loadTemperature('Température (annuel)', 'YEAR/366');
 				    loadHumidity('Humidité (annuel)', 'YEAR/366');
-				    loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
+				    loadAirQuality('Qualité de l\'air CO2 (annuel)', 'YEAR/366');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (annuel)', 'YEAR/366');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (annuel)', 'YEAR/366');
 				}
 
 				setTimeout(function () {
