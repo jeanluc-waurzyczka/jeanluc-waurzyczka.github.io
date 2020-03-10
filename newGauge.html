@@ -82,7 +82,7 @@ Highcharts.chart('container', {
             rotation: 'auto'
         },
         title: {
-            text: 'km/h'
+            text: 'µg/m³'
         },
         plotBands: [{
             from: 0,
@@ -108,8 +108,9 @@ Highcharts.chart('container', {
         name: 'Speed',
         data: [80],
         tooltip: {
-            valueSuffix: ' km/h'
-        }
+            valueSuffix: ' µg/m³'
+        },
+        overshoot: 5
     }]
 
   });
