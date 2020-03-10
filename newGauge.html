@@ -14,7 +14,8 @@
 
 <script>
 	$(function () {
-    $('#container').highcharts({
+Highcharts.chart('container', {
+
     chart: {
         type: 'gauge',
         plotBackgroundColor: null,
@@ -97,24 +98,16 @@
             color: '#DF5353' // red
         }]
     },
-
+	exporting: {
+	enabled: false
+	},
     series: [{
         name: 'Speed',
         data: [80],
         tooltip: {
             valueSuffix: ' km/h'
         }
-    },{
-        name: 'Speed2',
-        data: [30],
-        tooltip: {
-            valueSuffix: ' km/h'
-        }}]
-
-
-	exporting: {
-	enabled: false
-	}
+    }]
 
   });
 });
