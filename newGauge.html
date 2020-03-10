@@ -24,9 +24,11 @@ Highcharts.chart('container', {
         plotShadow: false
     },
 title: {
-    text: undefined
+    text: 'My custom title'
 },
-
+subtitle: {
+    text: 'My custom subtitle'
+},
 //    title: {
   //      text: undefined
   //  },
@@ -108,15 +110,13 @@ title: {
         enabled: false
     },
     series: [{
-        name: 'PM25',
+        name: 'Speed',
         data: [80],
         tooltip: {
             valueSuffix: ' µg/m³'
         },
         overshoot: 5
-    }],
-        caption: {
-        text: 'Qualité de l\'air-2.5µm<br>1 minute 25 secondes'}
+    }]
 
   });
 });
