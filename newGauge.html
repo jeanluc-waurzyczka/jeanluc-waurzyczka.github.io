@@ -140,9 +140,13 @@ title: {
 	    credits: {
         enabled: false
     },
-    series: {
+    series: [{
+    
+
+    
+        dataLabels: {
             formatter: function () {
-                var kmh = 3,
+                var kmh = this.y,
                     mph = Math.round(kmh * 0.621);
                 return '<span style="color:#339">' + kmh + ' km/h</span><br/>' +
                     '<span style="color:#933">' + mph + ' mph</span>';
@@ -159,7 +163,7 @@ title: {
                     [1, '#FFF']
                 ]
             }
-    },
+        },
         name: 'PM2.5',
         data: [8.7],
 	   	dial: {
