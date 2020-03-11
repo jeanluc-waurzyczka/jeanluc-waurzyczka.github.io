@@ -14,7 +14,8 @@
 
 <script>
 	$(function () {
-    $('#container').highcharts({
+Highcharts.chart('container', {
+
     chart: {
         type: 'gauge',
         plotBackgroundColor: null,
@@ -22,10 +23,13 @@
         plotBorderWidth: 0,
         plotShadow: false
     },
+title: {
+    text: undefined
+},
 
-    title: {
-        text: undefined
-    },
+//    title: {
+  //      text: undefined
+  //  },
 
     pane: {
         startAngle: -150,
@@ -81,7 +85,8 @@
             rotation: 'auto'
         },
         title: {
-            text: 'km/h'
+            text: 'µg/m³',
+		  y:10
         },
         plotBands: [{
             from: 0,
@@ -97,16 +102,19 @@
             color: '#DF5353' // red
         }]
     },
-
+	exporting: {
+	enabled: false
+	},
+	    credits: {
+        enabled: false
+    },
     series: [{
         name: 'PM25',
         data: [80],
-	   	dial: {
-        backgroundColor: 'blue'
-	},
         tooltip: {
-            valueSuffix: ' km/h'
-        }
+            valueSuffix: ' µg/m³'
+        },
+        overshoot: 5
     },{
         name: 'PM2524H',
         data: [30],
@@ -115,19 +123,19 @@
 	},
         tooltip: {
             valueSuffix: ' km/h'
-        }}
-    ],
-	exporting: {
-	enabled: false
-	},
+        }}],
         caption: {
-        text: '<b>Qualité de l\'air-2.5µm</b><br>1 minute 25 secondes'}
+        text: '<b>Qualité de l\'air-2.5µm</b><br>2 minute 25 secondes'}
 
   });
 });
 </script>
 
 <body>
-<div id="container" style="min-width: 200px; max-width: 400px; height: 300px; margin: 0 auto"></div>
+<div id="container" style="height: 100%; width: 100%;position: relative;   margin: -15px auto 0 auto;top: 0%;"></div>
+<div id="inner">
+<div id="gauge_div"></div>
+<div id="when_div"></div>
+
 </body>
 </html>
