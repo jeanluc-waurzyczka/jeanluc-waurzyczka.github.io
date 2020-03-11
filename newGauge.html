@@ -67,15 +67,15 @@ title: {
     // the value axis
     yAxis: {
         min: 0,
-        max: 200,
+        max: 20,
 
         minorTickInterval: 'auto',
         minorTickWidth: 1,
-        minorTickLength: 10,
+        minorTickLength: 7,
         minorTickPosition: 'inside',
         minorTickColor: '#666',
 
-        tickPixelInterval: 30,
+        tickPixelInterval: 5,
         tickWidth: 2,
         tickPosition: 'inside',
         tickLength: 10,
@@ -90,15 +90,15 @@ title: {
         },
         plotBands: [{
             from: 0,
-            to: 120,
+            to: 5,
             color: '#c4ffa5' // green
         }, {
-            from: 120,
-            to: 160,
+            from: 5,
+            to: 10,
             color: '#ffd468' // yellow
         }, {
-            from: 160,
-            to: 200,
+            from: 10,
+            to: 35,
             color: '#ff5b5b' // red
         }]
     },
@@ -110,7 +110,7 @@ title: {
     },
     series: [{
         name: 'PM25',
-        data: [80],
+        data: [8],
 	   	dial: {
         backgroundColor: 'blue'
 	},
@@ -119,8 +119,8 @@ title: {
         },
         overshoot: 5
     },{
-        name: 'PM2524H',
-        data: [30],
+        name: 'PM25-24H',
+        data: [3],
 	dial: {
         backgroundColor: 'red'
 	},
