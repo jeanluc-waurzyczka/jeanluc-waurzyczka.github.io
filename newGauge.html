@@ -26,8 +26,7 @@ Highcharts.chart('container', {
         plotBackgroundColor: null,
         plotBackgroundImage: null,
         plotBorderWidth: 0,
-        plotShadow: false,
-        styledMode: true
+        plotShadow: false
     },
 title: {
     text: undefined
@@ -118,6 +117,11 @@ title: {
         enabled: false
     },
     series: [{
+            dataLabels: [{
+            align: 'center',
+        }, {
+            align: 'right',
+        }],
         name: 'PM2.5',
         data: [8.7],
 	   	dial: {
@@ -137,7 +141,7 @@ title: {
             valueSuffix: ' µg/m³'
         }}],
         caption: {
-        text: '<b>Qualité de l\'air-2.5µm</b><br>17 minute 25 secondes'}
+        text: '<b>Qualité de l\'air-2.5µm</b><br>18 / 16 minute 25 secondes'}
 
   });
 });
