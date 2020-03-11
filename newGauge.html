@@ -140,16 +140,26 @@ title: {
 	    credits: {
         enabled: false
     },
-    series: [{
-    
-
-    
-            dataLabels: [{
-            align: 'left',
-		  format: '{y} points'
-        }, {
-            align: 'right',
-        }],
+    series: {
+            formatter: function () {
+                var kmh = 3,
+                    mph = Math.round(kmh * 0.621);
+                return '<span style="color:#339">' + kmh + ' km/h</span><br/>' +
+                    '<span style="color:#933">' + mph + ' mph</span>';
+            },
+            backgroundColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, '#DDD'],
+                    [1, '#FFF']
+                ]
+            }
+    },
         name: 'PM2.5',
         data: [8.7],
 	   	dial: {
