@@ -105,13 +105,27 @@ title: {
 	   }, {
             from: 5,
             to: 10,
-            color: '#c4ffa5' // green
+ //           color: '#c4ffa5' // green
+             color: {
+                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#c4ffa5'],
+                    [1, '#fffb82']
+                ]
+            },
         },{
             from: 10,
-            to: 15,
-            color: '#fffb82' // yellow
+            to: 25,
+//            color: '#fffb82' // yellow
+             color: {
+                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#fffb82'],
+                    [1, '#ff2a5d']
+                ]
+            },
         }, {
-            from: 15,
+            from: 25,
             to: 35,
             color: '#ff2a5d' // red
         }]
