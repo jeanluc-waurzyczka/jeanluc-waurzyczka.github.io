@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta  charset=UTF-8"> <meta http-equiv="refresh" content="150">
+</head>
+<style>
+ body {width:200px; height:300px; overflow:hidden; margin:0; }
+ html {width:200px; height:300px; overflow:hidden; margin:0}
+ div.a {
+  text-align: center;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<body>
+
+<div id="container" style="height: 200px; width: 200px;position: relative;   margin: -15px auto -15 auto;top: 0%;"></div>
+<div class="a" id="textegauge" style="margin: 0 auto 0 auto;top: 0%;">Texte Gauge</div>
+
+
+</body>
+<script>
+	$(function () {
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+    },
+title: {
+    text: undefined
+},
+
+//    title: {
+  //      text: undefined
+  //  },
+
+    pane: {
+        startAngle: -150,
+        endAngle: 150,
+        background: [{
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#FFF'],
+                    [1, '#333']
+                ]
+            },
+            borderWidth: 0,
+            outerRadius: '109%'
+        }, {
+            backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#333'],
+                    [1, '#FFF']
+                ]
+            },
+            borderWidth: 1,
+            outerRadius: '107%'
+        }, {
+            // default background
+        }, {
+            backgroundColor: '#DDD',
+            borderWidth: 0,
+            outerRadius: '105%',
+            innerRadius: '103%'
+        }]
+    },
+
+    // the value axis
+    yAxis: {
+        min: 0,
+        max: 30,
+
+        minorTickInterval: 1,
+        minorTickWidth: 1,
+        minorTickLength: 7,
+        minorTickPosition: 'inside',
+        minorTickColor: '#666',
+
+        tickInterval: 5,
+        tickWidth: 2,
+        tickPosition: 'inside',
+        tickLength: 10,
+        tickColor: '#666',
+        labels: {
+            step: 1,
+            rotation: 'auto'
+        },
+        title: {
+            text: 'µg/m³',
+		  style: {
+			  fontSize: '14px'    
+		  },
+		  y:10
+        },
+        plotBands: [{
+            from: 0,
+            to: 5,
+//            color: '#b8dfdc' // blue
+            color: {
+                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#b8dfdc'],
+                    [1, '#c4ffa5']
+                ]
+            }
+	   }, {
+            from: 5,
+            to: 12,
+ //           color: '#c4ffa5' // green
+             color: {
+                linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#c4ffa5'],
+                    [1, '#fffb82']
+                ]
+		   }
+            }, {
+            from: 12,
+            to: 17,
+            color: '#fffb82' // red
+        },{
+            from: 17,
+            to: 25,
+//            color: '#fffb82' // yellow
+             color: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#fffb82'],
+                    [1, '#ff2a5d']
+                ]
+		   }
+        }, {
+            from: 25,
+            to: 35,
+            color: '#ff2a5d' // red
+        }]
+    },
+	exporting: {
+	enabled: false
+	},
+	    credits: {
+        enabled: false
+    },
+    series: [{
+    
+
+
+        dataLabels: {
+                    allowOverlap : true,
+                    borderWidth: 0,
+                     align: 'center',
+            formatter: function () {
+                var kmh = '43.4',
+                    mph = Math.round(kmh * 0.621);
+                return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
+                    '<span style="color:#933">' + mph + '</span>';
+            }
+            
+        },
+        name: 'PM2.5',
+        data: [15.7],
+	   	dial: {
+        backgroundColor: 'blue'
+	},
+        tooltip: {
+            valueSuffix: ' µg/m³'
+        },
+        overshoot: 5
+    },{
+        name: 'PM2.5-24H',
+        data: [12.25],
+	dial: {
+        backgroundColor: 'red'
+	},
+        tooltip: {
+            valueSuffix: ' µg/m³'
+        }}],
+
+
+  });
+});
+</script>
+
+
+</html>
