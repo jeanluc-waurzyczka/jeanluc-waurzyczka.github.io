@@ -19,12 +19,13 @@
 <body>
 
 <div id="container" style="height: 200px; width: 200px;position: relative;   margin: -15px auto -15 auto;top: 0%;"></div>
-<div class="a" id="textegauge" style="margin: 0 auto 0 auto;top: 0%;">Texte Gauge10</div>
+<div class="a" id="textegauge" style="margin: 0 auto 0 auto;top: 0%;">Texte Gauge11</div>
 
 
 </body>
 <script>
-	$(function () {
+var textelabel = '<p style="margin:auto; text-align:center; color:red;">24H: 5.7<br/></p><p style="margin:auto; text-align:center; color:blue;">19.8</p>'
+$(function () {
 Highcharts.chart('container', {
 
     chart: {
@@ -170,7 +171,7 @@ title: {
             
         },
         name: 'PM2.5',
-        data: [                {y:15,  name: '<p style="margin:auto; text-align:center; color:red;">24H: 5.7<br/></p><p style="margin:auto; text-align:center; color:blue;">19.8</p>'}],
+        data: [                {y:15,  name: textelabel}],
 	   	dial: {
         backgroundColor: 'blue'
 	},
