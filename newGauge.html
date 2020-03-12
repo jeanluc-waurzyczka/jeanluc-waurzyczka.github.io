@@ -15,8 +15,8 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <body>
 
-<div id="container" style="height: 200px; width: 190px;position: relative;   margin: -15px auto 0 auto;top: 0%;"></div>
-<div id="textegauge">Texte Gauge</div>
+<div id="container" style="height: 200px; width: 200px;position: relative;   margin: -15px auto 0 auto;top: 0%;"></div>
+<div id="textegauge" style="margin: -15px auto 0 auto;top: 0%;">Texte Gauge</div>
 
 
 </body>
@@ -156,7 +156,7 @@ title: {
                     allowOverlap : true,
                     borderWidth: 0,
             formatter: function () {
-                var kmh = '39.4',
+                var kmh = '40.4',
                     mph = Math.round(kmh * 0.621);
                 return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
                     '<span style="color:#933">' + mph + '</span>';
