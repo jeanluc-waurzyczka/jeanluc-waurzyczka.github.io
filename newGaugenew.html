@@ -19,7 +19,7 @@
 <body>
 
 <div id="container" style="height: 200px; width: 200px;position: relative;   margin: -15px auto -15 auto;top: 0%;"></div>
-<div class="a" id="textegauge" style="margin: 0 auto 0 auto;top: 0%;">Texte Gauge5</div>
+<div class="a" id="textegauge" style="margin: 0 auto 0 auto;top: 0%;">Texte Gauge6</div>
 
 
 </body>
@@ -157,18 +157,20 @@ title: {
 
         dataLabels: {
                     enabled : true,
+                    format: '{point.name}',
+                    useHTML: true,
                     allowOverlap : true,
                     borderWidth: 0,
             formatter: function () {
                 var kmh = '45.4',
                     mph = Math.round(kmh * 0.621);
                 return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
-                    '<span style="color:#933"> &nbsp; &nbsp; &nbsp; ' + mph + '</span>';
+                    '<span style="color:#933">' + mph + '</span>';
             }
             
         },
         name: 'PM2.5',
-        data: [15.7],
+        data: [                {x:1, y:2, value: 100, name: '<p style="margin:auto; text-align:center;">Long Wordssss <br/> 50</p>'}],
 	   	dial: {
         backgroundColor: 'blue'
 	},
