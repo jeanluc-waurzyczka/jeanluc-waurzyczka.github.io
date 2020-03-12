@@ -16,7 +16,7 @@
 <body>
 
 <div id="container" style="height: 100%; width: 100%;position: relative;   margin: -55px auto 0 auto;top: 0%;"></div>
-<div id="textegauge">Texte Gauge</div>
+<div id="textegauge margin: -55px auto 0 auto;">Texte Gauge</div>
 
 
 </body>
@@ -154,9 +154,9 @@ title: {
 
         dataLabels: {
                     allowOverlap : true,
-                    border : 0,
+                    borderWidth: 0,
             formatter: function () {
-                var kmh = '36.4',
+                var kmh = '37.4',
                     mph = Math.round(kmh * 0.621);
                 return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
                     '<span style="color:#933">' + mph + '</span>';
