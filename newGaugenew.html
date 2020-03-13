@@ -11,7 +11,7 @@ body {width:200px; height:300px; overflow:hidden; margin:0; }
 html {width:200px; height:300px; overflow:hidden; margin:0}
 {background-color: white; height: 100%; margin: 0; padding: 0;}
 p.a { line-height:125%; text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0; text-align: center; }
-p.b { line-height:85%; text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0; text-align: center; }
+p.b { line-height:85%; text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0; color:red; text-align: center; }
 #inner { vertical-align: middle; horizontal-align: middle; display: table-cell;}
 #chart-container { width: 100%; height: 55; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
 </style>
@@ -29,7 +29,8 @@ p.b { line-height:85%; text-decoration:none;font-family:"Noto Sans",HelveticaNeu
 
 </body>
 <script>
-var textelabel = '<p style="margin:auto; text-align:center; color:red;">24H: 5.7<br/></p><p style="margin:auto; text-align:center; color:blue;">19.8</p>'
+			var textelabel = [];
+			textelabel = '<p class=\"b\">24H: 5.7<br></p><p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">26.8</span><br>';
 $(function () {
 Highcharts.chart('container', {
 
@@ -170,8 +171,7 @@ title: {
             formatter: function () {
                 var kmh = '45.4',
                     mph = Math.round(kmh * 0.621);
-                return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
-                    '<span style="color:#933">' + mph + '</span>';
+                return textelabel;
             }
             
         },
