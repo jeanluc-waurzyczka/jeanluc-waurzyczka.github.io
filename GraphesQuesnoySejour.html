@@ -218,13 +218,13 @@ function loadAirQuality(titleText, granulation) {
 	loadData('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation);
 }
 
-/*function loadAirQualityPM25(titleText, granulation) {
+function loadAirQualityPM25(titleText, granulation) {
 	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation);
 }
 
 function loadAirQualityPM10(titleText, granulation) {
 	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation);
-}*/
+}
 
 $(document).ready(function () {
 
