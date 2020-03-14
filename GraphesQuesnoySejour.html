@@ -45,6 +45,8 @@
 <div class="chartContainer" id="graphTemperature">&nbsp;</div>
 <div class="chartContainer" id="graphHumidity">&nbsp;</div>
 <div class="chartContainer" id="graphAirQuality">&nbsp;</div>
+<div class="chartContainer" id="graphAirQualityPM25">&nbsp;</div>
+<div class="chartContainer" id="graphAirQualityPM10">&nbsp;</div>
 </p> <p>
 <a href="https://iotguru.cloud"><img src="https://iotguru.cloud/images/powered-by-logo.png" style="height:40px;"></a>
  </p></center>
@@ -65,7 +67,10 @@ var DHT22NodeShortId = 'miZTNmTp2NUtHRJQVMIR6g';
 var DHT22NodeKey = 'obsg1vFhggTMU5jPTXZJvw';
 var MQ135NodeShortId = 'miZTNmTp2NVJgb-QVMIR6g';
 var MQ135NodeKey = 'or5dOx2qSxUV44xqce1Akg';
+var SDS011NodeShortId = 'g46NIng-txc9VIjwZfMR6g';
+var SDS011NodeKey = 'q4qSlGXEBGCCyp-nIj5Prw';
 //===================================================================================================//
+
 var DeviceDescription = "";
 
 var TimeOutGraph;
@@ -109,6 +114,7 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
                            }
                       },
             xAxis: {
+		  
             type: 'datetime',
             title: {
             text: xAxisText
@@ -117,9 +123,9 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
             tickInterval: 3600 * 1000
                       },
             yAxis: {
-            title: {
-            text: yAxisText
-                           }
+					title: {
+							text: yAxisText
+						}				
                       },
             tooltip: {
             xDateFormat: '%Y-%m-%d %H:%M',
@@ -212,6 +218,14 @@ function loadAirQuality(titleText, granulation) {
 	loadData('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation);
 }
 
+/*function loadAirQualityPM25(titleText, granulation) {
+	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation);
+}
+
+function loadAirQualityPM10(titleText, granulation) {
+	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation);
+}*/
+
 $(document).ready(function () {
 
 	var granularity = 'day';
@@ -244,25 +258,33 @@ success: function (data) {
 				if (granularity === 'day') {
 				    loadTemperature('Température (journalier)', 'DAY/288');
 				    loadHumidity('Humidité (journalier)', 'DAY/288');
-				    loadAirQuality('Qualité de l\'air (journalier)', 'DAY/288');
+				    loadAirQuality('Qualité de l\'air CO2 (journalier)', 'DAY/288');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
 				}
 
 				if (granularity === 'week') {
 				    loadTemperature('Température (hebdomadaire)', 'WEEK/168');
 				    loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
-				    loadAirQuality('Qualité de l\'air (hebdomadaire)', 'WEEK/168');
+				    loadAirQuality('Qualité de l\'air CO2 (hebdomadaire)', 'WEEK/168');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (hebdomadaire)', 'WEEK/168');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (hebdomadaire)', 'WEEK/168');
 				}
 
 				if (granularity === 'month') {
 				    loadTemperature('Température (mensuel)', 'MONTH/240');
 				    loadHumidity('Humidité (mensuel)', 'MONTH/240');
-				    loadAirQuality('Qualité de l\'air (mensuel)', 'MONTH/240');               
+				    loadAirQuality('Qualité de l\'air CO2 (mensuel)', 'MONTH/240');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (mensuel)', 'MONTH/240');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (mensuel)', 'MONTH/240');
 				}
 
 				if (granularity === 'year') {
 				    loadTemperature('Température (annuel)', 'YEAR/366');
 				    loadHumidity('Humidité (annuel)', 'YEAR/366');
-				    loadAirQuality('Qualité de l\'air (annuel)', 'YEAR/366');  
+				    loadAirQuality('Qualité de l\'air CO2 (annuel)', 'YEAR/366');
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (annuel)', 'YEAR/366');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (annuel)', 'YEAR/366');
 				}
 
 				setTimeout(function () {
