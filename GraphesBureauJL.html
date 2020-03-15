@@ -256,38 +256,47 @@ success: function (data) {
 
 			function load() {
 				if (granularity === 'day') {
-				    loadTemperature('Température (journalier 2)', 'DAY/288');
-				    loadHumidity('Humidité (journalier)', 'DAY/288');
-				    loadAirQuality('Qualité de l\'air CO2 (journalier)', 'DAY/288');
+				    loadTemperature('Température (24 heures)', 'DAY/288');
+				    loadHumidity('Humidité (24 heures)', 'DAY/288');
+				    loadAirQuality('Qualité de l\'air CO2 (24 heures)', 'DAY/288');
 				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
 				    {
-					    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
-					    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
+					    loadAirQualityPM25('Qualité de l\'air PM2.5 (24 heures)', 'DAY/288');
+					    loadAirQualityPM10('Qualité de l\'air PM10 (24 heures)', 'DAY/288');
 				    }
 				}
 
 				if (granularity === 'week') {
-				    loadTemperature('Température (hebdomadaire)', 'WEEK/168');
-				    loadHumidity('Humidité (hebdomadaire)', 'WEEK/168');
-				    loadAirQuality('Qualité de l\'air CO2 (hebdomadaire)', 'WEEK/168');
-				    loadAirQualityPM25('Qualité de l\'air PM2.5 (hebdomadaire)', 'WEEK/168');
-				    loadAirQualityPM10('Qualité de l\'air PM10 (hebdomadaire)', 'WEEK/168');
+				    loadTemperature('Température (1 semaine)', 'WEEK/168');
+				    loadHumidity('Humidité (1 semaine)', 'WEEK/168');
+				    loadAirQuality('Qualité de l\'air CO2 (1 semaine)', 'WEEK/168');
+				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+				    {
+					    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 semaine)', 'DAY/288');
+					    loadAirQualityPM10('Qualité de l\'air PM10 (1 semaine)', 'DAY/288');
+				    }
 				}
 
 				if (granularity === 'month') {
-				    loadTemperature('Température (mensuel)', 'MONTH/240');
-				    loadHumidity('Humidité (mensuel)', 'MONTH/240');
-				    loadAirQuality('Qualité de l\'air CO2 (mensuel)', 'MONTH/240');
-				    loadAirQualityPM25('Qualité de l\'air PM2.5 (mensuel)', 'MONTH/240');
-				    loadAirQualityPM10('Qualité de l\'air PM10 (mensuel)', 'MONTH/240');
+				    loadTemperature('Température (1 mois)', 'MONTH/240');
+				    loadHumidity('Humidité (1 mois)', 'MONTH/240');
+				    loadAirQuality('Qualité de l\'air CO2 (1 mois)', 'MONTH/240');
+				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+				    {
+					    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 mois)', 'DAY/288');
+					    loadAirQualityPM10('Qualité de l\'air PM10 (1 mois)', 'DAY/288');
+				    }
 				}
 
 				if (granularity === 'year') {
-				    loadTemperature('Température (annuel)', 'YEAR/366');
-				    loadHumidity('Humidité (annuel)', 'YEAR/366');
-				    loadAirQuality('Qualité de l\'air CO2 (annuel)', 'YEAR/366');
-				    loadAirQualityPM25('Qualité de l\'air PM2.5 (annuel)', 'YEAR/366');
-				    loadAirQualityPM10('Qualité de l\'air PM10 (annuel)', 'YEAR/366');
+				    loadTemperature('Température (1 an)', 'YEAR/366');
+				    loadHumidity('Humidité (1 an)', 'YEAR/366');
+				    loadAirQuality('Qualité de l\'air CO2 (1 an)', 'YEAR/366');
+				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+				    {
+					    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 an)', 'DAY/288');
+					    loadAirQualityPM10('Qualité de l\'air PM10 (1 an)', 'DAY/288');
+				    }
 				}
 
 				setTimeout(function () {
