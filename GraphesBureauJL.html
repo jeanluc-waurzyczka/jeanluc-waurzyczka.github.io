@@ -42,11 +42,11 @@
 <button class="button" id="yearly" value="Yearly">An</button>
 </div>
 </p> <p>
-<div class="chartContainer" id="graphTemperature">&nbsp;</div>
-<div class="chartContainer" id="graphHumidity">&nbsp;</div>
-<div class="chartContainer" id="graphAirQuality">&nbsp;</div>
-<div class="chartContainer" id="graphAirQualityPM25">&nbsp;</div>
-<div class="chartContainer" id="graphAirQualityPM10">&nbsp;</div>
+<div class="chartContainer" id="graphTemperature"></div>
+<div class="chartContainer" id="graphHumidity">;</div>
+<div class="chartContainer" id="graphAirQuality"></div>
+<div class="chartContainer" id="graphAirQualityPM25"></div>
+<div class="chartContainer" id="graphAirQualityPM10"></div>
 <div id="errorMessage"></div>
 </p> <p>
 <a href="https://iotguru.cloud"><img src="https://iotguru.cloud/images/powered-by-logo.png" style="height:40px;"></a>
@@ -229,7 +229,7 @@ function loadAirQualityPM10(titleText, granulation) {
 
 
 function deviceFindError(xhr) {
-var TexteError = '<p><span style=\"font-size:1.25em; color:#05109B\">Impossible de lire les données actuellement pour le Device: ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '</span></p>';
+var TexteError = '<p><span style=\"font-size:1.25em; color:#05109B\"><br>Impossible de lire les données actuellement pour le Device: ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '<br><br></span></p>';
 	document.getElementById("errorMessage").innerHTML = TexteError;
 }
 
