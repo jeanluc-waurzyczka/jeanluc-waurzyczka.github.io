@@ -67,8 +67,8 @@ var DHT22NodeShortId = 'jDP5ZAlISh60rN5wWYIR6g';
 var DHT22NodeKey = 'iGW59GU2BO6VKDCptEFNrA';
 var MQ135NodeShortId = 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey = 'sd6iASTvnDK5_G45gj1EfA';
-var SDS011NodeShortId = 'tGib1WSRvEE5Mp-gYUgR6g';
-var SDS011NodeKey = 'qXlMZEFnR1DTs90DwDRGbQ';
+//var SDS011NodeShortId = 'tGib1WSRvEE5Mp-gYUgR6g';
+//var SDS011NodeKey = 'qXlMZEFnR1DTs90DwDRGbQ';
 //===================================================================================================//
 
 var DeviceDescription = "";
@@ -256,11 +256,15 @@ success: function (data) {
 
 			function load() {
 				if (granularity === 'day') {
-				    loadTemperature('Température (journalier)', 'DAY/288');
+				    loadTemperature('Température (journalier 1)', 'DAY/288');
 				    loadHumidity('Humidité (journalier)', 'DAY/288');
 				    loadAirQuality('Qualité de l\'air CO2 (journalier)', 'DAY/288');
-				    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
-				    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
+				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+				    {
+					    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
+					    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
+				    }
+				}
 				}
 
 				if (granularity === 'week') {
