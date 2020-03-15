@@ -128,7 +128,50 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 					title: {
 							text: yAxisText
 						},	
-	 
+        plotBands: [{
+            from: 0,
+            to: 5,
+//            color: '#b8dfdc' // blue
+            color: {
+                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#b8dfdc'],
+                    [1, '#c4ffa5']
+                ]
+            }
+	   }, {
+            from: 5,
+            to: 12,
+ //           color: '#c4ffa5' // green
+             color: {
+                linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#c4ffa5'],
+                    [1, '#fffb82']
+                ]
+		   }
+            }, {
+            from: 12,
+            to: 17,
+            color: '#fffb82' // yellow
+        },{
+            from: 17,
+            to: 25,
+//            color: '#fffb82' // yellow
+             color: {
+                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                stops: [
+                    [0, '#fffb82'],
+                    [1, '#ff2a5d']
+                ]
+		   }
+        }, {
+            from: 25,
+            to: Infinity,
+            color: '#ff2a5d' // red
+        }]
+
+		 
                       },
             tooltip: {
             xDateFormat: '%Y-%m-%d %H:%M',
