@@ -47,6 +47,7 @@
 <div class="chartContainer" id="graphAirQuality">&nbsp;</div>
 <div class="chartContainer" id="graphAirQualityPM25">&nbsp;</div>
 <div class="chartContainer" id="graphAirQualityPM10">&nbsp;</div>
+<div id="errorMessage"></div>
 </p> <p>
 <a href="https://iotguru.cloud"><img src="https://iotguru.cloud/images/powered-by-logo.png" style="height:40px;"></a>
  </p></center>
@@ -72,8 +73,8 @@ var SDS011NodeKey = 'qXlMZEFnR1DTs90DwDRGbQ';
 //===================================================================================================//
 
 var DeviceDescription = "";
-
 var TimeOutGraph;
+var TexteError = "";
 
 function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
 	return $.ajax({
@@ -224,6 +225,12 @@ function loadAirQualityPM25(titleText, granulation) {
 
 function loadAirQualityPM10(titleText, granulation) {
 	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation);
+}
+
+
+function lastValuesListError(xhr) {
+var TexteError = '<p><span style=\"font-size:1.25em; color:#05109B\">Impossible de lire les données actuellement pour le Device: ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '</span></p>';
+	document.getElementById("errorMessage").innerHTML = TexteError;
 }
 
 $(document).ready(function () {
