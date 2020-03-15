@@ -29,6 +29,7 @@
 	.active, .button:focus {
         background-color: lightblue;
 	}
+	p.a { line-height:125%; text-decoration:none;font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0; text-align: center; }
 	
 </style>
 
@@ -229,7 +230,7 @@ function loadAirQualityPM10(titleText, granulation) {
 
 
 function deviceFindError(xhr) {
-var TexteError = '<p><span style=\"font-size:1.25em; color:#05109B\"><br><br>Impossible de lire les données actuellement pour le Device: ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '<br><br></span></p>';
+var TexteError = '<p class="a"><span style=\"font-size:1.5em; color:#05109B\"><br><br>Impossible de lire actuellement les données pour : ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '<br><br></span></p>';
 	document.getElementById("errorMessage").innerHTML = TexteError;
 }
 
