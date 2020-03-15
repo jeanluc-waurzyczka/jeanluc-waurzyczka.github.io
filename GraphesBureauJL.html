@@ -127,7 +127,12 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
             yAxis: {
 					title: {
 							text: yAxisText
-						}				
+						},	
+						            plotBands: [{
+            color: 'yellow',
+            from: 45,
+            to: 75
+								  }]
                       },
             tooltip: {
             xDateFormat: '%Y-%m-%d %H:%M',
@@ -164,15 +169,7 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 				}
 			 }
             },
-		  plotBands: [{
-			  from: 0,
-			  to: 25,
-			  color: 'lightgreen'
-			},{
-			  from: 25,
-			  to: 30,
-			  color: 'yellow'
-			  }],
+
 
             series: [{
 			 name: 'Moyenne',
