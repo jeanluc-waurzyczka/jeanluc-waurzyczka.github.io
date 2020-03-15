@@ -259,8 +259,11 @@ success: function (data) {
 				    loadTemperature('Température (journalier)', 'DAY/288');
 				    loadHumidity('Humidité (journalier)', 'DAY/288');
 				    loadAirQuality('Qualité de l\'air CO2 (journalier)', 'DAY/288');
-				    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
-				    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
+				    if (SDS011NodeShortId !=== undefined && SDS011NodeShortId !=== null)
+				    {
+					    loadAirQualityPM25('Qualité de l\'air PM2.5 (journalier)', 'DAY/288');
+					    loadAirQualityPM10('Qualité de l\'air PM10 (journalier)', 'DAY/288');
+				    }
 				}
 
 				if (granularity === 'week') {
