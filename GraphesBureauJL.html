@@ -69,31 +69,31 @@ var MQ135NodeShortId	= 'miZTNmTp2NVJgb-QVMIR6g';
 var MQ135NodeKey		= 'or5dOx2qSxUV44xqce1Akg';
 var SDS011NodeShortId	= 'g46NIng-txc9VIjwZfMR6g';
 var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
-var EndFullBlue		= 18;
-var StartFullGreen		= 21;
-var EndFullGreen		= 24;
-var StartFullYellow		= 27;
-var EndFullYellow		= 29;
-var StartFullRed		= 34;
+var t_EndFullBlue		= 18;
+var t_StartFullGreen	= 21;
+var t_EndFullGreen		= 24;
+var t_StartFullYellow	= 27;
+var t_EndFullYellow		= 29;
+var t_StartFullRed		= 34;
 //===================================================================================================//
 
 var DeviceDescription = "";
 var TimeOutGraph;
 var TexteError = "";
 
-function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
+function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	return $.ajax({
 		type: "GET",
 		url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
 		dataType: "json",
 		success: function (data)
 		{
-			processData(target, titleText, xAxisText, yAxisText, granulation, data);
+			processData(target, titleText, xAxisText, yAxisText, granulation, data, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
 }
 
-function processData(target, titleText, xAxisText, yAxisText, granulation, data) {
+function processData(target, titleText, xAxisText, yAxisText, granulation, data, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var averages = [];
 	var ranges = [];
 	for (var i = 0; i < data[0]["data"].length; i++) {
@@ -260,7 +260,7 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 
 
 function loadTemperature(titleText, granulation) {
-	loadData('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation);
+	loadData('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
 }
 
 function loadHumidity(titleText, granulation) {
