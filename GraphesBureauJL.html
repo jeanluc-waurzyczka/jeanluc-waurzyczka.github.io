@@ -58,17 +58,23 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <script>
-
-//============================================ Bureau JL ============================================//
-var DeviceWebPage = 'bureaujl';
-var DeviceShortId = 'jDP5ZAlISh55VYYQWYIR6g';
-var DeviceKey = 'huodYngtUDGO58-Q8-VFLw';
-var DHT22NodeShortId = 'jDP5ZAlISh60rN5wWYIR6g';
-var DHT22NodeKey = 'iGW59GU2BO6VKDCptEFNrA';
-var MQ135NodeShortId = 'jDP5ZAlISh7TWX_gWYIR6g';
-var MQ135NodeKey = 'sd6iASTvnDK5_G45gj1EfA';
-var SDS011NodeShortId = 'tGib1WSRvEE5Mp-gYUgR6g';
-var SDS011NodeKey = 'qXlMZEFnR1DTs90DwDRGbQ';
+	
+//========================================== Quesnoy Séjour =========================================//
+var DeviceWebPage		= 'quesnoysejour';
+var DeviceShortId		= 'rjVNHiEP7lOaoHYQVMER6g';
+var DeviceKey			= 'rgYImh2t5HBX8NGcrXFClg';
+var DHT22NodeShortId	= 'miZTNmTp2NUtHRJQVMIR6g';
+var DHT22NodeKey		= 'obsg1vFhggTMU5jPTXZJvw';
+var MQ135NodeShortId	= 'miZTNmTp2NVJgb-QVMIR6g';
+var MQ135NodeKey		= 'or5dOx2qSxUV44xqce1Akg';
+var SDS011NodeShortId	= 'g46NIng-txc9VIjwZfMR6g';
+var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
+var EndFullBlue		= 18;
+var StartFullGreen		= 21;
+var EndFullGreen		= 24;
+var StartFullYellow		= 27;
+var EndFullYellow		= 29;
+var StartFullRed		= 34;
 //===================================================================================================//
 
 var DeviceDescription = "";
@@ -127,11 +133,11 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 			},	
 			plotBands: [{
 				from: -Infinity,
-				to: 18,
+				to: EndFullBlue,
 				color: '#dbefed' // blue pure
 					   },{
-				from: 18,
-				to: 21,
+				from: EndFullBlue,
+				to: StartFullGreen,
 				//color: '#b8dfdc' // blue to green
 				color: {
 				    linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
@@ -141,12 +147,12 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 				    ]
 				}
 					   }, {
-				from: 21,
-				to: 24,
+				from: StartFullGreen,
+				to: EndFullGreen,
 				color: '#d5ffbf' // green pure
 					   },{
-				from: 24,
-				to: 27,
+				from: EndFullGreen,
+				to: StartFullYellow,
 				 //           color: '#c4ffa5' // green to yellow
 				 color: {
 				    linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
@@ -156,12 +162,12 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 				    ]
 						   }
 				}, {
-				from: 27,
-				to: 29,
+				from: StartFullYellow,
+				to: EndFullYellow,
 				color: '#fffdb5' // yellow
 					   },{
-				from: 29,
-				to: 34,
+				from: EndFullYellow,
+				to: StartFullRed,
 				//color: '#fffb82' // yellow to red
 				 color: {
 				    linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
@@ -171,7 +177,7 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 				    ]
 						   }
 					   }, {
-				from: 34,
+				from: StartFullRed,
 				to: Infinity,
 				color: '#ffabbf' // red
 			}]
