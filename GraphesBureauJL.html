@@ -58,7 +58,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <script>
-	
+
 //========================================== Quesnoy Séjour =========================================//
 var DeviceWebPage		= 'quesnoysejour';
 var DeviceShortId		= 'rjVNHiEP7lOaoHYQVMER6g';
@@ -69,12 +69,27 @@ var MQ135NodeShortId	= 'miZTNmTp2NVJgb-QVMIR6g';
 var MQ135NodeKey		= 'or5dOx2qSxUV44xqce1Akg';
 var SDS011NodeShortId	= 'g46NIng-txc9VIjwZfMR6g';
 var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
+//	Temperature
 var t_EndFullBlue		= 18;
 var t_StartFullGreen	= 21;
 var t_EndFullGreen		= 24;
 var t_StartFullYellow	= 27;
 var t_EndFullYellow		= 29;
 var t_StartFullRed		= 34;
+//===================================================================================================//
+
+
+//===================================================================================================//
+//=================================== Common colors parameters ======================================//
+//===================================================================================================//
+
+//=========================================== Humidity ============================================//
+var h_EndFullBlue		= 35;
+var h_StartFullGreen	= 45;
+var h_EndFullGreen		= 55;
+var h_StartFullYellow	= 65;
+var h_EndFullYellow		= 75;
+var h_StartFullRed		= 85;
 //===================================================================================================//
 
 var DeviceDescription = "";
@@ -264,7 +279,7 @@ function loadTemperature(titleText, granulation) {
 }
 
 function loadHumidity(titleText, granulation) {
-	loadData('graphHumidity', titleText + ' - ' + DeviceDescription, 'Date et heure', '%', DHT22NodeShortId, 'humidity', granulation);
+	loadData('graphHumidity', titleText + ' - ' + DeviceDescription, 'Date et heure', '%', DHT22NodeShortId, 'humidity', granulation, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
 }
 
 function loadAirQuality(titleText, granulation) {
