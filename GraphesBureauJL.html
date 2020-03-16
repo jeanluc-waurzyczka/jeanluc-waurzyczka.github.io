@@ -79,13 +79,13 @@ var TexteError = "";
 
 function loadData(target, titleText, xAxisText, yAxisText, nodeId, fieldName, granulation) {
 	return $.ajax({
-            type: "GET",
-            url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
-            dataType: "json",
-            success: function (data)
-                        {
-                           processData(target, titleText, xAxisText, yAxisText, granulation, data);
-                        }
+		type: "GET",
+		url: 'https://api.iotguru.cloud/measurement/loadByNodeId/' + nodeId + '/' + fieldName + '/' + granulation,
+		dataType: "json",
+		success: function (data)
+		{
+			processData(target, titleText, xAxisText, yAxisText, granulation, data);
+		}
 	});
 }
 
@@ -130,45 +130,53 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 						},	
         plotBands: [{
             from: 0,
-            to: 5,
-//            color: '#b8dfdc' // blue
+            to: 19,
+            color: '#dbefed' // blue pure
+        },{
+            from: 19,
+            to: 21,
+//            color: '#b8dfdc' // blue to green
             color: {
                 linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
                 stops: [
-                    [0, '#b8dfdc'],
-                    [1, '#c4ffa5']
+                    [0, '#dbefed'],
+                    [1, '#d5ffbf']
                 ]
             }
 	   }, {
-            from: 5,
-            to: 12,
- //           color: '#c4ffa5' // green
+            from: 21,
+            to: 24,
+            color: '#d5ffbf' // green pure
+        }{
+            from: 24,
+            to: 27,
+ //           color: '#c4ffa5' // green to yellow
              color: {
                 linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
                 stops: [
-                    [0, '#c4ffa5'],
-                    [1, '#fffb82']
+                    [0, '#d5ffbf'],
+                    [1, '#fffdb5']
                 ]
 		   }
             }, {
-            from: 12,
-            to: 17,
-            color: '#fffb82' // yellow
+            from: 27,
+            to: 29,
+            color: '#fffdb5' // yellow
         },{
-            from: 17,
-            to: 25,
+            from: 29,
+            to: 32,
 //            color: '#fffb82' // yellow
              color: {
                 linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
                 stops: [
-                    [0, '#fffb82'],
-                    [1, '#ff2a5d']
+                    [0, '#fffdb5'],
+                    [1, '#ffabbf']
                 ]
 		   }
         }, {
-            from: 25,
+            from: 32,
             to: Infinity,
-            color: '#ff2a5d' // red
+            color: '#ffabbf' // red
         }]
 
 		 
