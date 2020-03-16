@@ -60,21 +60,21 @@
 <script>
 
 //========================================== Chambre AM JL ==========================================//
-var DeviceWebPage = 'chbreamjl';
-var DeviceShortId = 'ssbN5XnOFjPOG-JwJikR6g';
-var DeviceKey = 'jDy2YhGGVqPbRrxg_fhKeA';
-var DHT22NodeShortId = 'ssbN5XnOFjPkXEuwJikR6g';
-var DHT22NodeKey = 'kLfpkfHoA3mUXPHYVJRPuA';
-var MQ135NodeShortId = 'uK-Ls4AXTQ70cZMgJikR6g';
-var MQ135NodeKey = 'pcDXKnx5e0WFRUjqOVZFzQ';
-var SDS011NodeShortId = '';
-var SDS011NodeKey = '';
+var DeviceWebPage		= 'chbreamjl';
+var DeviceShortId		= 'ssbN5XnOFjPOG-JwJikR6g';
+var DeviceKey			= 'jDy2YhGGVqPbRrxg_fhKeA';
+var DHT22NodeShortId	= 'ssbN5XnOFjPkXEuwJikR6g';
+var DHT22NodeKey		= 'kLfpkfHoA3mUXPHYVJRPuA';
+var MQ135NodeShortId	= 'uK-Ls4AXTQ70cZMgJikR6g';
+var MQ135NodeKey		= 'pcDXKnx5e0WFRUjqOVZFzQ';
+var SDS011NodeShortId	= '';
+var SDS011NodeKey		= '';
 //	Temperature
 var t_EndFullBlue		= 15;
 var t_StartFullGreen	= 17;
-var t_EndFullGreen		= 19;
-var t_StartFullYellow	= 21;
-var t_EndFullYellow		= 24;
+var t_EndFullGreen		= 20;
+var t_StartFullYellow	= 22;
+var t_EndFullYellow		= 25;
 var t_StartFullRed		= 27;
 //===================================================================================================//
 
@@ -354,7 +354,7 @@ $(document).ready(function () {
 			    loadTemperature('Température (24 heures)', 'DAY/288');
 			    loadHumidity('Humidité (24 heures)', 'DAY/288');
 			    loadAirQuality('Qualité de l\'air CO2 (24 heures)', 'DAY/288');
-			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== "")
+			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
 			    {
 				    loadAirQualityPM25('Qualité de l\'air PM2.5 (24 heures)', 'DAY/288');
 				    loadAirQualityPM10('Qualité de l\'air PM10 (24 heures)', 'DAY/288');
