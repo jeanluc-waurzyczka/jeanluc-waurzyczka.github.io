@@ -19,13 +19,11 @@
         border: none;
         transition: all 0.4s ease 0s;
      }
-
     .button:hover {
         background-color: lightblue;
 	   box-shadow: 0 4px 8px 0 blue,0 2px 5px 0 blue;
 	   font-weight: bold;
      }
-	
 	.active, .button:focus {
         background-color: lightblue;
 	}
@@ -96,97 +94,94 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 		averages.push([data[0]["data"][i][0], data[0]["data"][i][1]]);
 		ranges.push([data[0]["data"][i][0], data[0]["data"][i][2], data[0]["data"][i][3]]);
 	}
-	
-	var options = {
-            time: {
-            useUTC: false
-                      },
-            title: {
-            text: titleText,
-                      },
-            chart: {
-		  height: '550',
-            type: 'spline',
-            renderTo: target,
-            events: {
-            load: function () {
-                                },
-            redraw: function () {
-                                }
-                           }
-                      },
-            xAxis: {
-		  
-            type: 'datetime',
-            title: {
-            text: xAxisText
-                           },
-            gridLineWidth: 1,
-            tickInterval: 3600 * 1000
-                      },
-            yAxis: {
-					title: {
-							text: yAxisText
-						},	
-        plotBands: [{
-            from: 0,
-            to: 18,
-            color: '#dbefed' // blue pure
-        },{
-            from: 18,
-            to: 21,
-//            color: '#b8dfdc' // blue to green
-            color: {
-                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
-                stops: [
-                    [0, '#dbefed'],
-                    [1, '#d5ffbf']
-                ]
-            }
-	   }, {
-            from: 21,
-            to: 24,
-            color: '#d5ffbf' // green pure
-        },{
-            from: 24,
-            to: 27,
- //           color: '#c4ffa5' // green to yellow
-             color: {
-                linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
-                stops: [
-                    [0, '#d5ffbf'],
-                    [1, '#fffdb5']
-                ]
-		   }
-            }, {
-            from: 27,
-            to: 29,
-            color: '#fffdb5' // yellow
-        },{
-            from: 29,
-            to: 34,
-//            color: '#fffb82' // yellow to red
-             color: {
-                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
-                stops: [
-                    [0, '#fffdb5'],
-                    [1, '#ffabbf']
-                ]
-		   }
-        }, {
-            from: 34,
-            to: Infinity,
-            color: '#ffabbf' // red
-        }]
 
-		 
-                      },
-            tooltip: {
-            xDateFormat: '%Y-%m-%d %H:%M',
-            shared: true
-                      },
-            plotOptions: {
-			 spline: {
+	var options = {
+		time: {
+			useUTC: false
+		},
+		title: {
+			text: titleText,
+		},
+		chart: {
+			height: '550',
+			type: 'spline',
+			renderTo: target,
+			events: {
+				load: function () {
+					   },
+				redraw: function () {
+					   }
+			}
+		},
+		xAxis: {				  
+			type: 'datetime',
+			title: {
+			text: xAxisText
+			   },
+			gridLineWidth: 1,
+			tickInterval: 3600 * 1000
+		},
+		yAxis: {
+			title: {
+				text: yAxisText
+			},	
+			plotBands: [{
+				from: 0,
+				to: 18,
+				color: '#dbefed' // blue pure
+					   },{
+				from: 18,
+				to: 21,
+				//color: '#b8dfdc' // blue to green
+				color: {
+				    linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+				    stops: [
+					   [0, '#dbefed'],
+					   [1, '#d5ffbf']
+				    ]
+				}
+					   }, {
+				from: 21,
+				to: 24,
+				color: '#d5ffbf' // green pure
+					   },{
+				from: 24,
+				to: 27,
+				 //           color: '#c4ffa5' // green to yellow
+				 color: {
+				    linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
+				    stops: [
+					   [0, '#d5ffbf'],
+					   [1, '#fffdb5']
+				    ]
+						   }
+				}, {
+				from: 27,
+				to: 29,
+				color: '#fffdb5' // yellow
+					   },{
+				from: 29,
+				to: 34,
+				//color: '#fffb82' // yellow to red
+				 color: {
+				    linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+				    stops: [
+					   [0, '#fffdb5'],
+					   [1, '#ffabbf']
+				    ]
+						   }
+					   }, {
+				from: 34,
+				to: Infinity,
+				color: '#ffabbf' // red
+			}]
+		},
+		tooltip: {
+			xDateFormat: '%Y-%m-%d %H:%M',
+			shared: true
+			},
+		plotOptions: {
+			spline: {
 				lineWidth: 2,
 				states: {
 				hover: {
@@ -215,39 +210,39 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 					}
 				}
 			 }
-            },
+		  },
 
 
-            series: [{
-			 name: 'Moyenne',
-			 data: averages,
-			 type: 'spline',
-			 zIndex: 1,
-			 marker: {
-				fillColor: 'white',
-				lineWidth: 2,
-				lineColor: Highcharts.getOptions().colors[0]
-			 }
-            }, {
-			 name: 'Range',
-			 data: ranges,
-			 type: 'arearange',
-			 lineWidth: 0,
-			 linkedTo: ':previous',
-			 color: Highcharts.getOptions().colors[0],
-			 fillColor: {
-				linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
-				stops: [
-								[0, 'rgba(255, 0, 0, 0.1)'],
-								[1, 'rgba(0, 0, 255, 0.1)']
-								]
-			 },
-			 zIndex: 0,
-			 marker: {
-			 enabled: false
-						 }
-                      }]
-            };
+			  series: [{
+				 name: 'Moyenne',
+				 data: averages,
+				 type: 'spline',
+				 zIndex: 1,
+				 marker: {
+					fillColor: 'white',
+					lineWidth: 2,
+					lineColor: Highcharts.getOptions().colors[0]
+				 }
+			  }, {
+				 name: 'Range',
+				 data: ranges,
+				 type: 'arearange',
+				 lineWidth: 0,
+				 linkedTo: ':previous',
+				 color: Highcharts.getOptions().colors[0],
+				 fillColor: {
+					linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+					stops: [
+						[0, 'rgba(255, 0, 0, 0.1)'],
+						[1, 'rgba(0, 0, 255, 0.1)']
+					]
+				},
+				zIndex: 0,
+				marker: {
+				enabled: false
+				}
+			}]
+	};
 
 	var chart = new Highcharts.Chart(options);
 	if (window.location.hash.indexOf('filter') > 0) {
@@ -283,7 +278,7 @@ function loadAirQualityPM10(titleText, granulation) {
 
 
 function deviceFindError(xhr) {
-var TexteError = '<p class="a"><span style=\"font-size:1.125em; color:red\"><br><br>Impossible de lire actuellement les données pour : ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '<br><br></span></p>';
+	var TexteError = '<p class="a"><span style=\"font-size:1.125em; color:red\"><br><br>Impossible de lire actuellement les données pour : ' + DeviceWebPage + ' ShortId: ' + DeviceShortId + '<br><br></span></p>';
 	document.getElementById("errorMessage").innerHTML = TexteError;
 }
 
@@ -291,101 +286,102 @@ $(document).ready(function () {
 
 	var granularity = 'day';
 	TimeOutGraph = 150000;
-		$.ajax({
-type: "GET",
-url: '//api.iotguru.live/device/find/' + DeviceShortId,
-dataType: "json",
-	beforeSend: function (xhr) {
-			var accessToken =  Cookies.get('accessToken');
-			if (accessToken) {
-				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-			}
-	},
-success: function (data) {
-			DeviceDescription = data.description;
-				// Add active class to the current button (sets it to light blue)
-			var header = document.getElementById("mybuttonDIV");
-			var btns = header.getElementsByClassName("button");
-			
-			for (var i = 0; i < btns.length; i++) {
-				btns[i].addEventListener("click", function() {
-					var current = document.getElementsByClassName("active");
-					current[0].className = current[0].className.replace(" active", "");
-					this.className += " active";
-					});
-			}
-
-			function load() {
-				if (granularity === 'day') {
-				    loadTemperature('Température (24 heures)', 'DAY/288');
-				    loadHumidity('Humidité (24 heures)', 'DAY/288');
-				    loadAirQuality('Qualité de l\'air CO2 (24 heures)', 'DAY/288');
-				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
-				    {
-					    loadAirQualityPM25('Qualité de l\'air PM2.5 (24 heures)', 'DAY/288');
-					    loadAirQualityPM10('Qualité de l\'air PM10 (24 heures)', 'DAY/288');
-				    }
+	$.ajax({
+	type: "GET",
+	url: '//api.iotguru.live/device/find/' + DeviceShortId,
+	dataType: "json",
+		beforeSend: function (xhr) {
+				var accessToken =  Cookies.get('accessToken');
+				if (accessToken) {
+					xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 				}
-
-				if (granularity === 'week') {
-				    loadTemperature('Température (1 semaine)', 'WEEK/168');
-				    loadHumidity('Humidité (1 semaine)', 'WEEK/168');
-				    loadAirQuality('Qualité de l\'air CO2 (1 semaine)', 'WEEK/168');
-				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
-				    {
-					    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 semaine)', 'WEEK/168');
-					    loadAirQualityPM10('Qualité de l\'air PM10 (1 semaine)', 'WEEK/168');
-				    }
-				}
-
-				if (granularity === 'month') {
-				    loadTemperature('Température (1 mois)', 'MONTH/240');
-				    loadHumidity('Humidité (1 mois)', 'MONTH/240');
-				    loadAirQuality('Qualité de l\'air CO2 (1 mois)', 'MONTH/240');
-				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
-				    {
-					    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 mois)', 'MONTH/240');
-					    loadAirQualityPM10('Qualité de l\'air PM10 (1 mois)', 'MONTH/240');
-				    }
-				}
-
-				if (granularity === 'year') {
-				    loadTemperature('Température (1 an)', 'YEAR/366');
-				    loadHumidity('Humidité (1 an)', 'YEAR/366');
-				    loadAirQuality('Qualité de l\'air CO2 (1 an)', 'YEAR/366');
-				    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
-				    {
-					    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 an)', 'YEAR/366');
-					    loadAirQualityPM10('Qualité de l\'air PM10 (1 an)', 'YEAR/366');
-				    }
-				}
-
-				setTimeout(function () {
-					load();
-					}, TimeOutGraph);    
-			}
-
-			$('#daily').click(function() {
-			   granularity = 'day'; TimeOutGraph = 150000; load ();
-			   });
-			$('#weekly').click(function() {
-			   granularity = 'week'; TimeOutGraph = 1800000; load();
-			   });
-			$('#monthly').click(function() {
-			   granularity = 'month'; TimeOutGraph = 5400000; load();
-			   });
-			$('#yearly').click(function() {
-			   granularity = 'year'; TimeOutGraph = 43200000; load();
-			   });
-
-			load();
-
-			},
-
-error: function (xhr) {
-	deviceFindError(xhr);
+		},
+	success: function (data) {
+		DeviceDescription = data.description;
+			// Add active class to the current button (sets it to light blue)
+		var header = document.getElementById("mybuttonDIV");
+		var btns = header.getElementsByClassName("button");
+		
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].addEventListener("click", function() {
+				var current = document.getElementsByClassName("active");
+				current[0].className = current[0].className.replace(" active", "");
+				this.className += " active";
+			});
 		}
-});
+
+		function load() {
+			if (granularity === 'day') {
+			    loadTemperature('Température (24 heures)', 'DAY/288');
+			    loadHumidity('Humidité (24 heures)', 'DAY/288');
+			    loadAirQuality('Qualité de l\'air CO2 (24 heures)', 'DAY/288');
+			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+			    {
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (24 heures)', 'DAY/288');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (24 heures)', 'DAY/288');
+			    }
+			}
+
+			if (granularity === 'week') {
+			    loadTemperature('Température (1 semaine)', 'WEEK/168');
+			    loadHumidity('Humidité (1 semaine)', 'WEEK/168');
+			    loadAirQuality('Qualité de l\'air CO2 (1 semaine)', 'WEEK/168');
+			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+			    {
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 semaine)', 'WEEK/168');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (1 semaine)', 'WEEK/168');
+			    }
+			}
+
+			if (granularity === 'month') {
+			    loadTemperature('Température (1 mois)', 'MONTH/240');
+			    loadHumidity('Humidité (1 mois)', 'MONTH/240');
+			    loadAirQuality('Qualité de l\'air CO2 (1 mois)', 'MONTH/240');
+			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+			    {
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 mois)', 'MONTH/240');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (1 mois)', 'MONTH/240');
+			    }
+			}
+
+			if (granularity === 'year') {
+			    loadTemperature('Température (1 an)', 'YEAR/366');
+			    loadHumidity('Humidité (1 an)', 'YEAR/366');
+			    loadAirQuality('Qualité de l\'air CO2 (1 an)', 'YEAR/366');
+			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+			    {
+				    loadAirQualityPM25('Qualité de l\'air PM2.5 (1 an)', 'YEAR/366');
+				    loadAirQualityPM10('Qualité de l\'air PM10 (1 an)', 'YEAR/366');
+			    }
+			}
+
+			setTimeout(function () {
+				load();
+				},
+				TimeOutGraph);    
+		}
+
+		$('#daily').click(function() {
+		   granularity = 'day'; TimeOutGraph = 150000; load ();
+		   });
+		$('#weekly').click(function() {
+		   granularity = 'week'; TimeOutGraph = 1800000; load();
+		   });
+		$('#monthly').click(function() {
+		   granularity = 'month'; TimeOutGraph = 5400000; load();
+		   });
+		$('#yearly').click(function() {
+		   granularity = 'year'; TimeOutGraph = 43200000; load();
+		   });
+
+		load();
+
+	},
+
+	error: function (xhr) {
+		deviceFindError(xhr);
+	}
+	});
 });
 
 
