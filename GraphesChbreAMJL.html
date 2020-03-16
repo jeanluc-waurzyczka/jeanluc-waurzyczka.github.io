@@ -354,7 +354,7 @@ $(document).ready(function () {
 			    loadTemperature('Température (24 heures)', 'DAY/288');
 			    loadHumidity('Humidité (24 heures)', 'DAY/288');
 			    loadAirQuality('Qualité de l\'air CO2 (24 heures)', 'DAY/288');
-			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+			    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== "")
 			    {
 				    loadAirQualityPM25('Qualité de l\'air PM2.5 (24 heures)', 'DAY/288');
 				    loadAirQualityPM10('Qualité de l\'air PM10 (24 heures)', 'DAY/288');
