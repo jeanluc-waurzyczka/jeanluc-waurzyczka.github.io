@@ -83,13 +83,34 @@ var t_StartFullRed		= 34;
 //=================================== Common colors parameters ======================================//
 //===================================================================================================//
 
-//=========================================== Humidity ============================================//
+//============================================ Humidity =============================================//
 var h_EndFullBlue		= 35;
 var h_StartFullGreen	= 45;
 var h_EndFullGreen		= 55;
 var h_StartFullYellow	= 65;
 var h_EndFullYellow		= 75;
 var h_StartFullRed		= 85;
+//======================================== airquality (CO2) =========================================//
+var aqc_EndFullBlue		= 400;
+var aqc_StartFullGreen	= 415;
+var aqc_EndFullGreen	= 550;
+var aqc_StartFullYellow	= 600;
+var aqc_EndFullYellow	= 900;
+var aqc_StartFullRed	= 1000;
+//======================================= airquality (PM2.5) ========================================//
+var aq25_EndFullBlue	= -1;
+var aq25_StartFullGreen	= 0;
+var aq25_EndFullGreen	= 5;
+var aq25_StartFullYellow	= 10;
+var aq25_EndFullYellow	= 17;
+var aq25_StartFullRed	= 25;
+//======================================= airquality (PM10) =========================================//
+var aq10_EndFullBlue	= 400;
+var aq10_StartFullGreen	= 415;
+var aq10_EndFullGreen	= 550;
+var aq10_StartFullYellow	= 600;
+var aq10_EndFullYellow	= 900;
+var aq10_StartFullRed	= 1000;
 //===================================================================================================//
 
 var DeviceDescription = "";
@@ -283,15 +304,15 @@ function loadHumidity(titleText, granulation) {
 }
 
 function loadAirQuality(titleText, granulation) {
-	loadData('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation);
+	loadData('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
 }
 
 function loadAirQualityPM25(titleText, granulation) {
-	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation);
+	loadData('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
 }
 
 function loadAirQualityPM10(titleText, granulation) {
-	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation);
+	loadData('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation, aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
 }
 
 
