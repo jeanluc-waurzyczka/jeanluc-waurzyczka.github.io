@@ -130,10 +130,10 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
 						},	
         plotBands: [{
             from: 0,
-            to: 19,
+            to: 18,
             color: '#dbefed' // blue pure
         },{
-            from: 19,
+            from: 18,
             to: 21,
 //            color: '#b8dfdc' // blue to green
             color: {
@@ -164,8 +164,8 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
             color: '#fffdb5' // yellow
         },{
             from: 29,
-            to: 32,
-//            color: '#fffb82' // yellow
+            to: 34,
+//            color: '#fffb82' // yellow to red
              color: {
                 linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
                 stops: [
@@ -174,7 +174,7 @@ function processData(target, titleText, xAxisText, yAxisText, granulation, data)
                 ]
 		   }
         }, {
-            from: 32,
+            from: 34,
             to: Infinity,
             color: '#ffabbf' // red
         }]
