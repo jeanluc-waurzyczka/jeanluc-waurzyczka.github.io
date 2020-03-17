@@ -11,7 +11,7 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <body>
-     
+
 <div id="chart-container">
 <p id="AffichageTitre" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
 <style type="text/css">
@@ -406,6 +406,7 @@ function loadData()
 }
 
 $(document).ready(function () {
+     loadCredentileFile();
      deviceFind();
     //loadSingle('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
     //loadSingle('graphHumidity', titleText + ' - ' + DeviceDescription, 'Date et heure', '%', DHT22NodeShortId, 'humidity', granulation, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
@@ -418,6 +419,4 @@ $(document).ready(function () {
     }
 });
 </script>
-
-
 </html>
