@@ -386,7 +386,7 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
             },
             name: 'PM2.5-24H',
  //           data: JSON.parse("[" + val24H + "]"),
-                    data: [                {y:15,  name: '<p style="margin:auto; text-align:center; color:blue;">24H 5.7<br/></p><p style="margin:auto; text-align:center; color:red;">19.8</p>'}],
+                    data: [                {y:JSON.parse("[" + val24H + "]"),  name: '<p style="margin:auto; text-align:center; color:blue;">24H 5.7<br/></p><p style="margin:auto; text-align:center; color:red;">19.8</p>'}],
 
             dial: {
                 backgroundColor: 'blue'
