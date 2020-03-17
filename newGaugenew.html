@@ -389,11 +389,9 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
                         '<span style="color:#933">' + mph + '</span>';
                 }
                 
-            },
+            },{
             name: 'PM2.5-24H',
-        data: JSON.parse("[" + val24H + "]"),
-
-        name: 'PM2.5 24H',
+            data: JSON.parse("[" + val24H + "]"),
             dial: {
                 backgroundColor: 'blue'
             },
