@@ -37,7 +37,8 @@ a:hover {text-decoration: underline;}
 <style type="text/css">
 p.a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 </style>
-<div id="container" style="height: 200px; width: 200px;position: relative;   margin: -15px auto -15 auto;top: 0%;"></div>
+<div class="col-container">
+<div class="col" id="container1" style="height: 200px; width: 200px;position: relative;   margin: -15px auto -15 auto;top: 0%;"></div></div>
 <div id="textegauge" style="margin: 0 auto 0 auto;top: 0%; text-align:left; color:#05109B;"><p class="a" id="AffichageTitre">Qualité de l'air - µg/m³</p></div>
 
 
@@ -222,7 +223,7 @@ function deviceFindResponse(data) {
     
 
 function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
-    Highcharts.chart('container', {
+    Highcharts.chart('container1', {
         chart: {
             type: 'gauge',
             plotBackgroundColor: null,
