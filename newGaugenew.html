@@ -14,177 +14,242 @@
 p.a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 </style>
 <div id="container" style="height: 200px; width: 200px;position: relative;   margin: -15px auto -15 auto;top: 0%;"></div>
-<div id="textegauge" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"><p class="a" id="AffichageTitre">Qualité de l'air - µg/m³</p></div>
+<div id="textegauge" style="margin: 0 auto 0 auto;top: 0%; text-align:left; color:#05109B;"><p class="a" id="AffichageTitre">Qualité de l'air - µg/m³</p></div>
 
 
 </body>
 <script>
-	$(function () {
-Highcharts.chart('container', {
+     //============================================ Bureau JL ============================================//
+var DeviceWebPage		= 'bureaujl';
+var DeviceShortId		= 'jDP5ZAlISh55VYYQWYIR6g';
+var DeviceKey			= 'huodYngtUDGO58-Q8-VFLw';
+var DHT22NodeShortId	= 'jDP5ZAlISh60rN5wWYIR6g';
+var DHT22NodeKey		= 'iGW59GU2BO6VKDCptEFNrA';
+var MQ135NodeShortId	= 'jDP5ZAlISh7TWX_gWYIR6g';
+var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
+var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
+var SDS011NodeKey		= 'qXlMZEFnR1DTs90DwDRGbQ';
+//	Temperature
+var t_EndFullBlue		= 18;
+var t_StartFullGreen	= 21;
+var t_EndFullGreen		= 24;
+var t_StartFullYellow	= 27;
+var t_EndFullYellow		= 29;
+var t_StartFullRed		= 34;
+//===================================================================================================//
 
-    chart: {
-        type: 'gauge',
-        plotBackgroundColor: null,
-        plotBackgroundImage: null,
-        plotBorderWidth: 0,
-        plotShadow: false
-    },
-title: {
-    text: undefined
-},
 
-//    title: {
-  //      text: undefined
-  //  },
+//===================================================================================================//
+//=================================== Common colors parameters ======================================//
+//===================================================================================================//
 
-    pane: {
-        startAngle: -150,
-        endAngle: 150,
-        background: [{
-            backgroundColor: {
-                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                stops: [
-                    [0, '#FFF'],
-                    [1, '#333']
-                ]
-            },
-            borderWidth: 0,
-            outerRadius: '109%'
-        }, {
-            backgroundColor: {
-                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                stops: [
-                    [0, '#333'],
-                    [1, '#FFF']
-                ]
-            },
-            borderWidth: 1,
-            outerRadius: '107%'
-        }, {
-            // default background
-        }, {
-            backgroundColor: '#DDD',
-            borderWidth: 0,
-            outerRadius: '105%',
-            innerRadius: '103%'
-        }]
-    },
-
-    // the value axis
-    yAxis: {
-        min: 0,
-        max: 30,
-
-        minorTickInterval: 1,
-        minorTickWidth: 1,
-        minorTickLength: 7,
-        minorTickPosition: 'inside',
-        minorTickColor: '#666',
-
-        tickInterval: 5,
-        tickWidth: 2,
-        tickPosition: 'inside',
-        tickLength: 10,
-        tickColor: '#666',
-        labels: {
-            step: 1,
-            rotation: 'auto'
+//============================================ Humidity =============================================//
+var h_EndFullBlue		= 35;
+var h_StartFullGreen	= 45;
+var h_EndFullGreen		= 55;
+var h_StartFullYellow	= 65;
+var h_EndFullYellow		= 75;
+var h_StartFullRed		= 85;
+//======================================== airquality (CO2) =========================================//
+var aqc_EndFullBlue		= 400;
+var aqc_StartFullGreen	= 415;
+var aqc_EndFullGreen	= 550;
+var aqc_StartFullYellow	= 600;
+var aqc_EndFullYellow	= 900;
+var aqc_StartFullRed	= 1000;
+//======================================= airquality (PM2.5) ========================================//
+var aq25_EndFullBlue	= -1;
+var aq25_StartFullGreen	= 0;
+var aq25_EndFullGreen	= 5;
+var aq25_StartFullYellow	= 10;
+var aq25_EndFullYellow	= 17;
+var aq25_StartFullRed	= 25;
+//======================================= airquality (PM10) =========================================//
+var aq10_EndFullBlue	= -1;
+var aq10_StartFullGreen	= 0;
+var aq10_EndFullGreen	= 10;
+var aq10_StartFullYellow	= 20;
+var aq10_EndFullYellow	= 34;
+var aq10_StartFullRed	= 50;
+//===================================================================================================//
+var posmonte = 1;
+function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+    Highcharts.chart('container', {
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
         },
         title: {
-            text: 'µg/m³',
-		  style: {
-			  fontSize: '14px'    
-		  },
-		  y:10
+            text: undefined
         },
-        plotBands: [{
-            from: 0,
-            to: 5,
-//            color: '#b8dfdc' // blue
-            color: {
-                linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
-                stops: [
-                    [0, '#b8dfdc'],
-                    [1, '#c4ffa5']
-                ]
-            }
-	   }, {
-            from: 5,
-            to: 12,
- //           color: '#c4ffa5' // green
-             color: {
-                linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
-                stops: [
-                    [0, '#c4ffa5'],
-                    [1, '#fffb82']
-                ]
-		   }
+        pane: {
+            startAngle: -150,
+            endAngle: 150,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
             }, {
-            from: 12,
-            to: 17,
-            color: '#fffb82' // red
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+
+        yAxis: {
+            min: 0,
+            max: 30,
+
+            minorTickInterval: 1,
+            minorTickWidth: 1,
+            minorTickLength: 7,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+
+            tickInterval: 5,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 1,
+                rotation: 'auto'
+            },
+            title: {
+                text: unit,
+                style: {
+                     fontSize: '14px'    
+                },
+                y:10
+            },
+            plotBands: [
+            {
+                from: -Infinity,
+                to: EndFullBlue,
+                color: '#b8dfdc'
+            }, {
+                from: EndFullBlue,
+                to: StartFullGreen,
+                 color: {
+                    linearGradient: { x1: 1, y1:1, x2: 1, y2: 0 },
+                    stops: [
+                        [0, '#b8dfdc'],
+                        [1, '#c4ffa5']
+                    ]
+                 }
+                }, {
+                from: StartFullGreen,
+                to: EndFullGreen,
+                color: '#c4ffa5'
+            },{
+                from: EndFullGreen,
+                to: StartFullYellow,
+                 color: {
+                    linearGradient: { x1: posmonte, y1: posmonte, x2: posmonte, y2: !posmonte },
+                    stops: [
+                        [0, '#c4ffa5'],
+                        [1, '#fffb82']
+                    ]
+                 }
+            }, {
+                from: StartFullYellow,
+                to: EndFullYellow,
+                color: '#fffb82'
+            },{
+                from: EndFullYellow,
+                to: StartFullRed,
+                 color: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#fffb82'],
+                        [1, '#ff2a5d']
+                    ]
+                 }
+            }, {
+                from: StartFullRed,
+                to: Infinity,
+                color: '#ff2a5d'
+            }]
+        },
+         exporting: {
+         enabled: false
+         },
+             credits: {
+            enabled: false
+        },
+        series: [{
+        
+
+
+            dataLabels: {
+                        enabled : true,
+                        format: '{point.name}',
+                        useHTML: true,
+                        allowOverlap : true,
+                        borderWidth: 0,
+                formatter: function () {
+                    var kmh = '45.4',
+                        mph = Math.round(kmh * 0.621);
+                    return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
+                        '<span style="color:#933">' + mph + '</span>';
+                }
+                
+            },
+            name: 'PM2.5-24H',
+        data: [7.6],  
+  //      name: {'<p style="margin:auto; text-align:center; color:blue;">24H 5.7<br/></p><p style="margin:auto; text-align:center; color:red;">19.8</p>'},
+            dial: {
+                backgroundColor: 'blue'
+            },
+            tooltip: {
+                valueSuffix: ' µg/m³'
+            },
+            overshoot: 5
         },{
-            from: 17,
-            to: 25,
-//            color: '#fffb82' // yellow
-             color: {
-                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                stops: [
-                    [0, '#fffb82'],
-                    [1, '#ff2a5d']
-                ]
-		   }
-        }, {
-            from: 25,
-            to: 35,
-            color: '#ff2a5d' // red
-        }]
-    },
-	exporting: {
-	enabled: false
-	},
-	    credits: {
-        enabled: false
-    },
-    series: [{
-    
-
-
-        dataLabels: {
-                    enabled : true,
-                    format: '{point.name}',
-                    useHTML: true,
-                    allowOverlap : true,
-                    borderWidth: 0,
-            formatter: function () {
-                var kmh = '45.4',
-                    mph = Math.round(kmh * 0.621);
-                return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
-                    '<span style="color:#933">' + mph + '</span>';
-            }
-            
-        },
-        name: 'PM2.5',
-        data: [                {y:15,  name: '<p style="margin:auto; text-align:center; color:blue;">24H 5.7<br/></p><p style="margin:auto; text-align:center; color:red;">19.8</p>'}],
-	   	dial: {
-        backgroundColor: 'blue'
-	},
-        tooltip: {
-            valueSuffix: ' µg/m³'
-        },
-        overshoot: 5
-    },{
-        name: 'PM2.5-24H',
-        data: [12.25],
-	dial: {
-        backgroundColor: 'red'
-	},
-        tooltip: {
-            valueSuffix: ' µg/m³'
-        }}],
-
-
+            name: 'PM2.5',
+            data: [2.5],
+             dial: {
+                backgroundColor: 'red'
+             },
+             tooltip: {
+                    valueSuffix: ' µg/m³'
+             }
+        }],
   });
+}
+
+$(document).ready(function () {
+    //loadSingle('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
+    //loadSingle('graphHumidity', titleText + ' - ' + DeviceDescription, 'Date et heure', '%', DHT22NodeShortId, 'humidity', granulation, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
+    //loadSingle('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
+    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+    {
+ //        loadDual('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+ //        loadDual('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation, aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
+        loadDual('µg/m³', '7.5', '2.1', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+    }
 });
 </script>
 
