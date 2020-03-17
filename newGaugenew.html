@@ -377,16 +377,14 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
 
 
             dataLabels: {
-                        enabled : true,
-                        format: '{point.name}',
-                        useHTML: true,
-                        allowOverlap : true,
-                        borderWidth: 0,
+                enabled : true,
+                format: '{point.name}',
+                useHTML: true,
+                allowOverlap : true,
+                borderWidth: 0,
+                y:5,
                 formatter: function () {
-                    var kmh = '45.4',
-                        mph = Math.round(kmh * 0.621);
-                    return '<span style="color:#339">24H: ' + kmh + '</span><br/>' +
-                        '<span style="color:#933">' + mph + '</span>';
+                    return '<span style="color:#339">24H: ' + val24H + '</span><br/>' + '<span style="color:#933">' + valNow + '</span>';
                 }
             },
             name: 'PM2.5-24H',
@@ -447,7 +445,7 @@ $(document).ready(function () {
     {
  //        loadDual('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
  //        loadDual('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation, aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
-        loadDual('µg/m³', '17.5', '2.1', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+        loadDual('µg/m³', '18.5', '2.1', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
     }
 });
 </script>
