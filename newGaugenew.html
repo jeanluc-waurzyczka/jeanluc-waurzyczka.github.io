@@ -73,6 +73,7 @@ var aq10_EndFullYellow	= 34;
 var aq10_StartFullRed	= 50;
 //===================================================================================================//
 var posmonte = 1;
+var tabposmonte1 = [17,1]
 function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
     Highcharts.chart('container', {
         chart: {
@@ -167,7 +168,7 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
                 from: EndFullGreen,
                 to: StartFullYellow,
                  color: {
-                    linearGradient: { x1: posmonte, y1: posmonte, x2: posmonte, y2: !posmonte },
+                    linearGradient: { x1: tabposmonte1[1], y1: tabposmonte1[1], x2: tabposmonte1[1], y2: !tabposmonte1[1] },
                     stops: [
                         [0, '#c4ffa5'],
                         [1, '#fffb82']
@@ -218,7 +219,8 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
                 
             },
             name: 'PM2.5-24H',
-        data: [7.6],  
+data: JSON.parse("[" + val24H + "]"),
+//        data: [9.6],  
   //      name: {'<p style="margin:auto; text-align:center; color:blue;">24H 5.7<br/></p><p style="margin:auto; text-align:center; color:red;">19.8</p>'},
             dial: {
                 backgroundColor: 'blue'
@@ -229,7 +231,7 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
             overshoot: 5
         },{
             name: 'PM2.5',
-            data: [2.5],
+            data: [4.5],
              dial: {
                 backgroundColor: 'red'
              },
@@ -248,7 +250,7 @@ $(document).ready(function () {
     {
  //        loadDual('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
  //        loadDual('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation, aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
-        loadDual('µg/m³', '7.5', '2.1', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+        loadDual('µg/m³', '17.5', '2.1', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
     }
 });
 </script>
