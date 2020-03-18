@@ -203,7 +203,8 @@ function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,
 			if (accessToken) {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 							console.log("Hello access token ok");
-							console.log (Node_choice, Field_Choice);
+							console.log (Node_choice);
+														console.log (Field_Choice);
 			}
 		},
 		success: function (data) {
