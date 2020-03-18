@@ -89,7 +89,7 @@ var t_EndFullGreen		= [24,0,0,0,1];
 var t_StartFullYellow	= [27,0,0,0,1];
 var t_EndFullYellow		= [29,0,0,0,1];
 var t_StartFullRed		= [34,0,0,0,1];
-var t_Tick			= [5,35,1,5];		//  min, max, minTickInterval, TickInterval
+var t_Tick			= [5,35,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
 //===================================================================================================//
 
 
@@ -104,7 +104,7 @@ var h_EndFullGreen		= [55,1,1,1,0];
 var h_StartFullYellow	= [65,0,0,0,1];
 var h_EndFullYellow		= [75,0,0,0,1];
 var h_StartFullRed		= [85,0,0,0,1];
-var h_Tick			= [0,100,5,20];		//  min, max, minTickInterval, TickInterval
+var h_Tick			= [0,100,5,20,0];		//  min, max, minTickInterval, TickInterval, decimals
 //======================================== airquality (CO2) =========================================//
 var aqc_EndFullBlue		= [400,1,1,1,0];
 var aqc_StartFullGreen	= [415,1,1,1,0];
@@ -112,7 +112,7 @@ var aqc_EndFullGreen	= [550,1,1,1,0];
 var aqc_StartFullYellow	= [600,1,1,1,0];
 var aqc_EndFullYellow	= [900,1,1,1,0];
 var aqc_StartFullRed	= [1000,0,0,0,1];
-var aqc_Tick			= [200,1400,50,200];		//  min, max, minTickInterval, TickInterval
+var aqc_Tick			= [200,1400,50,200,0];		//  min, max, minTickInterval, TickInterval, decimals
 //======================================= airquality (PM2.5) ========================================//
 var aq25_EndFullBlue	= [0,1,1,1,0];
 var aq25_StartFullGreen	= [0,1,1,1,0];      // valeur, x1, y1, x2, y2
@@ -120,7 +120,7 @@ var aq25_EndFullGreen	= [3,1,1,1,0];
 var aq25_StartFullYellow	= [10,1,1,1,0];     // valeur, x1, y1, x2, y2
 var aq25_EndFullYellow	= [16,0,0,0,1];
 var aq25_StartFullRed	= [28,0,0,0,1];     // valeur, x1, y1, x2, y2
-var aq25_Tick			= [0,30,1,5];		//  min, max, minTickInterval, TickInterval
+var aq25_Tick			= [0,30,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
 //======================================= airquality (PM10) =========================================//
 var aq10_EndFullBlue	= [0,1,1,1,0];
 var aq10_StartFullGreen	= [0,1,1,1,0];
@@ -128,7 +128,7 @@ var aq10_EndFullGreen	= [6,1,1,1,0];
 var aq10_StartFullYellow	= [20,1,1,1,0];
 var aq10_EndFullYellow	= [32,0,0,0,1];
 var aq10_StartFullRed	= [56,0,0,0,1];
-var aq10_Tick			= [0,60,2,10];		//  min, max, minTickInterval, TickInterval
+var aq10_Tick			= [0,60,2,10,1];		//  min, max, minTickInterval, TickInterval, decimals
 //===================================================================================================//
 
 var TexteTitre;
@@ -325,6 +325,8 @@ function fluentDuration(timestamp) {
     
 
 function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+	valNow = valNow.toFixed(Tick[4]);
+	val24H = val24H.toFixed(Tick[4]);	
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
@@ -467,7 +469,7 @@ function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choic
             },
             name: 'PM2.5-24H',
 
-			data: JSON.parse("[" + val24H + "]"),
+		data: JSON.parse("[" + val24H + "]"),
             dial: {
                 backgroundColor: 'blue'
             },
