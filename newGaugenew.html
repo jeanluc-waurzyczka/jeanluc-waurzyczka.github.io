@@ -416,7 +416,7 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
                 y:92,
                 style: {
                     fontWeight: '',
-                    fontSize: '16px'
+                    fontSize: '15px'
                 },
                 formatter: function () {
                 return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
@@ -471,7 +471,7 @@ $(document).ready(function () {
     {
  //        loadDual('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
  //        loadDual('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation, aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
-        loadDual('µg/m³', '19.5', '3.8', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+        loadDual('µg/m³','', '3.8', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
     }
 });
 </script>
