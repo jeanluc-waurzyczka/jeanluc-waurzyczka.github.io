@@ -326,7 +326,7 @@ function fluentDuration(timestamp) {
 
 function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var valTemp = valNow;
-	var valNowDec = valTemp.toFixed(0);
+	var valNowDec = parseFloat(valTemp).toFixed(0);
 //	var val24HDec = val24H.toFixed(Tick[4]);	
 	Highcharts.chart(container, {
         chart: {
