@@ -27,7 +27,7 @@ a:hover {text-decoration: underline;}
 .col {
   display: table-cell;
   padding: 2px;
-  width:16%;
+  width:20%;
   align: "center";
   text-decoration:none;  
   font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
@@ -65,11 +65,6 @@ p.img {
         <p id="container5" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
         <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
-    <div class="col" >
-        <p id="container6" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre6" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
-    </div>
-
 </div>
 
 
@@ -505,13 +500,13 @@ function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choic
 
 $(document).ready(function () {
      deviceFind();
-    //loadSingle('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
-    //loadSingle('graphHumidity', titleText + ' - ' + DeviceDescription, 'Date et heure', '%', DHT22NodeShortId, 'humidity', granulation, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
-    //loadSingle('graphAirQuality', titleText + ' - ' + DeviceDescription, 'Date et heure', 'PPM', MQ135NodeShortId, 'airquality', granulation, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
-    if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+		loadData ('container1','Température PM2.5', DHT22NodeKey,'temperature','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container2','Humidité', DHT22NodeKey,'humidity','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container3','Air Quality CO2', MQ135NodeKey,'airquality','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
     {
-		loadData ('container5','Air Quality PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
-		loadData ('container6','Air Quality PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container4','Air Quality PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container5','Air Quality PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
     }
 });
 </script>
