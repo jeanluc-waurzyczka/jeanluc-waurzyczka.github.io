@@ -11,10 +11,6 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <body>
-
-<div id="chart-container">
-<p id="AffichageTitre" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
-</div>
 <style type="text/css">
 { background-color: white; height: 100%; font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif; margin: auto; padding: 2;}
 a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
@@ -43,24 +39,27 @@ p.img {
       margin-bottom: -5px;
     }
 </style>
-     
+
+<div id="chart-container">
+<p id="AffichageTitre" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
+</div>     
 <div class="col-container">
 
     <div class="col" >
         <p id="container1" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="AffichageTitre1" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container2" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="AffichageTitre2" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container3" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="AffichageTitre3" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container4" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="AffichageTitre4" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container5" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
@@ -68,7 +67,7 @@ p.img {
     </div>
     <div class="col" >
         <p id="container6" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="AffichageTitre6" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
 
 </div>
@@ -131,14 +130,15 @@ var aq10_StartFullYellow	= 20;
 var aq10_EndFullYellow	= 34;
 var aq10_StartFullRed	= 50;
 //===================================================================================================//
-var posmonte = 1;
-var tabposmonte1 = [17,1];
 
 var TexteTitre;
 var date_last_update;
 var totalSeconds;
 var TexteDuration;
 var data;
+var valNow;
+var dateVal;
+var val24H;
 
 //============================================== deviceFind ==================================================//
 function deviceFind() {
@@ -187,7 +187,7 @@ function deviceFindResponse(data) {
 }	
 // ===============================================================================
 
-function loadData()
+function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
 {
 	// variable for the data point
 	var p;
@@ -206,21 +206,29 @@ function loadData()
 			}
 		},
 		success: function (data) {
-			lastValuesListResponse(data);
+			lastValuesListResponse(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		},
 		error: function (xhr) {
-			lastValuesListError(xhr);
+			lastValuesListError(container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
 }
 
-function lastValuesListResponse(data) {
+function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
 		var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-		document.getElementById("when_div").innerHTML = TexteError;
+		document.getElementById(container).innerHTML = TexteError;
 	} else {
 		$.each(data, function (idx, n) {
-			displayData(n[1].toFixed(1));
+			valNow = n[1].toFixed(1);
+			dateVal = n[0];
+			
+			// !!! add here the loading of val24H
+			
+			loadDual (data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+		});
+/*	
+	//=====================
 			var Texte = [];
 			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.1em; color:#05109B\">' + Gauge_Description + '</span><br>';
 			TexteDuration = fluentDuration (n[0]);
@@ -231,10 +239,15 @@ function lastValuesListResponse(data) {
 			if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
 			Texte += TexteDuration;
 			Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
-			document.getElementById("when_div").innerHTML = Texte;
-		});
+*/
 	}
 }
+
+function lastValuesListError(container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
+	document.getElementById(container).innerHTML = TexteError;
+}
+
 
 // ===============================================================================
 function fluentDuration(timestamp) {
@@ -307,8 +320,8 @@ function fluentDuration(timestamp) {
 }
     
 
-function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
-    Highcharts.chart('container5', {
+function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
             plotBackgroundColor: null,
@@ -486,33 +499,6 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
 
 }
 
-function loadData()
-{
-	// variable for the data point
-	var p;
-
-	// get the data from IoTGuru
-
-	$.ajax(
-	{
-		type: "GET",
-		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + Node_Choice + '/' + Field_Choice + '/1',
-		dataType: "json",
-		beforeSend: function (xhr) {
-			var accessToken =  Cookies.get('accessToken');
-			if (accessToken) {
-				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-			}
-		},
-		success: function (data) {
-			lastValuesListResponse(data);
-		},
-		error: function (xhr) {
-			lastValuesListError(xhr);
-		}
-	});
-}
-
 $(document).ready(function () {
      deviceFind();
     //loadSingle('graphTemperature', titleText + ' - ' + DeviceDescription, 'Date et heure', '°C', DHT22NodeShortId, 'temperature', granulation, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
@@ -522,7 +508,7 @@ $(document).ready(function () {
     {
  //        loadDual('graphAirQualityPM25', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm25', granulation, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
  //        loadDual('graphAirQualityPM10', titleText + ' - ' + DeviceDescription, 'Date et heure', 'µg/m³', SDS011NodeShortId, 'pm10', granulation, aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
-        loadDual('µg/m³','6.7', '3.8', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+        loadData ('container3','Air Quality PM2.5', SDS011NodeKey,'airquality25','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
     }
 });
 </script>
