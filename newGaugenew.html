@@ -189,8 +189,7 @@ function deviceFindResponse(data) {
 
 function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
 {
-	// variable for the data point
-	var p;
+
 
 	// get the data from IoTGuru
 
@@ -206,9 +205,11 @@ function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,
 			}
 		},
 		success: function (data) {
+			console.log("Hello success");
 			lastValuesListResponse(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		},
 		error: function (xhr) {
+					console.log("Hello error");
 			lastValuesListError(container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
