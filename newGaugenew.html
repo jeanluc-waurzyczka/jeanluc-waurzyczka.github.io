@@ -202,6 +202,7 @@ function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,
 			var accessToken =  Cookies.get('accessToken');
 			if (accessToken) {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+							console.log("Hello access token ok");
 			}
 		},
 		success: function (data) {
