@@ -394,7 +394,7 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
                     fontSize: '14px'
                 },
                 formatter: function () {
-                    return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span><br/>' + '<span style="color:red">' + valNow + '</span></p>';
+                    return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span></p>';
                 }
             },
             name: 'PM2.5-24H',
@@ -413,13 +413,13 @@ function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGree
                 useHTML: true,
                 allowOverlap : true,
                 borderWidth: 0,
-                y:-2,
+                y:92,
                 style: {
                     fontWeight: '',
-                    fontSize: '14px'
+                    fontSize: '16px'
                 },
                 formatter: function () {
-                    return '<p style="text-align:center;line-height: 200%;"> </p>';
+                return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
                 }
             },
             name: 'PM2.5',
