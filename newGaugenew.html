@@ -506,12 +506,12 @@ function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choic
 $(document).ready(function () {
      deviceFind();
 		loadData ('container1','Température PM2.5', DHT22NodeKey,'temperature','µg/m³','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
-		loadData ('container2','Humidité', DHT22NodeKey,'humidity','µg/m³','', '', '', h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
-		loadData ('container3','Air Quality CO2', MQ135NodeKey,'airquality','µg/m³','', '', '', aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
+		loadData ('container2','Humidité', DHT22NodeKey,'humidity','µg/m³','', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
+		loadData ('container3','Air Quality CO2', MQ135NodeKey,'airquality','µg/m³','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
 if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
     {
-		loadData ('container4','Air Quality PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
-		loadData ('container5','Air Quality PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
+		loadData ('container4','Air Quality PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container5','Air Quality PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
     }
 });
 </script>
