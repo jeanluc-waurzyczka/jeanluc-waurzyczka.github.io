@@ -16,7 +16,7 @@
 <p id="AffichageTitre" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
 </div>
 <style type="text/css">
-{ background-color: white; height: 100%; font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif; margin: 0; padding: 0;}
+{ background-color: white; height: 100%; font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif; margin: auto; padding: 2;}
 a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 a:link, a:visited { text-decoration:none; color: #05109B;}
 a:hover {text-decoration: underline;}
@@ -175,7 +175,7 @@ function deviceFindResponse(data) {
 	TexteTitre += '/\"><strong>';
 
 	TexteTitre += data.description;
-	TexteTitre += '</a></strong></span><span class="b"; style=\"font-size:1.125em; color:#05109B;\"> &nbsp; {</span><span class="b"; style=\"font-size:1.125em; color:#05109B;';
+	TexteTitre += '</strong></a></span><span class="b"; style=\"font-size:1.125em; color:#05109B;\"> &nbsp; {</span><span class="b"; style=\"font-size:1.125em; color:#05109B;';
 	if (totalSeconds >= 3600) {TexteTitre +=  ' background-color:#ff598f;\"> ';}
 	if (totalSeconds >= 1200 && totalSeconds < 3600) {TexteTitre +=  ' background-color:#fdb1ca;\"> ';}
 	if (totalSeconds >= 300 && totalSeconds < 1200) {TexteTitre += ' background-color:#FFF0F5;\"> ';}
@@ -185,75 +185,126 @@ function deviceFindResponse(data) {
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 
 }	
+// ===============================================================================
 
-    function fluentDuration(timestamp) {
-		totalSeconds = 86400;
-        if (!timestamp) {
-            return 'n/a';
-        }
+function loadData()
+{
+	// variable for the data point
+	var p;
 
-        totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
-        var days = ~~(totalSeconds / 86400);
-        var hours = ~~((totalSeconds % 86400) / 3600);
-        var minutes = ~~((totalSeconds % 3600) / 60);
-        var seconds = ~~(totalSeconds % 60);
+	// get the data from IoTGuru
 
-        var message = [];
-        if (days > 0) {
-            message.push(' ');
-            message.push(days);
-            message.push(' ');
-            if (days > 1) {
-                message.push('jours');
-            } else {
-                message.push('jour');
-            }
-            message.push(' ');
-            message.push(hours);
-            message.push(' ');
-            if (hours > 1) {
-                message.push('heures');
-            } else {
-                message.push('heure');
-            }
-        } else if (hours > 0) {
-            message.push(' ');
-            message.push(hours);
-            message.push(' ');
-            if (hours > 1) {
-                message.push('heures');
-            } else {
-                message.push('heure');
-            }
-            message.push(' ');
-            message.push(minutes);
-            message.push(' ');
-            if (minutes > 1) {
-                message.push('minutes');
-            } else {
-                message.push('minute');
-            }
-        } else {
-            message.push(' ');
-            message.push(minutes);
-            message.push(' ');
-            if (minutes > 1) {
-                message.push('minutes');
-            } else {
-                message.push('minute');
-            }
-            message.push(' ');
-            message.push(seconds);
-            message.push(' ');
-            if (seconds > 1) {
-                message.push('secondes');
-            } else {
-                message.push('seconde');
-            }
-        }
+	$.ajax(
+	{
+		type: "GET",
+		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + Node_Choice + '/' + Field_Choice + '/1',
+		dataType: "json",
+		beforeSend: function (xhr) {
+			var accessToken =  Cookies.get('accessToken');
+			if (accessToken) {
+				xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+			}
+		},
+		success: function (data) {
+			lastValuesListResponse(data);
+		},
+		error: function (xhr) {
+			lastValuesListError(xhr);
+		}
+	});
+}
 
-        return message.join('');
+function lastValuesListResponse(data) {
+	if (data === undefined || data.length === 0) {
+		var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
+		document.getElementById("when_div").innerHTML = TexteError;
+	} else {
+		$.each(data, function (idx, n) {
+			displayData(n[1].toFixed(1));
+			var Texte = [];
+			Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.1em; color:#05109B\">' + Gauge_Description + '</span><br>';
+			TexteDuration = fluentDuration (n[0]);
+			Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
+			if (totalSeconds >= 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
+			if (totalSeconds >= 1200 && totalSeconds < 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
+			if (totalSeconds >= 300 && totalSeconds < 1200) {Texte += '<span style=\"font-size:0.75em; background-color:#FFF0F5; color:#05109B\"> ';}
+			if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
+			Texte += TexteDuration;
+			Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
+			document.getElementById("when_div").innerHTML = Texte;
+		});
+	}
+}
+
+// ===============================================================================
+function fluentDuration(timestamp) {
+    totalSeconds = 86400;
+    if (!timestamp) {
+        return 'n/a';
     }
+
+    totalSeconds = ~~((new Date().getTime() - timestamp) / 1000);
+    var days = ~~(totalSeconds / 86400);
+    var hours = ~~((totalSeconds % 86400) / 3600);
+    var minutes = ~~((totalSeconds % 3600) / 60);
+    var seconds = ~~(totalSeconds % 60);
+
+    var message = [];
+    if (days > 0) {
+        message.push(' ');
+        message.push(days);
+        message.push(' ');
+        if (days > 1) {
+            message.push('jours');
+        } else {
+            message.push('jour');
+        }
+        message.push(' ');
+        message.push(hours);
+        message.push(' ');
+        if (hours > 1) {
+            message.push('heures');
+        } else {
+            message.push('heure');
+        }
+    } else if (hours > 0) {
+        message.push(' ');
+        message.push(hours);
+        message.push(' ');
+        if (hours > 1) {
+            message.push('heures');
+        } else {
+            message.push('heure');
+        }
+        message.push(' ');
+        message.push(minutes);
+        message.push(' ');
+        if (minutes > 1) {
+            message.push('minutes');
+        } else {
+            message.push('minute');
+        }
+    } else {
+        message.push(' ');
+        message.push(minutes);
+        message.push(' ');
+        if (minutes > 1) {
+            message.push('minutes');
+        } else {
+            message.push('minute');
+        }
+        message.push(' ');
+        message.push(seconds);
+        message.push(' ');
+        if (seconds > 1) {
+            message.push('secondes');
+        } else {
+            message.push('seconde');
+        }
+    }
+
+    return message.join('');
+}
     
 
 function loadDual(unit, val24H, valNow, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
