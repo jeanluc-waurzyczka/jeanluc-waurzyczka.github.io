@@ -88,7 +88,7 @@ var MQ135NodeShortId	= 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
 var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
 //var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
-var SDS011NodeKey		= 'q4qSlGXEBGCCyp-';
+var SDS011NodeKey		= '';
 
 //============================================ Temperature =================================================//
 var t_EndFullBlue		= [17,1,1,1,0];
@@ -533,7 +533,7 @@ $(document).ready(function () {
 		loadData ('container1','TitreCol1','Température', DHT22NodeKey,'temperature','°C', t_NbNeedles, '', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
 		loadData ('container2','TitreCol2','Humidité', DHT22NodeKey,'humidity','%',h_NbNeedles, '', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
 		loadData ('container3','TitreCol3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM',aqc_NbNeedles, '', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
-if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+if (SDS011NodeKey !== undefined && SDS011NodeKey !== null && SDS011NodeKey !== "")
     {
 		loadData ('container4','TitreCol4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³',aq25_NbNeedles, '', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
 		loadData ('container5','TitreCol5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³',aq10_NbNeedles, '', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
