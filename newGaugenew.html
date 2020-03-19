@@ -467,14 +467,14 @@ function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choic
                     return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span></p>';
                 }
             },
-            name: 'PM2.5-24H',
+            name: Field_Choice + '-24H',
 
 		data: JSON.parse("[" + val24H + "]"),
             dial: {
                 backgroundColor: 'blue'
             },
             tooltip: {
-                valueSuffix: ' µg/m³'
+                valueSuffix: unit
             },
             overshoot: 5
         },{
@@ -492,13 +492,13 @@ function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choic
                 return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
                 }
             },
-            name: 'PM2.5',
+            name: Field_Choice,
             data: JSON.parse("[" + valNow + "]"),
              dial: {
                 backgroundColor: 'red'
              },
              tooltip: {
-                    valueSuffix: ' µg/m³'
+                    valueSuffix: unit
              }
         }],
         });
