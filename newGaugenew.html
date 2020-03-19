@@ -88,16 +88,17 @@ var MQ135NodeShortId	= 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
 var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
 var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
-//	Temperature
+
+//============================================ Temperature =================================================//
 var t_EndFullBlue		= [17,1,1,1,0];
-var t_StartFullGreen	= [20,1,1,1,0];
+var t_StartFullGreen	= [20,1,1,1,0];     // valeur, x1, y1, x2, y2
 var t_EndFullGreen		= [23,0,0,0,1];
-var t_StartFullYellow	= [27,0,0,0,1];
+var t_StartFullYellow	= [27,0,0,0,1];     // valeur, x1, y1, x2, y2
 var t_EndFullYellow		= [29,0,0,0,1];
-var t_StartFullRed		= [34,0,0,0,1];
-var t_Tick			= [5,35,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
-var t_NbNeedles		= 2;					// Number needles. If > 1 the second one is a 24Hours average
-//===================================================================================================//
+var t_StartFullRed		= [34,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
+var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
+//=========================================================================================================//
 
 
 //===================================================================================================//
@@ -106,23 +107,23 @@ var t_NbNeedles		= 2;					// Number needles. If > 1 the second one is a 24Hours 
 
 //============================================ Humidity =============================================//
 var h_EndFullBlue		= [30,1,1,1,0];
-var h_StartFullGreen	= [40,1,1,1,0];      // valeur, x1, y1, x2, y2
+var h_StartFullGreen	= [40,1,1,1,0];     // valeur, x1, y1, x2, y2
 var h_EndFullGreen		= [55,1,1,1,0];
-var h_StartFullYellow	= [65,0,0,0,1];      // valeur, x1, y1, x2, y2
+var h_StartFullYellow	= [65,0,0,0,1];     // valeur, x1, y1, x2, y2
 var h_EndFullYellow		= [72,0,0,0,1];
-var h_StartFullRed		= [85,0,0,0,1];      // valeur, x1, y1, x2, y2
-var h_Tick			= [10,90,2,10,0];		//  min, max, minTickInterval, TickInterval, decimals
+var h_StartFullRed		= [85,0,0,0,1];     // valeur, x1, y1, x2, y2
+var h_Tick			= [10,90,2,10,0];	//  min, max, minTickInterval, TickInterval, decimals
 var h_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
-//======================================== airquality (CO2) =========================================//
+//======================================== airquality (CO2) =================================================//
 var aqc_EndFullBlue		= [380,1,1,1,0];
-var aqc_StartFullGreen	= [430,1,1,1,0];
+var aqc_StartFullGreen	= [430,1,1,1,0];	// valeur, x1, y1, x2, y2
 var aqc_EndFullGreen	= [500,1,1,1,0];
-var aqc_StartFullYellow	= [600,1,1,1,0];
+var aqc_StartFullYellow	= [600,1,1,1,0];	// valeur, x1, y1, x2, y2
 var aqc_EndFullYellow	= [740,1,1,1,0];
-var aqc_StartFullRed	= [940,0,0,0,1];
-var aqc_Tick			= [400,1000,20,100,0];		//  min, max, minTickInterval, TickInterval, decimals
+var aqc_StartFullRed	= [940,0,0,0,1];	// valeur, x1, y1, x2, y2
+var aqc_Tick			= [400,1000,20,100,0];	//  min, max, minTickInterval, TickInterval, decimals
 var aqc_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
-//======================================= airquality (PM2.5) ========================================//
+//======================================= airquality (PM2.5) =================================================//
 var aq25_EndFullBlue	= [0,1,1,1,0];
 var aq25_StartFullGreen	= [0,1,1,1,0];      // valeur, x1, y1, x2, y2
 var aq25_EndFullGreen	= [3,1,1,1,0];
@@ -131,16 +132,16 @@ var aq25_EndFullYellow	= [16,0,0,0,1];
 var aq25_StartFullRed	= [28,0,0,0,1];     // valeur, x1, y1, x2, y2
 var aq25_Tick			= [0,30,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
 var aq25_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
-//======================================= airquality (PM10) =========================================//
+//======================================= airquality (PM10) ==================================================//
 var aq10_EndFullBlue	= [0,1,1,1,0];
-var aq10_StartFullGreen	= [0,1,1,1,0];
+var aq10_StartFullGreen	= [0,1,1,1,0];		// valeur, x1, y1, x2, y2
 var aq10_EndFullGreen	= [6,1,1,1,0];
-var aq10_StartFullYellow	= [20,1,1,1,0];
+var aq10_StartFullYellow	= [20,1,1,1,0];	// valeur, x1, y1, x2, y2
 var aq10_EndFullYellow	= [32,0,0,0,1];
-var aq10_StartFullRed	= [56,0,0,0,1];
-var aq10_Tick			= [0,60,2,10,1];		//  min, max, minTickInterval, TickInterval, decimals
-var aq10_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
-//===================================================================================================//
+var aq10_StartFullRed	= [56,0,0,0,1];	// valeur, x1, y1, x2, y2
+var aq10_Tick			= [0,60,2,10,1];	//  min, max, minTickInterval, TickInterval, decimals
+var aq10_NbNeedles		= 2;				// Number needles. If 2 the second one is a 24Hours average
+//============================================================================================================//
 
 var TexteTitre;
 var date_last_update;
@@ -222,8 +223,10 @@ function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_
 
 function lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
-		var TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-		document.getElementById(TitreCol).innerHTML = TexteError;
+		var TexteError = '<p class=\"a\"><span style=\"font-size:0.7em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
+		document.getElementById(TitreCol).innerHTML = TexteError;	
+		TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span></p>';
+		document.getElementById(container).innerHTML = TexteError;
 	} else 
 	{
 		valNow = data[0][1].toFixed(Tick[4]);
