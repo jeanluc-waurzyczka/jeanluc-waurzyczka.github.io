@@ -224,7 +224,7 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		dateVal = data[0][0];
 		var Texte = [];
 		Texte = '<p class=\"b\"><br></p><p class=\"a\"><span style=\"font-size:1.1em; color:#05109B\">' + Gauge_description + '</span><br>';
-		TexteDuration = fluentDuration (n[0]);
+		TexteDuration = fluentDuration (dateVal);
 		Texte += '<span style=\"font-size:0.75em;color:05109B\">{</span>';
 		if (totalSeconds >= 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\"> ';}
 		if (totalSeconds >= 1200 && totalSeconds < 3600) {Texte +=  '<span style=\"font-size:0.75em; background-color:#fdb1ca; color:05109B\"> ';}
