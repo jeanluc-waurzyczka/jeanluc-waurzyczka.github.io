@@ -254,10 +254,12 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 					console.log ('NbAverages24H = ' + NbAverages24H);
 					val24H = parseFloat(val24H).toFixed(Tick[4]);
 					console.log ('val24H = ' + val24H);
+					loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 				}
 			});
-		}
+		}else {
 		loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+		}
 	}
 }
 
