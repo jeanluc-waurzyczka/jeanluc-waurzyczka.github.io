@@ -47,23 +47,23 @@ p.img {
 
     <div class="col" >
         <p id="container1" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre1" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
+        <p id="TitreCol1" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
     </div>
     <div class="col" >
         <p id="container2" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre2" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol2" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container3" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre3" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol3" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container4" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre4" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol4" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
     <div class="col" >
         <p id="container5" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
     </div>
 </div>
 
@@ -232,7 +232,7 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
 		Texte += TexteDuration;
 		Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
-		document.getElementById('AffichageTitre1').innerHTML = Texte;
+		document.getElementById('TitreCol1').innerHTML = Texte;
 
 
 // !!! add here the loading of val24H
@@ -503,11 +503,11 @@ $(document).ready(function () {
      deviceFind();
 		loadData ('container1','Température PM2.5', DHT22NodeKey,'temperature','°C','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
 		loadData ('container2','Humidité', DHT22NodeKey,'humidity','%','', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
-		loadData ('container3','Air Quality CO2', MQ135NodeKey,'airquality','PPM','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
+		loadData ('container3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
 if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
     {
-		loadData ('container4','Air Quality PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
-		loadData ('container5','Air Quality PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
+		loadData ('container4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
     }
 });
 </script>
