@@ -237,7 +237,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 
 // !!! add here the loading of val24H
 		if (NbNeedles > 1) {
-			return $.ajax({
+			$.ajax({
 				type: "GET",
 				url: 'https://api.iotguru.cloud/measurement/loadByNodeKey/' + NodeKey_Choice + '/' + Field_Choice + '/DAY/288',
 				dataType: "json",
@@ -257,7 +257,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 					loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 				}
 			});
-		}else {
+		} else {
 		loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	}
