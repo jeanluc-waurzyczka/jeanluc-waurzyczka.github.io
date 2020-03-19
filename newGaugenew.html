@@ -87,7 +87,7 @@ var DHT22NodeKey		= 'iGW59GU2BO6VKDCptEFNrA';
 var MQ135NodeShortId	= 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
 var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
-var SDS011NodeKey		= '';
+var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
 
 //============================================ Temperature =================================================//
 var t_EndFullBlue		= [17,1,1,1,0];
@@ -224,9 +224,9 @@ function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_
 function lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
 		var TexteError = '<p class=\"a\"><span style=\"font-size:0.7em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-		document.getElementById(TitreCol).innerHTML = TexteError;	
-		TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span></p>';
-		document.getElementById(container).innerHTML = TexteError;
+		document.getElementById(container).innerHTML = TexteError;	
+		TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><span style=\"font-size:0.7em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
+		document.getElementById(TitreCol).innerHTML = TexteError;
 	} else 
 	{
 		valNow = data[0][1].toFixed(Tick[4]);
