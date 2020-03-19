@@ -51,19 +51,19 @@ p.img {
     </div>
     <div class="col" >
         <p id="container2" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="TitreCol2" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol2" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
     </div>
     <div class="col" >
         <p id="container3" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="TitreCol3" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol3" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
     </div>
     <div class="col" >
         <p id="container4" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="TitreCol4" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol4" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
     </div>
     <div class="col" >
         <p id="container5" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="TitreCol5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="TitreCol5" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
     </div>
 </div>
 
@@ -217,7 +217,7 @@ function loadData(container, TitreCol, Gauge_description, Node_Choice, Field_Cho
 function lastValuesListResponse(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
 		var TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-		document.getElementById('TitreCol').innerHTML = TexteError;
+		document.getElementById(TitreCol).innerHTML = TexteError;
 	} else 
 	{
 		valNow = data[0][1].toFixed(Tick[4]);
@@ -232,7 +232,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, SD
 		if (totalSeconds < 300){Texte += '<span style=\"font-size:0.7em; color:#05109B\"> ';}
 		Texte += TexteDuration;
 		Texte += ' </span><span style=\"font-size:0.7em; background-color:transparent; color:05109B\">}</span></p>';
-		document.getElementById('TitreCol').innerHTML = Texte;
+		document.getElementById(TitreCol).innerHTML = Texte;
 
 
 // !!! add here the loading of val24H
