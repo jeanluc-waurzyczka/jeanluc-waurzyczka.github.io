@@ -252,7 +252,8 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 					val24H = Average24H / NbAverages24H;
 					console.log ('Average24H = ' + Average24H);
 					console.log ('NbAverages24H = ' + NbAverages24H);
-					val24H = parseFloat(val24H).toFixed(Tick[4]);	
+					val24H = parseFloat(val24H).toFixed(Tick[4]);
+					console.log ('val24H = ' + val24H);
 				}
 			});
 		}
