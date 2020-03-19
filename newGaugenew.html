@@ -501,7 +501,7 @@ function loadDual(data, container, TitreCol, Gauge_description, SDS011NodeKey, F
 
 $(document).ready(function () {
      deviceFind();
-		loadData ('container1','TitreCol1', Température PM2.5', DHT22NodeKey,'temperature','°C','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
+		loadData ('container1','TitreCol1','Température', DHT22NodeKey,'temperature','°C','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
 		loadData ('container2','TitreCol2','Humidité', DHT22NodeKey,'humidity','%','', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
 		loadData ('container3','TitreCol3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
 if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
