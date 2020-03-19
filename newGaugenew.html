@@ -187,12 +187,12 @@ function deviceFindResponse(data) {
 }	
 // ===============================================================================
 
-function loadData(container, TitreCol, Gauge_description, Node_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
+function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
 {
 	$.ajax(
 	{
 		type: "GET",
-		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + Node_Choice + '/' + Field_Choice + '/1',
+		url: '//api.iotguru.live/measurement/loadLastFloatValues/' + NodeKey_Choice + '/' + Field_Choice + '/1',
 		dataType: "json",
 		beforeSend: function (xhr) {
 			var accessToken =  Cookies.get('accessToken');
@@ -201,15 +201,15 @@ function loadData(container, TitreCol, Gauge_description, Node_Choice, Field_Cho
 			}
 		},
 		success: function (data) {
-			lastValuesListResponse(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+			lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		},
 		error: function (xhr) {
-			lastValuesListError(container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+			lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
 }
 
-function lastValuesListResponse(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
 		var TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 		document.getElementById(TitreCol).innerHTML = TexteError;
@@ -234,11 +234,11 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, SD
 //			var val24HDec = parseFloat(val24H).toFixed(Tick[4]);			
 
 
-	loadDual (data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+	loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 	}
 }
 
-function lastValuesListError(container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 	document.getElementById(container).innerHTML = TexteError;
 }
@@ -315,7 +315,7 @@ function fluentDuration(timestamp) {
 }
     
 
-function loadDual(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
