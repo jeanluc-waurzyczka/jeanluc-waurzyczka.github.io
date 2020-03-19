@@ -220,8 +220,8 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		document.getElementById(container).innerHTML = TexteError;
 	} else {
 //		$.each(data, function (idx, n) {
-			valNow = n[1].toFixed(1);
-			dateVal = n[0];
+			valNow = data[0][1].toFixed(1);
+//			dateVal = data[0];
 			
 			// !!! add here the loading of val24H
 			
