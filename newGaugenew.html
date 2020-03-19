@@ -47,7 +47,7 @@ p.img {
 
     <div class="col" >
         <p id="container1" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-        <p id="AffichageTitre1" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;">Qualité de l'air - PM2.5</p>
+        <p id="AffichageTitre1" style="margin: 0 auto 0 auto;top: 0%; text-align:center; color:#05109B;"></p>
     </div>
     <div class="col" >
         <p id="container2" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
@@ -232,7 +232,7 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		if (totalSeconds < 300){Texte += '<span style=\"font-size:0.75em; color:#05109B\"> ';}
 		Texte += TexteDuration;
 		Texte += ' </span><span style=\"font-size:0.75em; background-color:transparent; color:05109B\">}</span></p>';
-		document.getElementById(AffichageTitre1).innerHTML = Texte;
+		document.getElementById('AffichageTitre1').innerHTML = Texte;
 
 
 // !!! add here the loading of val24H
