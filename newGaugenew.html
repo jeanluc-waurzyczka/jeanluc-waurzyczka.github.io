@@ -96,7 +96,7 @@ var t_StartFullYellow	= [27,0,0,0,1];
 var t_EndFullYellow		= [29,0,0,0,1];
 var t_StartFullRed		= [34,0,0,0,1];
 var t_Tick			= [5,35,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
-var t_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours average
+var t_NbNeedles		= 2;					// Number needles. If > 1 the second one is a 24Hours average
 //===================================================================================================//
 
 
@@ -106,13 +106,13 @@ var t_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours av
 
 //============================================ Humidity =============================================//
 var h_EndFullBlue		= [30,1,1,1,0];
-var h_StartFullGreen	= [40,1,1,1,0];
+var h_StartFullGreen	= [40,1,1,1,0];      // valeur, x1, y1, x2, y2
 var h_EndFullGreen		= [55,1,1,1,0];
-var h_StartFullYellow	= [65,0,0,0,1];
+var h_StartFullYellow	= [65,0,0,0,1];      // valeur, x1, y1, x2, y2
 var h_EndFullYellow		= [72,0,0,0,1];
-var h_StartFullRed		= [85,0,0,0,1];
+var h_StartFullRed		= [85,0,0,0,1];      // valeur, x1, y1, x2, y2
 var h_Tick			= [10,90,2,10,0];		//  min, max, minTickInterval, TickInterval, decimals
-var h_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours average
+var h_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
 //======================================== airquality (CO2) =========================================//
 var aqc_EndFullBlue		= [380,1,1,1,0];
 var aqc_StartFullGreen	= [430,1,1,1,0];
