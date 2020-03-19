@@ -189,10 +189,6 @@ function deviceFindResponse(data) {
 
 function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
 {
-
-
-	// get the data from IoTGuru
-
 	$.ajax(
 	{
 		type: "GET",
@@ -223,14 +219,14 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_Description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 		document.getElementById(container).innerHTML = TexteError;
 	} else {
-		$.each(data, function (idx, n) {
+//		$.each(data, function (idx, n) {
 			valNow = n[1].toFixed(1);
 			dateVal = n[0];
 			
 			// !!! add here the loading of val24H
 			
 			loadDual (data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
-		});
+//		});
 /*	
 	//=====================
 			var Texte = [];
