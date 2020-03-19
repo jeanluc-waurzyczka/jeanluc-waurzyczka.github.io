@@ -90,6 +90,7 @@ var t_StartFullYellow	= [27,0,0,0,1];
 var t_EndFullYellow		= [29,0,0,0,1];
 var t_StartFullRed		= [34,0,0,0,1];
 var t_Tick			= [5,35,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
+var t_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours average
 //===================================================================================================//
 
 
@@ -105,6 +106,7 @@ var h_StartFullYellow	= [65,0,0,0,1];
 var h_EndFullYellow		= [72,0,0,0,1];
 var h_StartFullRed		= [85,0,0,0,1];
 var h_Tick			= [10,90,2,10,0];		//  min, max, minTickInterval, TickInterval, decimals
+var h_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours average
 //======================================== airquality (CO2) =========================================//
 var aqc_EndFullBlue		= [380,1,1,1,0];
 var aqc_StartFullGreen	= [430,1,1,1,0];
@@ -113,6 +115,7 @@ var aqc_StartFullYellow	= [600,1,1,1,0];
 var aqc_EndFullYellow	= [740,1,1,1,0];
 var aqc_StartFullRed	= [940,0,0,0,1];
 var aqc_Tick			= [400,1000,20,100,0];		//  min, max, minTickInterval, TickInterval, decimals
+var aqc_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
 //======================================= airquality (PM2.5) ========================================//
 var aq25_EndFullBlue	= [0,1,1,1,0];
 var aq25_StartFullGreen	= [0,1,1,1,0];      // valeur, x1, y1, x2, y2
@@ -121,6 +124,7 @@ var aq25_StartFullYellow	= [10,1,1,1,0];     // valeur, x1, y1, x2, y2
 var aq25_EndFullYellow	= [16,0,0,0,1];
 var aq25_StartFullRed	= [28,0,0,0,1];     // valeur, x1, y1, x2, y2
 var aq25_Tick			= [0,30,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
+var aq25_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
 //======================================= airquality (PM10) =========================================//
 var aq10_EndFullBlue	= [0,1,1,1,0];
 var aq10_StartFullGreen	= [0,1,1,1,0];
@@ -129,6 +133,7 @@ var aq10_StartFullYellow	= [20,1,1,1,0];
 var aq10_EndFullYellow	= [32,0,0,0,1];
 var aq10_StartFullRed	= [56,0,0,0,1];
 var aq10_Tick			= [0,60,2,10,1];		//  min, max, minTickInterval, TickInterval, decimals
+var aq10_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
 //===================================================================================================//
 
 var TexteTitre;
@@ -187,7 +192,7 @@ function deviceFindResponse(data) {
 }	
 // ===============================================================================
 
-function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
+function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
 {
 	$.ajax(
 	{
@@ -201,15 +206,15 @@ function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_
 			}
 		},
 		success: function (data) {
-			lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+			lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		},
 		error: function (xhr) {
-			lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+			lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
 }
 
-function lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
 		var TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 		document.getElementById(TitreCol).innerHTML = TexteError;
@@ -231,14 +236,29 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 
 
 // !!! add here the loading of val24H
-//			var val24HDec = parseFloat(val24H).toFixed(Tick[4]);			
-
-
-	loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+//			var val24HDec = parseFloat(val24H).toFixed(Tick[4]);	
+		if (NbNeedles > 1) {
+			return $.ajax({
+				type: "GET",
+				url: 'https://api.iotguru.cloud/measurement/loadByNodeKey/' + NodeKey_Choice + '/' + Field_Choice + '/DAY/288',
+				dataType: "json",
+				success: function (data)
+				{
+					var Average24H = 0;
+					var NbAverages24H = 0;
+					for (var i = 0; i < data[0]["data"].length; i++) {
+						Average24H += data[0]["data"][i][1];
+						NbAverages24H += 1;
+					}
+				val24H = average24H / NbAverages24H;
+				}
+			});
+		}
+		loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 	}
 }
 
-function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 	document.getElementById(container).innerHTML = TexteError;
 }
@@ -315,7 +335,7 @@ function fluentDuration(timestamp) {
 }
     
 
-function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
@@ -496,13 +516,13 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
 
 $(document).ready(function () {
      deviceFind();
-		loadData ('container1','TitreCol1','Température', DHT22NodeKey,'temperature','°C','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
-		loadData ('container2','TitreCol2','Humidité', DHT22NodeKey,'humidity','%','', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
-		loadData ('container3','TitreCol3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
+		loadData ('container1','TitreCol1','Température', DHT22NodeKey,'temperature','°C', t_NbNeedles, '', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
+		loadData ('container2','TitreCol2','Humidité', DHT22NodeKey,'humidity','%',h_NbNeedles, '', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
+		loadData ('container3','TitreCol3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM',aqc_NbNeedles, '', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
 if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
     {
-		loadData ('container4','TitreCol4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
-		loadData ('container5','TitreCol5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
+		loadData ('container4','TitreCol4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³',aq25_NbNeedles, '', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container5','TitreCol5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³',aq10_NbNeedles, '', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
     }
 });
 </script>
