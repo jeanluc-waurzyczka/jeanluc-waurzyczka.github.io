@@ -220,12 +220,14 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		document.getElementById(container).innerHTML = TexteError;
 	} else {
 //		$.each(data, function (idx, n) {
-			valNow = data[0][1].toFixed(1);
-//			dateVal = data[0];
+			valNow = data[0][1].toFixed(Tick[4]);
+
+			dateVal = data[0][0];
 			
 			// !!! add here the loading of val24H
-			
-			loadDual (data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+//			var val24HDec = parseFloat(val24H).toFixed(Tick[4]);			
+
+	loadDual (data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 //		});
 /*	
 	//=====================
@@ -321,8 +323,6 @@ function fluentDuration(timestamp) {
     
 
 function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
-	var valNow = parseFloat(valNow).toFixed(Tick[4]);
-//	var val24HDec = val24H.toFixed(Tick[4]);	
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
