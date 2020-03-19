@@ -247,10 +247,10 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 					var Average24H = 0;
 					var NbAverages24H = 0;
 					for (var i = 0; i < data[0]["data"].length; i++) {
-						Average24H += data[0]["data"][i][1];
-						NbAverages24H += 1;
+						Average24H = Average24H + data[0]["data"][i][1];
+						NbAverages24H = NbAverages24H + 1;
 					}
-				val24H = average24H / NbAverages24H;
+					val24H = average24H / NbAverages24H;
 				}
 			});
 		}
