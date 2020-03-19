@@ -236,7 +236,6 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 
 
 // !!! add here the loading of val24H
-//			var val24HDec = parseFloat(val24H).toFixed(Tick[4]);	
 		if (NbNeedles > 1) {
 			return $.ajax({
 				type: "GET",
@@ -250,7 +249,10 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 						Average24H = Average24H + data[0]["data"][i][1];
 						NbAverages24H = NbAverages24H + 1;
 					}
-					val24H = average24H / NbAverages24H;
+					val24H = Average24H / NbAverages24H;
+					console.log ('Average24H = ' + Average24H);
+					console.log ('NbAverages24H = ' + NbAverages24H);
+					val24H = parseFloat(val24H).toFixed(Tick[4]);	
 				}
 			});
 		}
