@@ -187,7 +187,7 @@ function deviceFindResponse(data) {
 }	
 // ===============================================================================
 
-function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
+function loadData(container, TitreCol1, Gauge_description, Node_Choice, Field_Choice, unit,valNow, dateVal, val24H, Tick,  EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed)
 {
 	$.ajax(
 	{
@@ -205,19 +205,19 @@ function loadData(container, Gauge_description, Node_Choice, Field_Choice, unit,
 		},
 		success: function (data) {
 			console.log("Hello success");
-			lastValuesListResponse(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+			lastValuesListResponse(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		},
 		error: function (xhr) {
 					console.log("Hello error");
-			lastValuesListError(container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+			lastValuesListError(container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
 }
 
-function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListResponse(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
 		var TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-		document.getElementById('TitreCol1').innerHTML = TexteError;
+		document.getElementById('TitreCol').innerHTML = TexteError;
 	} else 
 	{
 		valNow = data[0][1].toFixed(Tick[4]);
@@ -232,18 +232,18 @@ function lastValuesListResponse(data, container, Gauge_description, SDS011NodeKe
 		if (totalSeconds < 300){Texte += '<span style=\"font-size:0.7em; color:#05109B\"> ';}
 		Texte += TexteDuration;
 		Texte += ' </span><span style=\"font-size:0.7em; background-color:transparent; color:05109B\">}</span></p>';
-		document.getElementById('TitreCol1').innerHTML = Texte;
+		document.getElementById('TitreCol').innerHTML = Texte;
 
 
 // !!! add here the loading of val24H
 //			var val24HDec = parseFloat(val24H).toFixed(Tick[4]);			
 
 
-	loadDual (data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+	loadDual (data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 	}
 }
 
-function lastValuesListError(container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListError(container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
 	document.getElementById(container).innerHTML = TexteError;
 }
@@ -320,7 +320,7 @@ function fluentDuration(timestamp) {
 }
     
 
-function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function loadDual(data, container, TitreCol, Gauge_description, SDS011NodeKey, Field_Choice, unit,valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
@@ -501,13 +501,13 @@ function loadDual(data, container, Gauge_description, SDS011NodeKey, Field_Choic
 
 $(document).ready(function () {
      deviceFind();
-		loadData ('container1','Température PM2.5', DHT22NodeKey,'temperature','°C','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
-		loadData ('container2','Humidité', DHT22NodeKey,'humidity','%','', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
-		loadData ('container3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
+		loadData ('container1','TitreCol1', Température PM2.5', DHT22NodeKey,'temperature','°C','', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
+		loadData ('container2','TitreCol2','Humidité', DHT22NodeKey,'humidity','%','', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
+		loadData ('container3','TitreCol3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM','', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
 if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
     {
-		loadData ('container4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
-		loadData ('container5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
+		loadData ('container4','TitreCol4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³','', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
+		loadData ('container5','TitreCol5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³','', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
     }
 });
 </script>
