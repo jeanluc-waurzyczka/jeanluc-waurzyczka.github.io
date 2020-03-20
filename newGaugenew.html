@@ -68,23 +68,23 @@ p.legendeTitre {
 
 	    <div class="col" >
 		   <p id="container1" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-		   <p id="TitreCol1" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B; padding-bottom: -20"></p>
+		   <p id="TitreCol1" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B;"></p>
 	    </div>
 	    <div class="col" >
 		   <p id="container2" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-		   <p id="TitreCol2" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B padding-bottom: -20;"></p>
+		   <p id="TitreCol2" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B;"></p>
 	    </div>
 	    <div class="col" >
 		   <p id="container3" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-		   <p id="TitreCol3" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B; padding-bottom: -20"></p>
+		   <p id="TitreCol3" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B;"></p>
 	    </div>
 	    <div class="col" >
 		   <p id="container4" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-		   <p id="TitreCol4" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B; padding-bottom: -20"></p>
+		   <p id="TitreCol4" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B;"></p>
 	    </div>
 	    <div class="col" >
 		   <p id="container5" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
-		   <p id="TitreCol5" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B; padding-bottom: -20"></p>
+		   <p id="TitreCol5" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B;"></p>
 	    </div>
 	</div>
 	
@@ -107,6 +107,7 @@ var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
 var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
 var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
 //var SDS011NodeKey		= 'sfs';
+var infoclimatVignette	= '07306';
 
 //============================================ Temperature =================================================//
 var t_EndFullBlue		= [17,1,1,1,0];
@@ -215,7 +216,7 @@ function deviceFindResponse(data) {
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 //	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 //	TexteTitre = '<span align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></span>';
-	TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
+	TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }	
 // ===============================================================================
@@ -290,7 +291,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var Texte = [];
 	Texte = '<p class=\"a\"><span style=\"font-size:1em; color:red\">' + Gauge_description + '</span></p>';
-	document.getElementById(container).innerHTML = Texte;
+	document.getElementById(TitreCol).innerHTML = Texte;
 }
 
 
