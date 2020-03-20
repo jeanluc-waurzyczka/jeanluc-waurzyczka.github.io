@@ -1,5 +1,5 @@
 
-//========================================== Camping-Car =============================================//
+//========================================== Camping-Car ==================================================//
 var DeviceWebPage 		= 'campingcar';
 var DeviceShortId 		= 'rxCNbrHrLfzxwd2AJ8sR6g';
 var DeviceKey 			= 'uNmVlKSUo-8Bh0BtUFdD5Q';
@@ -9,14 +9,16 @@ var MQ135NodeShortId 	= 'tkFPTNVS1GcSHFYAJ8wR6g';
 var MQ135NodeKey 		= 'icQbhd0Lxc9azJcggcdK6g';
 var SDS011NodeShortId 	= '';
 var SDS011NodeKey 		= '';
-//	Temperature
-var t_EndFullBlue		= 7;
-var t_StartFullGreen	= 17;
-var t_EndFullGreen		= 24;
-var t_StartFullYellow	= 27;
-var t_EndFullYellow		= 29;
-var t_StartFullRed		= 34;
-//===================================================================================================//
+//----------------------------------------- Temperature ---------------------------------------------------//
+var t_EndFullBlue		= [5,1,1,1,0];
+var t_StartFullGreen	= [16,1,1,1,0];     // valeur, x1, y1, x2, y2
+var t_EndFullGreen		= [21,0,0,0,1];
+var t_StartFullYellow	= [25,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_EndFullYellow		= [28,0,0,0,1];
+var t_StartFullRed		= [34,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
+var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
+//=========================================================================================================//
 
 
 //========================================== Chambre AM JL ==========================================//
@@ -29,13 +31,15 @@ var MQ135NodeShortId	= 'uK-Ls4AXTQ70cZMgJikR6g';
 var MQ135NodeKey		= 'pcDXKnx5e0WFRUjqOVZFzQ';
 var SDS011NodeShortId	= '';
 var SDS011NodeKey		= '';
-//	Temperature
-var t_EndFullBlue		= 15;
-var t_StartFullGreen	= 17;
-var t_EndFullGreen		= 20;
-var t_StartFullYellow	= 22;
-var t_EndFullYellow		= 25;
-var t_StartFullRed		= 27;
+//----------------------------------------- Temperature ---------------------------------------------------//
+var t_EndFullBlue		= [13,1,1,1,0];
+var t_StartFullGreen	= [16,1,1,1,0];     // valeur, x1, y1, x2, y2
+var t_EndFullGreen		= [19,0,0,0,1];
+var t_StartFullYellow	= [23,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_EndFullYellow		= [26,0,0,0,1];
+var t_StartFullRed		= [31,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
+var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
 //===================================================================================================//
 
 
@@ -49,17 +53,19 @@ var MQ135NodeShortId	= 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
 var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
 var SDS011NodeKey		= 'qXlMZEFnR1DTs90DwDRGbQ';
-//	Temperature
-var t_EndFullBlue		= 18;
-var t_StartFullGreen	= 21;
-var t_EndFullGreen		= 24;
-var t_StartFullYellow	= 27;
-var t_EndFullYellow		= 29;
-var t_StartFullRed		= 34;
+//----------------------------------------- Temperature ---------------------------------------------------//
+var t_EndFullBlue		= [17,1,1,1,0];
+var t_StartFullGreen	= [20,1,1,1,0];     // valeur, x1, y1, x2, y2
+var t_EndFullGreen		= [23,0,0,0,1];
+var t_StartFullYellow	= [27,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_EndFullYellow		= [29,0,0,0,1];
+var t_StartFullRed		= [34,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
+var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
 //===================================================================================================//
 
 
-//========================================== Quesnoy Séjour =========================================//
+//========================================== Quesnoy Séjour ===============================================//
 var DeviceWebPage		= 'quesnoysejour';
 var DeviceShortId		= 'rjVNHiEP7lOaoHYQVMER6g';
 var DeviceKey			= 'rgYImh2t5HBX8NGcrXFClg';
@@ -69,48 +75,61 @@ var MQ135NodeShortId	= 'miZTNmTp2NVJgb-QVMIR6g';
 var MQ135NodeKey		= 'or5dOx2qSxUV44xqce1Akg';
 var SDS011NodeShortId	= 'g46NIng-txc9VIjwZfMR6g';
 var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
-//	Temperature
-var t_EndFullBlue		= 18;
-var t_StartFullGreen	= 21;
-var t_EndFullGreen		= 24;
-var t_StartFullYellow	= 27;
-var t_EndFullYellow		= 29;
-var t_StartFullRed		= 34;
-//===================================================================================================//
+
+//----------------------------------------- Temperature ---------------------------------------------------//
+var t_EndFullBlue		= [17,1,1,1,0];
+var t_StartFullGreen	= [20,1,1,1,0];     // valeur, x1, y1, x2, y2
+var t_EndFullGreen		= [23,0,0,0,1];
+var t_StartFullYellow	= [27,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_EndFullYellow		= [29,0,0,0,1];
+var t_StartFullRed		= [34,0,0,0,1];     // valeur, x1, y1, x2, y2
+var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
+var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
+//=========================================================================================================//
 
 
 //===================================================================================================//
 //=================================== Common colors parameters ======================================//
 //===================================================================================================//
 
+
 //============================================ Humidity =============================================//
-var h_EndFullBlue		= 35;
-var h_StartFullGreen	= 45;
-var h_EndFullGreen		= 55;
-var h_StartFullYellow	= 65;
-var h_EndFullYellow		= 75;
-var h_StartFullRed		= 85;
-//======================================== airquality (CO2) =========================================//
-var aqc_EndFullBlue		= 400;
-var aqc_StartFullGreen	= 415;
-var aqc_EndFullGreen	= 550;
-var aqc_StartFullYellow	= 600;
-var aqc_EndFullYellow	= 900;
-var aqc_StartFullRed	= 1000;
-//======================================= airquality (PM2.5) ========================================//
-var aq25_EndFullBlue	= -1;
-var aq25_StartFullGreen	= 0;
-var aq25_EndFullGreen	= 5;
-var aq25_StartFullYellow	= 10;
-var aq25_EndFullYellow	= 17;
-var aq25_StartFullRed	= 25;
-//======================================= airquality (PM10) =========================================//
-var aq10_EndFullBlue	= -1;
-var aq10_StartFullGreen	= 0;
-var aq10_EndFullGreen	= 10;
-var aq10_StartFullYellow	= 20;
-var aq10_EndFullYellow	= 34;
-var aq10_StartFullRed	= 50;
+var h_EndFullBlue		= [30,1,1,1,0];
+var h_StartFullGreen	= [40,1,1,1,0];     // valeur, x1, y1, x2, y2
+var h_EndFullGreen		= [55,1,1,1,0];
+var h_StartFullYellow	= [65,0,0,0,1];     // valeur, x1, y1, x2, y2
+var h_EndFullYellow		= [72,0,0,0,1];
+var h_StartFullRed		= [85,0,0,0,1];     // valeur, x1, y1, x2, y2
+var h_Tick			= [10,90,2,10,0];	//  min, max, minTickInterval, TickInterval, decimals
+var h_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
+//======================================== airquality (CO2) =================================================//
+var aqc_EndFullBlue		= [380,1,1,1,0];
+var aqc_StartFullGreen	= [430,1,1,1,0];	// valeur, x1, y1, x2, y2
+var aqc_EndFullGreen	= [500,1,1,1,0];
+var aqc_StartFullYellow	= [600,1,1,1,0];	// valeur, x1, y1, x2, y2
+var aqc_EndFullYellow	= [740,1,1,1,0];
+var aqc_StartFullRed	= [940,0,0,0,1];	// valeur, x1, y1, x2, y2
+var aqc_Tick			= [400,1000,20,100,0];	//  min, max, minTickInterval, TickInterval, decimals
+var aqc_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
+//======================================= airquality (PM2.5) =================================================//
+var aq25_EndFullBlue	= [0,1,1,1,0];
+var aq25_StartFullGreen	= [0,1,1,1,0];      // valeur, x1, y1, x2, y2
+var aq25_EndFullGreen	= [3,1,1,1,0];
+var aq25_StartFullYellow	= [10,1,1,1,0];     // valeur, x1, y1, x2, y2
+var aq25_EndFullYellow	= [16,0,0,0,1];
+var aq25_StartFullRed	= [28,0,0,0,1];     // valeur, x1, y1, x2, y2
+var aq25_Tick			= [0,30,1,5,1];		//  min, max, minTickInterval, TickInterval, decimals
+var aq25_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
+//======================================= airquality (PM10) ==================================================//
+var aq10_EndFullBlue	= [0,1,1,1,0];
+var aq10_StartFullGreen	= [0,1,1,1,0];		// valeur, x1, y1, x2, y2
+var aq10_EndFullGreen	= [6,1,1,1,0];
+var aq10_StartFullYellow	= [20,1,1,1,0];	// valeur, x1, y1, x2, y2
+var aq10_EndFullYellow	= [32,0,0,0,1];
+var aq10_StartFullRed	= [56,0,0,0,1];	// valeur, x1, y1, x2, y2
+var aq10_Tick			= [0,60,2,10,1];	//  min, max, minTickInterval, TickInterval, decimals
+var aq10_NbNeedles		= 2;				// Number needles. If 2 the second one is a 24Hours average
+//============================================================================================================//
 
 //===================================================================================================//
 //======================================== Field to display =========================================//
