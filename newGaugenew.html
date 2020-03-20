@@ -96,7 +96,7 @@ p.legendeTitre {
 	<div id="chart-container" class="titreCol-container">
 		<p id="AffichageTitre" class= "titreCol" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
 		<p id="AffichageMeteo" class= "meteoCol" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
-
+<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></iframe>
 </div>  
 </div>
 
@@ -124,7 +124,7 @@ var t_StartFullYellow	= [27,0,0,0,1];     // valeur, x1, y1, x2, y2
 var t_EndFullYellow		= [29,0,0,0,1];
 var t_StartFullRed		= [34,0,0,0,1];     // valeur, x1, y1, x2, y2
 var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
-var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
+var t_NbNeedles		= 1;				// Number needles. If > 1 the second one is a 24Hours average
 //=========================================================================================================//
 
 
@@ -140,7 +140,7 @@ var h_StartFullYellow	= [65,0,0,0,1];     // valeur, x1, y1, x2, y2
 var h_EndFullYellow		= [72,0,0,0,1];
 var h_StartFullRed		= [85,0,0,0,1];     // valeur, x1, y1, x2, y2
 var h_Tick			= [10,90,2,10,0];	//  min, max, minTickInterval, TickInterval, decimals
-var h_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
+var h_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours average
 //======================================== airquality (CO2) =================================================//
 var aqc_EndFullBlue		= [380,1,1,1,0];
 var aqc_StartFullGreen	= [430,1,1,1,0];	// valeur, x1, y1, x2, y2
@@ -222,7 +222,8 @@ function deviceFindResponse(data) {
 	TexteTitre += TexteDuration;
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
-
+	TexteTitre = 'align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"';
+	document.getElementById("AffichageMeteo").innerHTML = TexteTitre;
 }	
 // ===============================================================================
 
@@ -283,10 +284,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 						NbAverages24H = NbAverages24H + 1;
 					}
 					val24H = Average24H / NbAverages24H;
-					console.log ('Average24H = ' + Average24H);
-					console.log ('NbAverages24H = ' + NbAverages24H);
 					val24H = parseFloat(val24H).toFixed(Tick[4]);
-					console.log ('val24H = ' + val24H);
 					loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 				}
 			});
@@ -375,7 +373,6 @@ function fluentDuration(timestamp) {
     
 
 function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
-	console.log ("loadDual : valNow = " + valNow + 'val24H = ' + val24H);
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
