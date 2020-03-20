@@ -289,7 +289,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 
 function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var Texte = [];
-	Texte = '<p class=\"a\"><span style=\"font-size:1em; color:red\">' + Gauge_description + '</span>';
+	Texte = '<p class=\"a\"><span style=\"font-size:1em; color:red\">' + Gauge_description + '</span></p>';
 	document.getElementById(container).innerHTML = Texte;
 }
 
