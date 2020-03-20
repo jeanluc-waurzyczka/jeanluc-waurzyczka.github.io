@@ -225,9 +225,9 @@ function deviceFindResponse(data) {
 	if (totalSeconds < 300){TexteTitre += ' background-color:white;\"> ';}
 	TexteTitre += TexteDuration;
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
-	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
+//	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 //	TexteTitre = '<span align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></span>';
-	TexteTitre = '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></iframe>';
+	TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></iframe>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }	
 // ===============================================================================
