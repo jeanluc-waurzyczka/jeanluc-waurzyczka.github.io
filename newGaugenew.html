@@ -105,8 +105,7 @@ var DHT22NodeKey		= 'iGW59GU2BO6VKDCptEFNrA';
 var MQ135NodeShortId	= 'jDP5ZAlISh7TWX_gWYIR6g';
 var MQ135NodeKey		= 'sd6iASTvnDK5_G45gj1EfA';
 var SDS011NodeShortId	= 'tGib1WSRvEE5Mp-gYUgR6g';
-//var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
-var SDS011NodeKey		= 'sfs';
+var SDS011NodeKey		= 'q4qSlGXEBGCCyp-nIj5Prw';
 var infoclimatVignette	= '07306';
 
 //============================================ Temperature =================================================//
@@ -237,8 +236,8 @@ function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_
 		success: function (data) {
 			lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		},
-		error: function (data) {
-			lastValuesListError(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
+		error: function (xhr) {
+			lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 		}
 	});
 }
@@ -261,9 +260,6 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 		Texte += TexteDuration;
 		Texte += ' </span><span style=\"font-size:0.7em; background-color:transparent; color:05109B\">}</span></p>';
 		document.getElementById(TitreCol).innerHTML = Texte;
-
-
-// !!! add here the loading of val24H
 		if (NbNeedles > 1) {
 			$.ajax({
 				type: "GET",
@@ -288,14 +284,12 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 	}
 }
 
-function lastValuesListError(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
+function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var Texte = [];
 	Texte = '<p class=\"a\"><span style=\"font-size:1em; color:red\">' + Gauge_description + '</span></p>';
 	document.getElementById(TitreCol).innerHTML = Texte;
 }
 
-
-// ===============================================================================
 function fluentDuration(timestamp) {
     totalSeconds = 86400;
     if (!timestamp) {
@@ -365,7 +359,6 @@ function fluentDuration(timestamp) {
     return message.join('');
 }
     
-
 function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	Highcharts.chart(container, {
         chart: {
