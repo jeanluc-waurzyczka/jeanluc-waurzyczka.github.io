@@ -107,7 +107,7 @@ var MQ135NodeShortId 	= 'tkFPTNVS1GcSHFYAJ8wR6g';
 var MQ135NodeKey 		= 'icQbhd0Lxc9azJcggcdK6g';
 var SDS011NodeShortId 	= '';
 var SDS011NodeKey 		= '';
-var infoclimatVignette	= '07015';
+var infoclimatVignette	= '';
 //----------------------------------------- Temperature ---------------------------------------------------//
 var t_EndFullBlue		= [5,1,1,1,0];
 var t_StartFullGreen	= [16,1,1,1,0];     // valeur, x1, y1, x2, y2
@@ -215,7 +215,10 @@ function deviceFindResponse(data) {
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 //	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 //	TexteTitre = '<span align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></span>';
-	TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
+	if (infoclimatVignette !== undefined && infoclimatVignette !== null && infoclimatVignette !== "")
+	{
+		TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
+	}
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }	
 // ===============================================================================
