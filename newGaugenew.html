@@ -76,7 +76,7 @@ p.legendeTitre {
 	<div class="col-container">
 
 	    <div class="col" >
-		   <p id="container1" class="img" display: flex; align-items: center; style="height: 200px; width: 200px;"></p>
+		   <p id="container1" class="img" style="height: 200px; width: 200px; position: relative; text-align:center;"></p>
 		   <p id="TitreCol1" class="legendeTitre" style="top: 0%; text-align:center; color:#05109B;"></p>
 	    </div>
 	    <div class="col" >
@@ -301,7 +301,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 
 function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	var Texte = [];
-	Texte = '</p><p margin: 0px><span style=\"font-size:1em; color:red\">' + Gauge_description + '</span><br></p>';
+	Texte = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br>';
 	document.getElementById(TitreCol).innerHTML = Texte;
 }
 
