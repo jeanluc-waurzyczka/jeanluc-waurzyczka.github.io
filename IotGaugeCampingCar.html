@@ -12,12 +12,10 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <body>
 <style type="text/css">
-{ background-color: white; height: 100%; font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif; margin: auto; padding: 0;}
 a { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
 a:link, a:visited { text-decoration:none; color: #05109B;}
 a:hover {text-decoration: underline;}
 .b { text-decoration:none;  font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;margin:0;padding:0;}
-#chart-container { width: 100%; height: 15; display: block; position:absolute; bottom:0; top:0; left:0; right:0;  overflow: hidden; }
 </style>   
 <style>
 .col-container {
@@ -36,15 +34,36 @@ a:hover {text-decoration: underline;}
 p.img {  
 	margin-left: auto;
 	margin-right: auto;
-	padding: 30px 0px 0px 0px;
+	padding: 48px 0px 0px 0px;
 }
 p.legendeTitre {
-	margin: -17px 0px -17px 0px;
+	margin: -17px 0px 0px 0px;
 	line-height: 100%;
 }
 </style>
+<style>
+.titreCol-container {
+	display: table;
+	width: 100%;
+}
+.titreCol {
+	display: table-cell;
+	padding: 0px;
+	width: 93%;
+	align: "center";
+	text-decoration:none;  
+	font-family:"Noto Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	margin: 0;
+	top: 3%;
+	position: absolute;
+	-ms-transform: translateY(-10%);
+	transform: translateY(-10%);
+}
+
+</style>
 
 <div>   
+
 	<div class="col-container">
 
 	    <div class="col" >
@@ -69,16 +88,14 @@ p.legendeTitre {
 	    </div>
 	</div>
 	
-	<div id="chart-container">
+	<div class="titreCol" >
 		<p id="AffichageTitre" style="text-align:center; font-family:\"Noto Sans\",HelveticaNeue-Light,\"Helvetica Neue Light\",\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;"></p>
-	</div>  
+	</div>
+</div>	
+
 </div>
-
-
-
 </body>
 <script>
-
 //========================================== Camping-Car ==================================================//
 var DeviceWebPage 		= 'campingcar';
 var DeviceShortId 		= 'rxCNbrHrLfzxwd2AJ8sR6g';
@@ -113,7 +130,7 @@ var h_StartFullYellow	= [65,0,0,0,1];     // valeur, x1, y1, x2, y2
 var h_EndFullYellow		= [72,0,0,0,1];
 var h_StartFullRed		= [85,0,0,0,1];     // valeur, x1, y1, x2, y2
 var h_Tick			= [10,90,2,10,0];	//  min, max, minTickInterval, TickInterval, decimals
-var h_NbNeedles		= 2;					// Number needles. If 2 the second one is a 24Hours average
+var h_NbNeedles		= 1;					// Number needles. If 2 the second one is a 24Hours average
 //======================================== airquality (CO2) =================================================//
 var aqc_EndFullBlue		= [380,1,1,1,0];
 var aqc_StartFullGreen	= [430,1,1,1,0];	// valeur, x1, y1, x2, y2
@@ -182,7 +199,7 @@ function deviceFindError(xhr) {
 function deviceFindResponse(data) {
 
 	TexteDuration = fluentDuration (data.lastCheck);
-	TexteTitre = "<span style=\"font-size:1.875em; color:red ;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
+	TexteTitre = "<span style=\"font-size:1.875em;\"><a target=\"_top\" href=\"https://am-jl.jimdo.com/";
 	TexteTitre += DeviceWebPage;
 	TexteTitre += '/\"><strong>';
 
@@ -194,8 +211,10 @@ function deviceFindResponse(data) {
 	if (totalSeconds < 300){TexteTitre += ' background-color:white;\"> ';}
 	TexteTitre += TexteDuration;
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
+//	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
+//	TexteTitre = '<span align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></span>';
+	TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
-
 }	
 // ===============================================================================
 
@@ -223,8 +242,7 @@ function loadData(container, TitreCol, Gauge_description, NodeKey_Choice, Field_
 
 function lastValuesListResponse(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
 	if (data === undefined || data.length === 0) {
-		var TexteError = '<p class=\"a\"><span style=\"font-size:1em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-		document.getElementById(TitreCol).innerHTML = TexteError;
+		lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 	} else 
 	{
 		valNow = data[0][1].toFixed(Tick[4]);
@@ -240,9 +258,6 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 		Texte += TexteDuration;
 		Texte += ' </span><span style=\"font-size:0.7em; background-color:transparent; color:05109B\">}</span></p>';
 		document.getElementById(TitreCol).innerHTML = Texte;
-
-
-// !!! add here the loading of val24H
 		if (NbNeedles > 1) {
 			$.ajax({
 				type: "GET",
@@ -257,10 +272,7 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 						NbAverages24H = NbAverages24H + 1;
 					}
 					val24H = Average24H / NbAverages24H;
-					console.log ('Average24H = ' + Average24H);
-					console.log ('NbAverages24H = ' + NbAverages24H);
 					val24H = parseFloat(val24H).toFixed(Tick[4]);
-					console.log ('val24H = ' + val24H);
 					loadDual (data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed);
 				}
 			});
@@ -271,12 +283,11 @@ function lastValuesListResponse(data, container, TitreCol, Gauge_description, No
 }
 
 function lastValuesListError(container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
-	var TexteError = '<p class=\"a\"><span style=\"font-size:1.125em; color:#05109B\">' + Gauge_description + '</span><br><br><span style=\"font-size:0.75em; background-color:#ff598f; color:05109B\">Impossible de lire les données actuellement</span></p>';
-	document.getElementById(container).innerHTML = TexteError;
+	var Texte = [];
+	Texte = '<p class=\"a\"><span style=\"font-size:1em; color:red\">' + Gauge_description + '</span></p>';
+	document.getElementById(TitreCol).innerHTML = Texte;
 }
 
-
-// ===============================================================================
 function fluentDuration(timestamp) {
     totalSeconds = 86400;
     if (!timestamp) {
@@ -346,9 +357,7 @@ function fluentDuration(timestamp) {
     return message.join('');
 }
     
-
 function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, Field_Choice, unit, NbNeedles, valNow, dateVal, val24H, Tick, EndFullBlue, StartFullGreen, EndFullGreen, StartFullYellow, EndFullYellow, StartFullRed) {
-	console.log ("loadDual : valNow = " + valNow + 'val24H = ' + val24H);
 	Highcharts.chart(container, {
         chart: {
             type: 'gauge',
@@ -532,7 +541,7 @@ $(document).ready(function () {
 		loadData ('container1','TitreCol1','Température', DHT22NodeKey,'temperature','°C', t_NbNeedles, '', '', '', t_Tick, t_EndFullBlue, t_StartFullGreen, t_EndFullGreen, t_StartFullYellow, t_EndFullYellow, t_StartFullRed);
 		loadData ('container2','TitreCol2','Humidité', DHT22NodeKey,'humidity','%',h_NbNeedles, '', '', '',h_Tick, h_EndFullBlue, h_StartFullGreen, h_EndFullGreen, h_StartFullYellow, h_EndFullYellow, h_StartFullRed);
 		loadData ('container3','TitreCol3','Qualité de l\'air CO2', MQ135NodeKey,'airquality','PPM',aqc_NbNeedles, '', '', '',aqc_Tick, aqc_EndFullBlue, aqc_StartFullGreen, aqc_EndFullGreen, aqc_StartFullYellow, aqc_EndFullYellow, aqc_StartFullRed);
-if (SDS011NodeShortId !== undefined && SDS011NodeShortId !== null)
+if (SDS011NodeKey !== undefined && SDS011NodeKey !== null && SDS011NodeKey !== "")
     {
 		loadData ('container4','TitreCol4','Qualité de l\'air PM2.5', SDS011NodeKey,'pm25','µg/m³',aq25_NbNeedles, '', '', '', aq25_Tick, aq25_EndFullBlue, aq25_StartFullGreen, aq25_EndFullGreen, aq25_StartFullYellow, aq25_EndFullYellow, aq25_StartFullRed);
 		loadData ('container5','TitreCol5','Qualité de l\'air PM10', SDS011NodeKey,'pm10','µg/m³',aq10_NbNeedles, '', '', '', aq10_Tick,aq10_EndFullBlue, aq10_StartFullGreen, aq10_EndFullGreen, aq10_StartFullYellow, aq10_EndFullYellow, aq10_StartFullRed);
