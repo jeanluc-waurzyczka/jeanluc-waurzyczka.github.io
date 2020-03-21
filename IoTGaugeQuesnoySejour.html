@@ -116,7 +116,7 @@ var t_StartFullYellow	= [27,0,0,0,1];     // valeur, x1, y1, x2, y2
 var t_EndFullYellow		= [29,0,0,0,1];
 var t_StartFullRed		= [34,0,0,0,1];     // valeur, x1, y1, x2, y2
 var t_Tick			= [5,35,1,5,1];	//  min, max, minTickInterval, TickInterval, decimals
-var t_NbNeedles		= 2;				// Number needles. If > 1 the second one is a 24Hours average
+var t_NbNeedles		= 1;				// Number needles. If > 1 the second one is a 24Hours average
 //=========================================================================================================//
 
 
@@ -213,11 +213,9 @@ function deviceFindResponse(data) {
 	if (totalSeconds < 300){TexteTitre += ' background-color:white;\"> ';}
 	TexteTitre += TexteDuration;
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
-//	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
-//	TexteTitre = '<span align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></span>';
 	if (infoclimatVignette !== undefined && infoclimatVignette !== null && infoclimatVignette !== "")
 	{
-//		TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
+		TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
 	}
 	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
 }	
@@ -494,7 +492,7 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
                 useHTML: true,
                 allowOverlap : true,
                 borderWidth: 0,
-                y:-2,
+                y:2,
                 style: {
                     fontWeight: '',
                     fontSize: '14px'
