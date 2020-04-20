@@ -213,8 +213,6 @@ function deviceFindResponse(data) {
 	if (totalSeconds < 300){TexteTitre += ' background-color:white;\"> ';}
 	TexteTitre += TexteDuration;
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
-//	document.getElementById("AffichageTitre").innerHTML = TexteTitre;
-//	TexteTitre = '<span align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=07306" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="65px" scrolling="no"></span>';
 	if (infoclimatVignette !== undefined && infoclimatVignette !== null && infoclimatVignette !== "")
 	{
 		TexteTitre += '<iframe align="right" src="https://www.infoclimat.fr/infoclimat/vignette_fiche_temps.php?s=' + infoclimatVignette + '" frameborder="0" marginwidth="0" marginheight="0" border="0" width="112px" height="70px" scrolling="no"></iframe>';
@@ -500,7 +498,12 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
                     fontSize: '14px'
                 },
                 formatter: function () {
-                    return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span></p>';
+				if (val24H > Tick[1])
+				{
+					return '<p style="text-align:center;line-height: 200%;"><span style="background-color:#ff598f; color:blue">24H: ' + val24H + '</span></p>';
+				} else {
+					return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span></p>';
+				}
                 }
             },
             name: Field_Choice + '-24H',
@@ -525,7 +528,12 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
                     fontSize: '15px'
                 },
                 formatter: function () {
-                return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
+				if (valNow > Tick [1])
+				{
+					return '<p style="text-align:center;"><span style="background-color:#fdb1ca; color:red">' + valNow + ' </span></p>';
+				} else {
+					return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
+				}
                 }
             },
             name: Field_Choice,
