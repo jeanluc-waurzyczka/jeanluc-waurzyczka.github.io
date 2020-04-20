@@ -498,7 +498,12 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
                     fontSize: '14px'
                 },
                 formatter: function () {
-                    return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span></p>';
+				if (val24H > Tick[1])
+				{
+					return '<p style="text-align:center;line-height: 200%;"><span style="background-color:#ddd; color:blue">24H: ' + val24H + '</span></p>';
+				} else {
+					return '<p style="text-align:center;line-height: 200%;"><span style="color:blue">24H: ' + val24H + '</span></p>';
+				}
                 }
             },
             name: Field_Choice + '-24H',
