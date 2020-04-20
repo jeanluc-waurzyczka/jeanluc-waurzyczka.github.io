@@ -502,7 +502,7 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
 				{
 					return '<p style="text-align:center;line-height: 200%;"><span style="background-color:#ddd; color:blue">24H: ' + val24H + '</span></p>';
 				} else {
-					return '<p style="text-align:center;line-height: 200%;"><b><span style="background-color:#ff598f; color:blue">24H: ' + val24H + '</span></b></p>';
+					return '<p style="text-align:center;line-height: 200%;"><span style="background-color:#ff598f; color:blue">24H: ' + val24H + '</span></p>';
 				}
                 }
             },
@@ -528,7 +528,12 @@ function loadDual(data, container, TitreCol, Gauge_description, NodeKey_Choice, 
                     fontSize: '15px'
                 },
                 formatter: function () {
-                return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
+				if (valNow > Tick [1])
+				{
+					return '<p style="text-align:center;"><span style="color:red">' + valNow + ' </span></p>';
+				} else {
+				
+				}
                 }
             },
             name: Field_Choice,
