@@ -216,6 +216,7 @@ function deviceFindResponse(data) {
 	var time_last_update = new Date(data.lastCheck);
 	TexteTitre += time_last_update.getHours();
 	TexteTitre += ':';
+	if (time_last_update.getMinutes() < 10) {TexteTitre += '0';}
 	TexteTitre += time_last_update.getMinutes();
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 	if (infoclimatVignette !== undefined && infoclimatVignette !== null && infoclimatVignette !== "")
