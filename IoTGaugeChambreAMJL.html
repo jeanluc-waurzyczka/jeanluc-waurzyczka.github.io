@@ -212,6 +212,11 @@ function deviceFindResponse(data) {
 	if (totalSeconds >= 300 && totalSeconds < 1200) {TexteTitre += ' background-color:#FFF0F5;\"> ';}
 	if (totalSeconds < 300){TexteTitre += ' background-color:white;\"> ';}
 	TexteTitre += TexteDuration;
+	TexteTitre += '. ';
+	var time_last_update = new Date(data.created_at);
+	TexteTitre += time.last_update.getHours();
+	TexteTitre += ':';
+	MinutesWorking = time_last_update.getMinutes();
 	TexteTitre += ' </span><span style=\"font-size:1.125em; background-color:transparent; color:05109B\">}</span>';
 	if (infoclimatVignette !== undefined && infoclimatVignette !== null && infoclimatVignette !== "")
 	{
